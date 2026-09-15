@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>МастерГаз — Установка ГБО в Ростове-на-Дону</title>
+<link rel="stylesheet" href="styles.css?v=9">
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="_ds_bundle.js?v=9"></script>
+<script src="config.js?v=9"></script>
+<script src="swipe.js?v=9"></script>
+<link rel="stylesheet" href="landing.css?v=9">
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="SmoothAccordion.jsx?v=9"></script>
+<script type="text/babel" src="Messenger.jsx?v=9"></script>
+<script type="text/babel" src="SubmitMorph.jsx?v=9"></script>
+<script type="text/babel" src="Header.jsx?v=9"></script>
+<script type="text/babel" src="Hero.jsx?v=9"></script>
+<script type="text/babel" src="ErrorsVsUs.jsx?v=9"></script>
+<script type="text/babel" src="Calculator.jsx?v=9"></script>
+<script type="text/babel" src="Team.jsx?v=9"></script>
+<script type="text/babel" src="RepairBrands.jsx?v=9"></script>
+<script type="text/babel" src="CertificatesReviews.jsx?v=9"></script>
+<script type="text/babel" src="Fleets.jsx?v=9"></script>
+<script type="text/babel" src="FAQ.jsx?v=9"></script>
+<script type="text/babel" src="Location.jsx?v=9"></script>
+<script type="text/babel" src="BookingForm.jsx?v=9"></script>
+<script type="text/babel" src="Footer.jsx?v=9"></script>
+<script type="text/babel" src="Popup.jsx?v=9"></script>
+<script type="text/babel">
+function App(){
+const [popup,setPopup]=React.useState(null);
+const onCta=src=>setPopup(src);
+return <div>
+<Header onCta={onCta}/>
+<Hero onCta={onCta}/>
+<ErrorsVsUs/>
+<Calculator onCta={onCta}/>
+<Team/>
+<RepairBrands onCta={onCta}/>
+<CertificatesReviews/>
+<Fleets onCta={onCta}/>
+<FAQ/>
+<Location/>
+<BookingForm/>
+<Footer/>
+{popup&&<Popup source={popup} onClose={()=>setPopup(null)}/>}
+</div>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

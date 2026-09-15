@@ -1,0 +1,15 @@
+:root{
+--font-family:'Manrope',Arial,sans-serif;
+--display-xxl-size:64px;--display-xxl-weight:600;--display-xxl-lh:1.05;/* @kind font */
+--display-xl-size:48px;--display-xl-weight:600;--display-xl-lh:1.08;/* @kind font */
+--display-md-size:32px;--display-md-weight:600;--display-md-lh:1.1;/* @kind font */
+--display-sm-size:24px;--display-sm-weight:600;--display-sm-lh:1.2;/* @kind font */
+--display-xs-size:20px;--display-xs-weight:600;--display-xs-lh:1.2;/* @kind font */
+--number-xl-size:56px;--number-xl-weight:700;--number-xl-lh:1.0;/* @kind font */
+--body-lg-size:18px;--body-lg-weight:400;--body-lg-lh:1.45;/* @kind font */
+--body-md-size:16px;--body-md-weight:400;--body-md-lh:1.5;/* @kind font */
+--body-emphasis-size:16px;--body-emphasis-weight:600;--body-emphasis-lh:1.5;/* @kind font */
+--caption-md-size:14px;--caption-md-weight:400;--caption-md-lh:1.5;/* @kind font */
+--caption-sm-size:12px;--caption-sm-weight:400;--caption-sm-lh:1.4;/* @kind font */
+--button-md-size:14px;--button-md-weight:700;--button-md-lh:1.4;/* @kind font */--button-md-spacing:0.7px;/* @kind font */--button-md-transform:uppercase;/* @kind font */
+}

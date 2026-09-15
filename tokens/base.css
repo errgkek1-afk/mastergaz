@@ -1,0 +1,5 @@
+*{box-sizing:border-box;}
+body{margin:0;font-family:var(--font-family);background:var(--surface-page);color:var(--text-body);}
+a{color:var(--color-primary);text-decoration:none;}
+a:hover{color:var(--color-primary-deep);}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

@@ -1,0 +1,62 @@
+function Location(){
+const {Button}=window.DesignSystem_a63f4f;
+const C=window.GBO_CONFIG;
+const open=window.isOpenNow();
+const photos=['Фасад с баннером','Заезд с ул. Особенная','Заезд со шлагбаумом, ул. Оганова'];
+return <section className="loc-section" style={{background:'var(--color-cloud)',padding:'64px 32px 96px',fontFamily:'var(--font-family)'}}>
+<div style={{maxWidth:1280,margin:'0 auto'}}>
+<h2 className="loc-title" style={{fontSize:'clamp(30px,3.4vw,46px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px',lineHeight:1.1}}>Как добраться</h2>
+<div className="loc-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:40,marginBottom:40}}>
+<div className="loc-map">
+<a className="loc-map__fallback" href={C.YANDEX} target="_blank" rel="noopener noreferrer"><b>МастерГаз</b><span>Ростов-на-Дону, Минеральная улица, 16</span><span className="loc-map__open">Открыть карту →</span></a>
+<iframe src={C.MAP_WIDGET} title="МастерГаз на Яндекс Картах" allowFullScreen/>
+</div>
+<div style={{display:'flex',flexDirection:'column',gap:20}}>
+<div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Адрес</div><div style={{fontSize:24,fontWeight:600,color:'var(--color-ink)'}}>{C.ADDRESS}</div></div>
+<div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Приоритетный заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>с улицы Особенная</div></div>
+<div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Второй заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>со стороны шлагбаума, с улицы Оганова</div></div>
+<div style={{display:'flex',alignItems:'center',gap:10}}>
+<span className={'status-dot'+(open?' is-open':'')}/>
+<span style={{fontSize:16,color:'var(--color-ink)'}}>Понедельник – Пятница, 09:00 – 18:00</span>
+</div>
+<a href={C.YANDEX} target="_blank" rel="noreferrer" style={{width:'fit-content'}}><Button variant="primary">Построить маршрут</Button></a>
+</div>
+</div>
+<div className="loc-photos" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:10}}>
+{photos.map((c,i)=><div key={i}>
+<div style={{aspectRatio:'16/10',background:'var(--color-fog)',borderRadius:16,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--color-graphite)',fontSize:13}}>Фото</div>
+<div style={{fontSize:14,color:'var(--color-ink)',marginTop:8,textAlign:'center'}}>{c}</div>
+</div>)}
+</div>
+<div style={{height:56}}/>
+<div className="loc-lounge" style={{background:'#fff',borderRadius:16,boxShadow:'var(--shadow-soft)',display:'grid',gridTemplateColumns:'1fr 1fr',overflow:'hidden'}}>
+<LoungeSlider/>
+<div style={{padding:40}}>
+<h3 style={{fontSize:32,fontWeight:600,color:'var(--color-ink)',margin:'0 0 16px'}}>Пока машина в работе — есть зона отдыха</h3>
+<p style={{fontSize:18,color:'var(--color-charcoal)',margin:0,lineHeight:1.45}}>На втором этаже — своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и Wi-Fi. Тихо и спокойно: можно поработать или просто переждать.</p>
+</div>
+</div>
+</div>
+</section>;
+}
+
+function LoungeSlider(){
+const slides=['диваны','нарды и телевизор','кулер и кофе','место, где можно поработать'];
+const n=slides.length;
+const [index,setIndex]=React.useState(0);
+const startX=React.useRef(null);
+const go=d=>setIndex(i=>(i+d+n)%n);
+return <div className="lounge-slider"
+onPointerDown={e=>{startX.current=e.clientX;}}
+onPointerUp={e=>{if(startX.current===null)return;const dx=e.clientX-startX.current;startX.current=null;if(Math.abs(dx)>40)go(dx<0?1:-1);}}>
+<div className="lounge-slider__track" style={{transform:`translateX(${-index*100}%)`}}>
+{slides.map((s,i)=><div key={i} className="lounge-slide"><b>Фото зоны отдыха</b><span>{s}</span></div>)}
+</div>
+<button type="button" className="lounge-arrow lounge-arrow--prev" aria-label="Предыдущее фото" onClick={()=>go(-1)}>‹</button>
+<button type="button" className="lounge-arrow lounge-arrow--next" aria-label="Следующее фото" onClick={()=>go(1)}>›</button>
+<div className="lounge-dots">
+{slides.map((_,i)=><button key={i} type="button" className={'lounge-dot'+(i===index?' is-active':'')} aria-label={'Фото '+(i+1)} onClick={()=>setIndex(i)}/>)}
+</div>
+</div>;
+}
+window.Location=Location;

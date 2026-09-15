@@ -1,0 +1,9 @@
+:root{
+--color-primary:#024ad8;--color-primary-bright:#296ef9;--color-primary-deep:#0e3191;--color-primary-soft:#c9e0fc;--color-primary-mist:#eef4fe;--color-on-primary:#ffffff;
+--color-ink:#1a1a1a;--color-ink-soft:#292929;--color-on-ink:#ffffff;
+--color-canvas:#ffffff;--color-cloud:#f7f7f7;--color-fog:#e8e8e8;--color-steel:#c2c2c2;--color-graphite:#636363;--color-charcoal:#3d3d3d;--color-hairline:#e8e8e8;
+--color-success:#1f9d55;--color-success-soft:#e3f5ea;
+--color-danger:#d92d20;--color-danger-soft:#fdecea;
+--text-heading:var(--color-ink);--text-body:var(--color-charcoal);--text-muted:var(--color-graphite);--text-on-dark:var(--color-on-ink);--text-on-dark-muted:var(--color-steel);
+--surface-page:var(--color-canvas);--surface-section-alt:var(--color-cloud);--surface-section-tint:var(--color-primary-mist);--surface-dark:var(--color-ink);--surface-dark-card:var(--color-ink-soft);--surface-card:var(--color-canvas);--border-default:var(--color-hairline);--border-input:var(--color-steel);
+}
