@@ -7,10 +7,10 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <div style={{maxWidth:1280,margin:'0 auto'}}>
 <h2 className="loc-title" style={{fontSize:'clamp(30px,3.4vw,46px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px',lineHeight:1.1}}>Как добраться</h2>
 <div className="loc-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:40,marginBottom:40}}>
-<div className="loc-map">
-<a className="loc-map__fallback" href={C.YANDEX} target="_blank" rel="noopener noreferrer"><b>МастерГаз</b><span>Ростов-на-Дону, Минеральная улица, 16</span><span className="loc-map__open">Открыть карту →</span></a>
-<iframe src={C.MAP_WIDGET} title="МастерГаз на Яндекс Картах" allowFullScreen/>
-</div>
+<a className="loc-map" href={C.YANDEX} target="_blank" rel="noopener noreferrer" aria-label="Открыть МастерГаз на Яндекс Картах">
+<img src="img/foto/map.jpg" alt="МастерГаз на карте: Минеральная улица, 16" loading="lazy"/>
+<span className="loc-map__open">Открыть в Яндекс Картах →</span>
+</a>
 <div style={{display:'flex',flexDirection:'column',gap:20}}>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Адрес</div><div style={{fontSize:24,fontWeight:600,color:'var(--color-ink)'}}>{C.ADDRESS}</div></div>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Приоритетный заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>с улицы Особенная</div></div>
@@ -19,7 +19,7 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <span className={'status-dot'+(open?' is-open':'')}/>
 <span style={{fontSize:16,color:'var(--color-ink)'}}>{window.HOURS_LINE}</span>
 </div>
-<a href={C.YANDEX} target="_blank" rel="noreferrer" style={{width:'fit-content'}}><Button variant="primary">Построить маршрут</Button></a>
+<a href={C.YANDEX} target="_blank" rel="noreferrer" style={{display:'block'}}><Button variant="primary" fullWidth>Построить маршрут</Button></a>
 <div style={{background:'#fff',borderRadius:12,padding:'14px 16px',fontSize:15,color:'var(--color-ink)',lineHeight:1.5}}>
 Если работа занимает больше дня — машину можно оставить на ночь. Территория охраняется, всё под камерами.
 </div>
@@ -27,7 +27,9 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 </div>
 <div className="loc-photos" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:10}}>
 {photos.map((c,i)=><div key={i}>
-<div style={{aspectRatio:'16/10',background:'var(--color-fog)',borderRadius:16,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--color-graphite)',fontSize:13}}>Фото</div>
+{i===0
+  ? <img className="loc-shot" src="img/foto/fasad.jpg" alt="Фасад МастерГаза с баннером" loading="lazy"/>
+  : <div style={{aspectRatio:'16/10',background:'var(--color-fog)',borderRadius:16,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--color-graphite)',fontSize:13}}>Фото</div>}
 <div style={{fontSize:14,color:'var(--color-ink)',marginTop:8,textAlign:'center'}}>{c}</div>
 </div>)}
 </div>
@@ -44,7 +46,10 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 }
 
 function LoungeSlider(){
-const slides=['диваны','нарды и телевизор','кулер и кофе','место, где можно поработать'];
+const slides=[
+['img/foto/lounge1.jpg','Зона отдыха: диваны, телевизор, кулер'],
+['img/foto/lounge2.jpg','Зона отдыха на втором этаже']
+];
 const n=slides.length;
 const [index,setIndex]=React.useState(0);
 const startX=React.useRef(null);
@@ -53,7 +58,7 @@ return <div className="lounge-slider"
 onPointerDown={e=>{startX.current=e.clientX;}}
 onPointerUp={e=>{if(startX.current===null)return;const dx=e.clientX-startX.current;startX.current=null;if(Math.abs(dx)>40)go(dx<0?1:-1);}}>
 <div className="lounge-slider__track" style={{transform:`translateX(${-index*100}%)`}}>
-{slides.map((s,i)=><div key={i} className="lounge-slide"><b>Фото зоны отдыха</b><span>{s}</span></div>)}
+{slides.map(([src,alt],i)=><div key={i} className="lounge-slide"><img src={src} alt={alt} loading="lazy"/></div>)}
 </div>
 <button type="button" className="lounge-arrow lounge-arrow--prev" aria-label="Предыдущее фото" onClick={()=>go(-1)}>‹</button>
 <button type="button" className="lounge-arrow lounge-arrow--next" aria-label="Следующее фото" onClick={()=>go(1)}>›</button>
