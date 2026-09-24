@@ -1,5 +1,5 @@
-function BookingForm(){
-const {Input}=window.DesignSystem_a63f4f;
+function BookingForm({onCta}){
+const {Input,Button}=window.DesignSystem_a63f4f;
 const C=window.GBO_CONFIG;
 const [name,setName]=React.useState('');
 const [phone,setPhone]=React.useState('+7');
@@ -21,7 +21,10 @@ return <section className="booking-section" style={{background:'var(--color-prim
 <Input label="Телефон" placeholder="+7 (___) ___-__-__" value={phone} onChange={e=>setPhone(window.formatPhone(e.target.value))}/>
 <Input label="Марка и год авто (необязательно)" placeholder="Например, Toyota Camry, 2015" value={car} onChange={e=>setCar(e.target.value)}/>
 </div>
-<SubmitMorph ready={ready} sent={sent} size="lg" label="Записаться на установку" onSubmit={()=>setSent(true)}/>
+<SubmitMorph ready={ready} sent={sent} size="lg" label="Рассчитать стоимость" onSubmit={()=>setSent(true)}/>
+<div style={{marginTop:12}}>
+<Button variant="ghost" fullWidth onClick={()=>onCta&&onCta('ближайшее свободное время')}>Записаться на ближайшее свободное время</Button>
+</div>
 <div style={{textAlign:'center',margin:'28px 0 8px'}}>
 <div style={{fontSize:16,fontWeight:600,color:'var(--color-ink)',marginBottom:6}}>Не готовы записываться?</div>
 <div style={{fontSize:14,color:'var(--color-graphite)',lineHeight:1.5}}>Просто напишите марку и год. Скажем, сколько будет стоить и сколько займёт времени. Без обязательств.</div>

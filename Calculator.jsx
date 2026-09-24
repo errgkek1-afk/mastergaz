@@ -12,7 +12,7 @@ const payback=saveMonth>0?Math.round(C.ENGINES[engine].cost/saveMonth):0;
 const rub=n=>n.toLocaleString('ru-RU')+' ₽';
 return <section style={{background:'var(--color-primary-mist)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1080,margin:'0 auto'}}>
-<h2 style={{fontSize:40,fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px',lineHeight:1.1}}>Посчитайте, сколько <span style={{color:'var(--color-primary)'}}>вернёт вам газ</span></h2>
+<h2 className="calc-title" style={{fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px',lineHeight:1.15}}>Посчитайте, сколько вы <span style={{color:'var(--color-primary)'}}>отдаёте бензину</span> каждый месяц</h2>
 <div className="calc-card" style={{background:'#fff',borderRadius:16,boxShadow:'var(--shadow-soft)',padding:40}}>
 <div className="calc-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:48,alignItems:'start'}}>
 <div style={{display:'flex',flexDirection:'column',gap:28}}>
@@ -44,10 +44,14 @@ return <section style={{background:'var(--color-primary-mist)',padding:'96px 32p
 <div style={{marginTop:24}}>
 <SmoothAccordion defaultOpenIndex={-1} items={[
 {title:'Что входит в установку',content:<ol style={{margin:0,paddingLeft:20,lineHeight:1.8}}>
-<li>Комплект электроники подкапотной части</li><li>Газовый баллон — тороидальный</li><li>Мультиклапан класса А, Италия</li><li>Термопластиковые магистрали</li><li>Редуктор</li><li>Форсунки</li><li>Заправочное устройство</li><li>Фурнитура и крепёж</li></ol>},
-{title:'Что входит в ТО каждые 10 000 км',content:<div>
-<ul style={{margin:'0 0 12px',paddingLeft:20,lineHeight:1.8}}><li>Замена комплекта фильтров жидкой и паровой фазы</li><li>Проверка герметичности системы</li><li>При необходимости — компьютерная диагностика</li></ul>
-<div style={{fontSize:13,color:'var(--color-graphite)'}}>Гарантия на установку — до 1 года при ТО каждые 10 000 км.</div>
+<li>Комплект электроники подкапотной части</li><li>Газовый баллон — тороидальный или цилиндрический</li><li>Мультиклапан класса А, Италия</li><li>Термопластиковые магистрали</li><li>Редуктор</li><li>Форсунки</li><li>Заправочное устройство</li><li>Фурнитура и крепёж</li></ol>},
+{title:'Обслуживание',content:<div>
+<div className="price-row" style={{borderBottom:'none'}}><span>ТО каждые 10 000 км — замена фильтров жидкой и паровой фазы, проверка герметичности, при необходимости компьютерная диагностика</span><b>1 400 – 2 000 ₽</b></div>
+<div style={{fontSize:15,color:'var(--color-ink)',marginTop:14,fontWeight:600}}>Помним вашу машину. Позвоните — скажем, когда вы последний раз обслуживались.</div>
+</div>},
+{title:'Наша гарантия — до 1 года или 100 000 км',content:<div style={{fontSize:16,color:'var(--color-charcoal)',lineHeight:1.6}}>
+Электронный блок управления, редуктор, форсунки.<br/>
+Если деталь вышла из строя в срок и вы проходили ТО у нас — работы и деталь бесплатно.
 </div>}
 ]}/>
 </div>

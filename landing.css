@@ -243,3 +243,131 @@ h3{font-size:18px!important}
 .loc-map__fallback b{font-size:18px}
 .loc-map__fallback span{font-size:14px;color:var(--color-graphite)}
 .loc-map__fallback .loc-map__open{margin-top:8px;color:var(--color-primary);font-weight:600}
+
+/* =====================================================================
+   Правки по ТЗ 4.0 (сентябрь 2026)
+   ===================================================================== */
+
+/* ——— слайдер первого экрана ——— */
+.hero-photos{display:flex;flex-direction:column;gap:12px}
+.hero-photos__frame{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#2e2e2e}
+.hero-photos__shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.05);
+  transition:opacity .55s ease,transform .9s cubic-bezier(.22,.61,.36,1)}
+.hero-photos__shot.is-active{opacity:1;transform:scale(1)}
+.hero-photos__cap{font-size:14px;color:#c2c2c2;min-height:20px;line-height:1.4}
+.hero-photos__dots{display:flex;gap:6px;max-width:100%}
+/* кнопка крупная под палец, видимая полоска тонкая */
+.hero-photos__dots button{flex:0 0 38px;width:38px;height:44px;border:0;padding:0;background:none;
+  cursor:pointer;display:flex;align-items:center;-webkit-tap-highlight-color:transparent}
+.hero-photos__dots button::before{content:'';display:block;width:100%;height:5px;border-radius:3px;
+  background:rgba(255,255,255,.28);transition:background .25s ease,height .2s ease}
+.hero-photos__dots button:hover::before{background:rgba(255,255,255,.5)}
+.hero-photos__dots button.is-active::before{background:var(--color-primary-bright);height:6px}
+@media (prefers-reduced-motion:reduce){.hero-photos__shot{transition:none;transform:none}}
+
+/* ——— иконки в хуках ——— */
+.hook-ico{width:26px;height:26px;flex:0 0 26px;color:var(--color-primary)}
+.hook-ico--wide{width:28px;flex-basis:28px}
+.hook-card__title--ico{display:flex;align-items:center;gap:10px}
+
+/* ——— «от 4 часов» со звёздочкой ——— */
+.hero-star{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;
+  border-bottom:1px dashed rgba(255,255,255,.35)}
+.hero-star:hover{border-bottom-color:var(--color-primary-bright)}
+.hero-star__mark{color:var(--color-primary-bright);font-size:.6em;vertical-align:super;margin-left:2px}
+
+.cars-line{max-width:1280px;margin:28px auto 0;padding:10px 12px;font-family:var(--font-family);
+  border-radius:12px;transition:background-color .4s ease,box-shadow .4s ease}
+.cars-line.is-flash{background:var(--color-primary-mist);box-shadow:0 0 0 2px var(--color-primary-soft)}
+@media (max-width:860px){.cars-extra{display:none}}
+.cars-line__row{font-size:clamp(14px,1.2vw,16px);color:var(--color-ink);line-height:1.6}
+.cars-line__row b{font-weight:600}
+.cars-line__note{font-size:13px;color:var(--color-graphite);margin-top:6px;line-height:1.5}
+
+/* ——— заголовок калькулятора: на большом экране одной строкой ——— */
+.calc-title{font-size:clamp(24px,2.55vw,36px)}
+@media (min-width:1000px){.calc-title{white-space:nowrap}}
+.price-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;
+  font-size:15px;line-height:1.45}
+.price-row b{white-space:nowrap;color:var(--color-ink)}
+
+/* ——— истории клиентов в блоке ремонта ——— */
+.cases-lead{text-align:center;font-size:clamp(16px,1.6vw,19px);font-weight:600;
+  color:var(--color-ink);margin:0 0 20px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:0 0 24px}
+@media (max-width:760px){.case-grid{grid-template-columns:1fr}}
+.case-card{background:#fff;border-radius:16px;box-shadow:var(--shadow-soft);padding:24px 26px}
+.case-card b{display:block;font-size:19px;font-weight:600;color:var(--color-ink);line-height:1.25}
+.case-card span{font-size:15px;color:var(--color-charcoal);line-height:1.55;display:block}
+.case-card__head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.case-card__head i{font-style:normal;font-size:13px;color:var(--color-graphite)}
+.avatar{width:52px;height:52px;flex:0 0 52px;border-radius:50%}
+.avatar--photo{object-fit:cover}
+
+.free-diag{display:flex;align-items:center;justify-content:center;gap:12px;margin:22px auto 0;
+  width:fit-content;max-width:100%;background:var(--color-success-soft);border-radius:9999px;
+  padding:14px 26px;font-size:clamp(15px,1.4vw,18px);font-weight:600;color:var(--color-ink);
+  text-align:center;line-height:1.35}
+.gift-ico{width:26px;height:26px;flex:0 0 26px;color:var(--color-success)}
+
+.brands-line{text-align:center;margin-bottom:32px;line-height:1.7}
+.brands-line__label{font-size:14px;color:var(--color-graphite);margin-right:8px}
+.brands-line__list{font-size:15px;font-weight:600;color:var(--color-charcoal)}
+
+/* ——— бегущая строка автопарков ——— */
+.fleet-strip{overflow:hidden;position:relative;padding:14px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.fleet-track{display:flex;width:max-content;animation:fleet-run 40s linear infinite}
+.fleet-strip:hover .fleet-track{animation-play-state:paused}
+.fleet-group{display:flex;align-items:center;gap:36px;padding-right:36px}
+.fleet-item{display:flex;align-items:center;gap:36px;white-space:nowrap;
+  font-size:clamp(15px,1.3vw,18px);font-weight:600;color:var(--color-charcoal)}
+.fleet-item::after{content:'·';color:var(--color-primary)}
+@keyframes fleet-run{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.fleet-track{animation:none}}
+
+/* ——— фото в блоке «На рынке 30 лет» ——— */
+.errors-shot{margin:0;border-radius:12px;overflow:hidden}
+.errors-shot img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3}
+
+/* На телефоне кадры складываются шторкой: приём с сайта АвтоРегион 161 —
+   стопку даёт position: sticky, уменьшение — скролл-анимация. Где браузер
+   её не понимает, кадры просто лягут стопкой, блок не сломается. */
+@media (max-width:860px){
+  .errors-photos{display:block;padding-bottom:22vh}
+  .errors-shot{position:sticky;aspect-ratio:4/3;margin-bottom:18px;
+    transform-origin:top center;box-shadow:0 -18px 34px rgba(0,0,0,.28);
+    border:1px solid var(--color-hairline)}
+  .errors-shot:nth-child(1){top:86px}
+  .errors-shot:nth-child(2){top:100px}
+  .errors-shot:nth-child(3){top:114px}
+  @supports (animation-timeline: view()){
+    .errors-shot{animation:errors-shot-shrink linear both;
+      animation-timeline:view();
+      animation-range:exit-crossing 0% exit-crossing 100%}
+    @keyframes errors-shot-shrink{to{transform:scale(.9)}}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .errors-shot{animation:none;position:static}
+}
+
+/* ——— фото в ответе про багажник ——— */
+.faq-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.faq-photos{grid-template-columns:1fr}}
+.faq-shot{width:100%;height:auto;display:block;border-radius:12px;aspect-ratio:16/10;object-fit:cover}
+
+/* ——— плашки магазинов в подвале ——— */
+.shops{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;align-items:center;
+  margin:0 auto 32px;max-width:1280px}
+.shop-tile{display:block;width:96px;height:96px;line-height:0;border-radius:22px;
+  transition:transform .18s cubic-bezier(.2,.7,.3,1),filter .18s ease;
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
+.shop-tile img{width:100%;height:100%;object-fit:contain}
+@media (hover:hover){
+  .shop-tile:hover{transform:translateY(4px) scale(.94);filter:drop-shadow(0 3px 7px rgba(0,0,0,.55))}
+  .shop-tile:active{transform:translateY(7px) scale(.9);filter:drop-shadow(0 1px 4px rgba(0,0,0,.6))}
+}
+@media (max-width:700px){.shops{gap:20px}.shop-tile{width:80px;height:80px}}

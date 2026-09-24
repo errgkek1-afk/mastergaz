@@ -30,7 +30,7 @@ return <>
 <span className={'status-dot'+(open?' is-open':'')}/>
 <div style={{display:'flex',flexDirection:'column',lineHeight:1.15}}>
 <span style={{fontSize:14,color:'var(--color-ink)'}}>{open?'Сейчас работаем':'Сейчас закрыто'}</span>
-<span style={{fontSize:12,color:'var(--color-graphite)'}}>Пн–Пт, 09:00–18:00</span>
+<span style={{fontSize:12,color:'var(--color-graphite)'}}>{window.HOURS_LINE}</span>
 </div>
 </div>
 <a className="header-phone" href={'tel:+'+C.PHONE_GBO.replace(/\D/g,'')}>{C.PHONE_GBO}</a>

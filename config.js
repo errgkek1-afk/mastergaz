@@ -68,9 +68,12 @@ if(d.length>8)out+='-'+d.slice(8,10);
 return out;
 };
 window.phoneComplete=function(v){return String(v).replace(/\D/g,'').length>=11;};
+window.HOURS_LINE='Пн–Пт 09:00–18:00 · Сб 09:00–17:00';
 window.isOpenNow=function(){
 const now=new Date();
 const msk=new Date(now.getTime()+(now.getTimezoneOffset()+180)*60000);
 const day=msk.getDay(),h=msk.getHours();
-return day>=1&&day<=5&&h>=9&&h<18;
+if(day>=1&&day<=5)return h>=9&&h<18;   // Пн–Пт 09:00–18:00
+if(day===6)return h>=9&&h<17;          // суббота — рабочая, до 17:00
+return false;
 };

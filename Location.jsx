@@ -17,9 +17,12 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Второй заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>со стороны шлагбаума, с улицы Оганова</div></div>
 <div style={{display:'flex',alignItems:'center',gap:10}}>
 <span className={'status-dot'+(open?' is-open':'')}/>
-<span style={{fontSize:16,color:'var(--color-ink)'}}>Понедельник – Пятница, 09:00 – 18:00</span>
+<span style={{fontSize:16,color:'var(--color-ink)'}}>{window.HOURS_LINE}</span>
 </div>
 <a href={C.YANDEX} target="_blank" rel="noreferrer" style={{width:'fit-content'}}><Button variant="primary">Построить маршрут</Button></a>
+<div style={{background:'#fff',borderRadius:12,padding:'14px 16px',fontSize:15,color:'var(--color-ink)',lineHeight:1.5}}>
+Если работа занимает больше дня — машину можно оставить на ночь. Территория охраняется, всё под камерами.
+</div>
 </div>
 </div>
 <div className="loc-photos" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:10}}>
