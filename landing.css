@@ -316,14 +316,14 @@ h3{font-size:18px!important}
 .brands-line__list{font-size:15px;font-weight:600;color:var(--color-charcoal)}
 
 /* ——— бегущая строка автопарков ——— */
-.fleet-strip{overflow:hidden;position:relative;padding:14px 0;
+.fleet-strip{overflow:hidden;position:relative;padding:6px 0;max-width:960px;margin:0 auto;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .fleet-track{display:flex;width:max-content;animation:fleet-run 40s linear infinite}
 .fleet-strip:hover .fleet-track{animation-play-state:paused}
-.fleet-group{display:flex;align-items:center;gap:36px;padding-right:36px}
-.fleet-item{display:flex;align-items:center;gap:36px;white-space:nowrap;
-  font-size:clamp(15px,1.3vw,18px);font-weight:600;color:var(--color-charcoal)}
+.fleet-group{display:flex;align-items:center;gap:26px;padding-right:26px}
+.fleet-item{display:flex;align-items:center;gap:26px;white-space:nowrap;
+  font-size:clamp(13px,1vw,15px);font-weight:500;color:var(--color-graphite)}
 .fleet-item::after{content:'·';color:var(--color-primary)}
 @keyframes fleet-run{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.fleet-track{animation:none}}
@@ -359,27 +359,34 @@ h3{font-size:18px!important}
 @media (max-width:700px){.faq-photos{grid-template-columns:1fr}}
 .faq-shot{width:100%;height:auto;display:block;border-radius:12px;aspect-ratio:16/10;object-fit:cover}
 
-/* ——— плашки магазинов в подвале ——— */
-.shops{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;align-items:center;
-  margin:0 auto 32px;max-width:1280px}
-.shop-tile{display:block;width:96px;height:96px;line-height:0;border-radius:22px;
-  transition:transform .18s cubic-bezier(.2,.7,.3,1),filter .18s ease;
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
-.shop-tile img{width:100%;height:100%;object-fit:contain}
-@media (hover:hover){
-  .shop-tile:hover{transform:translateY(4px) scale(.94);filter:drop-shadow(0 3px 7px rgba(0,0,0,.55))}
-  .shop-tile:active{transform:translateY(7px) scale(.9);filter:drop-shadow(0 1px 4px rgba(0,0,0,.6))}
-}
-@media (max-width:700px){.shops{gap:20px}.shop-tile{width:80px;height:80px}}
+/* ——— кнопки магазинов: под мессенджерами, сетка 3 на 2 ——— */
+.footer-contacts{display:grid;grid-template-columns:repeat(3,44px);gap:10px;justify-content:start}
+.shop-btn{width:44px;height:44px;border-radius:50%;overflow:hidden;display:block;line-height:0;
+  transition:transform var(--dur-press) var(--ease-out),box-shadow .25s}
+.shop-btn img{width:100%;height:100%;object-fit:cover;display:block}
+.shop-btn:active{transform:scale(.94)}
+@media (hover:hover){.shop-btn:hover{box-shadow:0 8px 22px rgba(0,0,0,.45)}}
 
-/* ——— карта картинкой: виджет Яндекса у части посетителей не грузится ——— */
-.loc-map{display:block;position:relative;border-radius:16px;overflow:hidden;
-  min-height:0;text-decoration:none;background:var(--color-fog)}
-.loc-map img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
-.loc-map .loc-map__open{position:absolute;left:0;right:0;bottom:0;padding:12px 16px;
+/* ——— карта: живой виджет Яндекса, снимок — только запасной вариант ——— */
+.loc-map{position:relative;border-radius:16px;overflow:hidden;
+  min-height:420px;text-decoration:none;background:var(--color-fog)}
+.loc-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.loc-map__pill{position:absolute;right:12px;bottom:12px;z-index:2;
+  background:rgba(255,255,255,.94);color:var(--color-ink);font-size:13px;font-weight:600;
+  padding:8px 12px;border-radius:999px;text-decoration:none;
+  box-shadow:0 4px 14px rgba(0,0,0,.18)}
+@media (hover:hover){.loc-map__pill:hover{background:#fff}}
+.loc-map__lock{position:absolute;inset:0;z-index:2;border:0;padding:0;cursor:pointer;
+  background:rgba(17,17,17,.06);display:flex;align-items:flex-end;justify-content:center}
+.loc-map__lock span{margin-bottom:56px;background:rgba(255,255,255,.95);color:var(--color-ink);
+  font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;
+  box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.loc-map--static{display:block;min-height:0}
+.loc-map--static img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.loc-map--static .loc-map__open{position:absolute;left:0;right:0;bottom:0;padding:12px 16px;
   background:linear-gradient(transparent,rgba(0,0,0,.55));color:#fff;font-size:14px;
   font-weight:600;text-align:center}
-@media (hover:hover){.loc-map:hover .loc-map__open{background:linear-gradient(transparent,rgba(0,0,0,.72))}}
+@media (max-width:860px){.loc-map{min-height:340px}}
 
 /* фасад и зона отдыха — настоящие кадры */
 .loc-shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:16px}

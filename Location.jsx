@@ -7,10 +7,7 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <div style={{maxWidth:1280,margin:'0 auto'}}>
 <h2 className="loc-title" style={{fontSize:'clamp(30px,3.4vw,46px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px',lineHeight:1.1}}>Как добраться</h2>
 <div className="loc-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:40,marginBottom:40}}>
-<a className="loc-map" href={C.YANDEX} target="_blank" rel="noopener noreferrer" aria-label="Открыть МастерГаз на Яндекс Картах">
-<img src="img/foto/map.jpg" alt="МастерГаз на карте: Минеральная улица, 16" loading="lazy"/>
-<span className="loc-map__open">Открыть в Яндекс Картах →</span>
-</a>
+<MapBlock/>
 <div style={{display:'flex',flexDirection:'column',gap:20}}>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Адрес</div><div style={{fontSize:24,fontWeight:600,color:'var(--color-ink)'}}>{C.ADDRESS}</div></div>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Приоритетный заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>с улицы Особенная</div></div>
@@ -67,4 +64,30 @@ onPointerUp={e=>{if(startX.current===null)return;const dx=e.clientX-startX.curre
 </div>
 </div>;
 }
+/* Карта: живой виджет Яндекса. Если он не отозвался за 8 секунд (у части
+   посетителей iframe не грузится) — молча подставляем снимок карты со ссылкой. */
+function MapBlock(){
+const C=window.GBO_CONFIG;
+const [failed,setFailed]=React.useState(false);
+const [active,setActive]=React.useState(false);
+/* На телефоне карта перехватывает движение пальцем и страница перестаёт
+   прокручиваться. Поэтому до первого нажатия карта закрыта прозрачной плашкой. */
+const touch=typeof window!=='undefined'&&window.matchMedia&&window.matchMedia('(hover:none)').matches;
+const loaded=React.useRef(false);
+React.useEffect(()=>{
+  const t=setTimeout(()=>{if(!loaded.current)setFailed(true);},8000);
+  return()=>clearTimeout(t);
+},[]);
+if(failed) return <a className="loc-map loc-map--static" href={C.YANDEX} target="_blank" rel="noopener noreferrer" aria-label="Открыть МастерГаз на Яндекс Картах">
+<img src="img/foto/map.jpg" alt="МастерГаз на карте: Минеральная улица, 16"/>
+<span className="loc-map__open">Открыть в Яндекс Картах →</span>
+</a>;
+return <div className="loc-map">
+<iframe src={C.MAP_WIDGET} title="МастерГаз на карте: Минеральная улица, 16" allowFullScreen onLoad={()=>{loaded.current=true;}}/>
+{touch&&!active&&<button type="button" className="loc-map__lock" onClick={()=>setActive(true)}>
+<span>Нажмите, чтобы двигать карту</span>
+</button>}
+</div>;
+}
+
 window.Location=Location;
