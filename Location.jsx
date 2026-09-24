@@ -2,7 +2,12 @@ function Location(){
 const {Button}=window.DesignSystem_a63f4f;
 const C=window.GBO_CONFIG;
 const open=window.isOpenNow();
-const photos=['Фасад с баннером','Заезд с ул. Особенная','Заезд со шлагбаумом, ул. Оганова'];
+const photos=['Фасад с баннером'];
+const [sound,setSound]=React.useState(null);
+const drives=[
+{src:'video/zaezd-osobennaya.mp4',poster:'video/zaezd-osobennaya.jpg',caption:'Заезд с ул. Особенная'},
+{src:'video/zaezd-oganova.mp4',poster:'video/zaezd-oganova.jpg',caption:'Заезд со шлагбаумом, ул. Оганова'}
+];
 return <section className="loc-section" style={{background:'var(--color-cloud)',padding:'64px 32px 96px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
 <h2 className="loc-title" style={{fontSize:'clamp(30px,3.4vw,46px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px',lineHeight:1.1}}>Как добраться</h2>
@@ -23,11 +28,13 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 </div>
 </div>
 <div className="loc-photos" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:10}}>
-{photos.map((c,i)=><div key={i}>
-{i===0
-  ? <img className="loc-shot" src="img/foto/fasad.jpg" alt="Фасад МастерГаза с баннером" loading="lazy"/>
-  : <div style={{aspectRatio:'16/10',background:'var(--color-fog)',borderRadius:16,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--color-graphite)',fontSize:13}}>Фото</div>}
-<div style={{fontSize:14,color:'var(--color-ink)',marginTop:8,textAlign:'center'}}>{c}</div>
+<div>
+<img className="loc-shot" src="img/foto/fasad.jpg" alt="Фасад МастерГаза с баннером" loading="lazy"/>
+<div className="loc-photos__cap">{photos[0]}</div>
+</div>
+{drives.map(d=><div key={d.src}>
+<DriveVideo {...d} soundOn={sound===d.src} onSound={on=>setSound(on?d.src:null)}/>
+<div className="loc-photos__cap">{d.caption}</div>
 </div>)}
 </div>
 <div style={{height:56}}/>
@@ -86,6 +93,71 @@ return <div className="loc-map">
 <iframe src={C.MAP_WIDGET} title="МастерГаз на карте: Минеральная улица, 16" allowFullScreen onLoad={()=>{loaded.current=true;}}/>
 {touch&&!active&&<button type="button" className="loc-map__lock" onClick={()=>setActive(true)}>
 <span>Нажмите, чтобы двигать карту</span>
+</button>}
+</div>;
+}
+
+/* Ролики с заездами. Сами не запускаются: человек видит кадр и кнопку,
+   и ролик идёт только после нажатия — со звуком, как в обычном плеере.
+   Ушли с экрана или свернули вкладку — встаёт на паузу. */
+function DriveVideo({src,poster,caption,soundOn,onSound}){
+const ref=React.useRef(null);
+const box=React.useRef(null);
+const [started,setStarted]=React.useState(false);
+const [playing,setPlaying]=React.useState(false);
+React.useEffect(()=>{
+  const v=ref.current,el=box.current;
+  if(!v||!el||!started)return;
+  let inView=true;
+  const sync=()=>{
+    if(inView&&!document.hidden){const p=v.play();if(p&&p.catch)p.catch(()=>{});}
+    else v.pause();
+  };
+  let io;
+  if(window.IntersectionObserver){
+    io=new IntersectionObserver(e=>{inView=e[0].isIntersecting;sync();},{threshold:.35});
+    io.observe(el);
+  }
+  document.addEventListener('visibilitychange',sync);
+  return()=>{if(io)io.disconnect();document.removeEventListener('visibilitychange',sync);};
+},[started]);
+React.useEffect(()=>{
+  const v=ref.current;
+  if(!v||!started)return;
+  v.muted=!soundOn;
+  if(v.paused){const p=v.play();if(p&&p.catch)p.catch(()=>{});}
+},[soundOn,started]);
+/* Запускаем тихо: со звуком браузер ролик просто не пустит, пока человек
+   не разрешит его отдельно — для этого рядом кнопка звука. */
+const start=()=>{
+  const v=ref.current;
+  if(!v)return;
+  /* два ролика одновременно не идут: соседний встаёт на паузу */
+  document.querySelectorAll('.loc-video__media').forEach(o=>{if(o!==v)o.pause();});
+  setStarted(true);
+  v.muted=true;
+  const p=v.play();
+  if(p&&p.catch)p.catch(()=>{});
+};
+const toggle=()=>{
+  const v=ref.current;
+  if(!v)return;
+  if(v.paused){const p=v.play();if(p&&p.catch)p.catch(()=>{});}
+  else v.pause();
+};
+return <div className={'loc-video'+(started?' is-started':'')} ref={box}>
+<video ref={ref} className="loc-video__media" poster={poster} muted loop playsInline preload="metadata"
+  aria-label={caption} onClick={()=>{if(started)toggle();}}
+  onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)}>
+<source src={src} type="video/mp4"/>
+</video>
+{(!started||!playing)&&<button type="button" className="loc-video__play" onClick={()=>started?toggle():start()} aria-label={'Смотреть: '+caption}>
+<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .62.68 1 1.21.68l10.9-6.8a.8.8 0 0 0 0-1.36L9.21 4.52A.8.8 0 0 0 8 5.2"/></svg>
+</button>}
+{started&&<button type="button" className={'loc-video__sound'+(soundOn?' is-on':'')} onClick={()=>onSound(!soundOn)} aria-label={soundOn?'Выключить звук':'Включить звук'}>
+{soundOn
+?<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M11.2 4.3 6.4 8.3H3.2a.8.8 0 0 0-.8.8v5.8c0 .44.36.8.8.8h3.2l4.8 4a.6.6 0 0 0 1-.46V4.76a.6.6 0 0 0-1-.46"/><path d="M15.5 8.6a.9.9 0 0 1 1.27 0 4.8 4.8 0 0 1 0 6.8.9.9 0 1 1-1.27-1.27 3 3 0 0 0 0-4.26.9.9 0 0 1 0-1.27"/><path d="M18.3 5.8a.9.9 0 0 1 1.27 0 8.8 8.8 0 0 1 0 12.4.9.9 0 0 1-1.27-1.27 7 7 0 0 0 0-9.86.9.9 0 0 1 0-1.27"/></svg>
+:<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M11.2 4.3 6.4 8.3H3.2a.8.8 0 0 0-.8.8v5.8c0 .44.36.8.8.8h3.2l4.8 4a.6.6 0 0 0 1-.46V4.76a.6.6 0 0 0-1-.46"/><path d="M21.3 9.5a.9.9 0 0 0-1.27-1.27L18 10.26l-2.03-2.03a.9.9 0 1 0-1.27 1.27l2.03 2.03-2.03 2.03a.9.9 0 1 0 1.27 1.27L18 12.8l2.03 2.03a.9.9 0 0 0 1.27-1.27l-2.03-2.03z"/></svg>}
 </button>}
 </div>;
 }

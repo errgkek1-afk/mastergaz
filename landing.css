@@ -392,3 +392,24 @@ h3{font-size:18px!important}
 .loc-shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:16px}
 .lounge-slide img{width:100%;height:100%;object-fit:cover;display:block}
 .lounge-slide{padding:0}
+
+/* ——— ролики с заездами в блоке «Как добраться» ——— */
+.loc-video{position:relative;border-radius:16px;overflow:hidden;background:var(--color-fog);
+  aspect-ratio:16/10}
+.loc-video__media{width:100%;height:100%;object-fit:cover;display:block}
+.loc-video__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;border:0;border-radius:50%;background:rgba(17,17,17,.55);color:#fff;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background .2s ease,transform .15s ease}
+.loc-video__play svg{margin-left:3px}
+.loc-video__play:active{transform:translate(-50%,-50%) scale(.94)}
+@media (hover:hover){.loc-video__play:hover{background:var(--color-primary)}}
+.loc-video.is-started .loc-video__media{cursor:pointer}
+.loc-video__sound{position:absolute;right:10px;bottom:10px;width:36px;height:36px;border:0;
+  border-radius:50%;background:rgba(17,17,17,.55);color:#fff;display:flex;align-items:center;
+  justify-content:center;cursor:pointer;transition:background .2s ease,transform .15s ease}
+.loc-video__sound.is-on{background:var(--color-primary)}
+.loc-video__sound:active{transform:scale(.94)}
+@media (hover:hover){.loc-video__sound:hover{background:rgba(17,17,17,.75)}
+  .loc-video__sound.is-on:hover{background:var(--color-primary)}}
+.loc-photos__cap{font-size:14px;color:var(--color-ink);margin-top:8px;text-align:center}
