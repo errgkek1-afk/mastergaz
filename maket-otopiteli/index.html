@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="dvizhenie.css?v=1790776223">
+<link rel="stylesheet" href="dvizhenie.css?v=1790777123">
 <style>
 /* Второй макет отопителей в шаблоне «Голубая тяжесть»: тексты и порядок блоков
    как в первом макете, движение из шаблона, акцент красный, как у МастерГаза.
@@ -110,13 +110,13 @@ h2 em{font-style:normal;color:var(--accent-bright)}
   cursor:pointer;transition:background .25s var(--ease),box-shadow .25s var(--ease),transform .12s var(--ease)}
 .btn--primary{background:var(--accent);color:#fff}
 @media (hover:hover){.btn--primary:hover{background:var(--accent-bright);box-shadow:0 0 24px var(--glow)}}
-@media (hover:none){.btn--primary{box-shadow:0 0 18px rgba(239,68,68,.35)}}
+@media (hover:none){.btn--primary{box-shadow:0 0 24px rgba(239,68,68,.55)}}
 .btn--primary:active{transform:scale(.985)}
 .btn--quiet{background:transparent;color:var(--t-fg);box-shadow:inset 0 0 0 1px var(--t-line-2)}
 @media (hover:hover){.btn--quiet:hover{background:var(--t-ph)}}
 .btn--cold{background:var(--cold);color:#fff}
 @media (hover:hover){.btn--cold:hover{background:var(--cold-bright);box-shadow:0 0 24px rgba(61,132,247,.5)}}
-@media (hover:none){.btn--cold{box-shadow:0 0 18px rgba(61,132,247,.35)}}
+@media (hover:none){.btn--cold{box-shadow:0 0 24px rgba(61,132,247,.55)}}
 .btn--wide{width:100%}
 .btn--big{padding:20px 34px;font-size:16px}
 .btn:disabled{background:var(--t-ph);color:var(--t-muted);box-shadow:none;cursor:default}
@@ -209,15 +209,16 @@ h1 em{font-style:normal;color:var(--accent-bright)}
    верха колбы: над обоими столбиками остаётся воздух (Eugene, 30.09). */
 .thermo{display:block;width:100%;max-width:360px;margin:0 auto} /* градусники - по оси карточки; 50 °C слева от серого на уровне столбика, 90 °C справа от красного на уровне черты */
 .t-tube{fill:rgba(255,255,255,.12);stroke:rgba(255,255,255,.28);stroke-width:1.5}
-.t-cold{fill:rgba(255,255,255,.38)}
+/* сплошной серый, а не полупрозрачный: на просвет были видны стыки столбика и колбы */
+.t-cold{fill:#7c7d7e}
 .t-hot{fill:var(--accent)}
 .t-need{stroke:#fff;stroke-width:2;stroke-dasharray:6 6}
 /* столбики поднимаются из колбы, когда схема попала на экран: сначала проступает черта
    90 °C, потом растёт дизель и не дотягивает, за ним автономка уходит выше черты */
-.t-col{transform-box:view-box;transform-origin:50% 182px;transition:transform .95s cubic-bezier(.19,1,.22,1)}
-.t-col--hot{transition-delay:.24s}
-.t-fade{transition:opacity .5s var(--ease)}
-.t-lbl-cold{transition:opacity .4s .7s}
+.t-col{transform-box:view-box;transform-origin:50% 182px;transition:transform 1.7s cubic-bezier(.19,1,.22,1)}
+.t-col--hot{transition-delay:.45s}
+.t-fade{transition:opacity .7s var(--ease)}
+.t-lbl-cold{transition:opacity .5s 1.2s}
 .dv .thermo.is-wait .t-col{transform:scaleY(0)}
 .dv .thermo.is-wait .t-fade,.dv .thermo.is-wait .t-lbl-cold{opacity:0}
 .t-num{fill:#fff;font:500 17px var(--font)}
@@ -823,6 +824,44 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 
 <div class="wrap dv-row"><div data-divider><i></i><i></i></div></div>
 
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2 data-reveal>Где нас <em>найти</em></h2></div>
+    <div class="two">
+      <div class="ph" style="min-height:320px"><b>Карта</b>Интерактивная карта Яндекса с&nbsp;меткой&nbsp;— как на&nbsp;странице ГБО</div>
+      <div>
+        <div class="info" data-stagger>
+          <div><b>Адрес</b><span>Ростов-на-Дону, <span class="nowrap">Минеральная улица, 16</span></span></div>
+          <div><span class="nowrap" style="font-size:18px;font-weight:500;color:var(--t-fg)">+7 (929) 818-19-99</span><span style="color:var(--t-muted);font-size:15px">отопители и&nbsp;кондиционеры</span></div>
+          <div><b>Без&nbsp;записи</b><span>Можно заехать с&nbsp;колёс, если свободен пост. В&nbsp;сезон лучше позвонить заранее.</span></div>
+        </div>
+        <a class="btn btn--primary btn--wide" style="margin-top:20px" target="_blank" rel="noopener noreferrer" href="https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C%20%D0%9C%D0%B8%D0%BD%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2016">Построить маршрут</a>
+      </div>
+    </div>
+
+    <div class="cards3" data-stagger style="margin-top:26px">
+      <div class="ph ph--wide"><b>Фото</b>Фасад с&nbsp;баннером</div>
+      <div class="ph ph--wide"><b>Фото</b>Заезд с&nbsp;ул. Особенная</div>
+      <div class="ph ph--wide"><b>Фото</b>Заезд со&nbsp;шлагбаумом, ул. Оганова</div>
+    </div>
+
+    <div class="lounge">
+      <div class="slider slider--in">
+        <button class="sl-btn sl-btn--prev" type="button" aria-label="Назад">‹</button>
+        <button class="sl-btn sl-btn--next" type="button" aria-label="Вперёд">›</button>
+        <div class="sl-track lounge__track">
+          <div class="ph">Фото зоны отдыха&nbsp;— диваны</div>
+          <div class="ph">Фото зоны отдыха&nbsp;— нарды и&nbsp;телевизор</div>
+        </div>
+      </div>
+      <div class="lounge__txt">
+        <h3 data-reveal>Есть зона отдыха</h3>
+        <p>На&nbsp;втором этаже своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и&nbsp;Wi-Fi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="s-dark">
   <div class="wrap">
     <div class="rev-head">
@@ -890,44 +929,6 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 </section>
 
 <div class="wrap dv-row"><div data-divider><i></i><i></i></div></div>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head"><h2 data-reveal>Где нас <em>найти</em></h2></div>
-    <div class="two">
-      <div class="ph" style="min-height:320px"><b>Карта</b>Интерактивная карта Яндекса с&nbsp;меткой&nbsp;— как на&nbsp;странице ГБО</div>
-      <div>
-        <div class="info" data-stagger>
-          <div><b>Адрес</b><span>Ростов-на-Дону, <span class="nowrap">Минеральная улица, 16</span></span></div>
-          <div><span class="nowrap" style="font-size:18px;font-weight:500;color:var(--t-fg)">+7 (929) 818-19-99</span><span style="color:var(--t-muted);font-size:15px">отопители и&nbsp;кондиционеры</span></div>
-          <div><b>Без&nbsp;записи</b><span>Можно заехать с&nbsp;колёс, если свободен пост. В&nbsp;сезон лучше позвонить заранее.</span></div>
-        </div>
-        <a class="btn btn--primary btn--wide" style="margin-top:20px" target="_blank" rel="noopener noreferrer" href="https://yandex.ru/maps/?text=%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83%2C%20%D0%9C%D0%B8%D0%BD%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2016">Построить маршрут</a>
-      </div>
-    </div>
-
-    <div class="cards3" data-stagger style="margin-top:26px">
-      <div class="ph ph--wide"><b>Фото</b>Фасад с&nbsp;баннером</div>
-      <div class="ph ph--wide"><b>Фото</b>Заезд с&nbsp;ул. Особенная</div>
-      <div class="ph ph--wide"><b>Фото</b>Заезд со&nbsp;шлагбаумом, ул. Оганова</div>
-    </div>
-
-    <div class="lounge">
-      <div class="slider slider--in">
-        <button class="sl-btn sl-btn--prev" type="button" aria-label="Назад">‹</button>
-        <button class="sl-btn sl-btn--next" type="button" aria-label="Вперёд">›</button>
-        <div class="sl-track lounge__track">
-          <div class="ph">Фото зоны отдыха&nbsp;— диваны</div>
-          <div class="ph">Фото зоны отдыха&nbsp;— нарды и&nbsp;телевизор</div>
-        </div>
-      </div>
-      <div class="lounge__txt">
-        <h3 data-reveal>Есть зона отдыха</h3>
-        <p>На&nbsp;втором этаже своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и&nbsp;Wi-Fi.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="book s-paper">
   <div class="wrap">
@@ -1135,4 +1136,4 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   });
 })();
 </script>
-<script src="dvizhenie.js?v=1790776223" defer></script>
+<script src="dvizhenie.js?v=1790777123" defer></script>
