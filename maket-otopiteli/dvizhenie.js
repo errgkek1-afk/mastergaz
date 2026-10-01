@@ -283,10 +283,15 @@
 
   /* --- запуск --- */
   all('[data-stagger]').forEach(stagger);
-  all('[data-count]').forEach(count);
   all('[data-divider]').forEach(divider);
-  // Строки заголовка считаются по готовому шрифту, иначе перенос съедет
-  document.fonts.ready.then(function () { all('[data-reveal]').forEach(reveal); });
+  // Цифры, подписи и строки заголовка считаются по готовому шрифту. Пока шрифт
+  // не приехал, буквы другой ширины: барабан встаёт на чужую ширину и держит её,
+  // а в конце возвращается обычный текст - слово прыгает. На «30 лет» это пять
+  // точек, видно глазом.
+  document.fonts.ready.then(function () {
+    all('[data-count]').forEach(count);
+    all('[data-reveal]').forEach(reveal);
+  });
 
   window.addEventListener('scroll', wakeDividers, { passive: true });
   window.addEventListener('resize', wakeDividers);

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="dvizhenie.css?v=1790861582">
+<link rel="stylesheet" href="dvizhenie.css?v=1790870611">
 <style>
 /* Второй макет отопителей в шаблоне «Голубая тяжесть»: тексты и порядок блоков
    как в первом макете, движение из шаблона, акцент красный, как у МастерГаза.
@@ -169,7 +169,10 @@ h1 em{font-style:normal;color:var(--accent-bright)}
   align-items:flex-start;padding:8px}
 .sticker::after{content:"";position:absolute;top:8px;right:8px;width:5px;height:5px;background:#fff}
 .sticker b{font-size:19px;font-weight:400;letter-spacing:-.03em;line-height:1.1;white-space:nowrap}
-.sticker span{font:500 11px/1.25 var(--font);letter-spacing:.06em;text-transform:uppercase}
+/* только подпись «опыта», прямой ребёнок: правило «.sticker span» ловило и
+   цифры барабана - они тоже span внутри плашки - и во время прокрутки
+   «30 лет» становилось 11 px вместо 15, а в конце прыгало обратно */
+.sticker>span{font:500 11px/1.25 var(--font);letter-spacing:.06em;text-transform:uppercase}
 
 .hooks{position:relative;z-index:3;margin-top:-48px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding-inline:8px}
 .hook{background:var(--card-2);border:1px solid var(--t-line);border-radius:var(--r);padding:22px 24px}
@@ -1136,4 +1139,4 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   });
 })();
 </script>
-<script src="dvizhenie.js?v=1790861582" defer></script>
+<script src="dvizhenie.js?v=1790870611" defer></script>
