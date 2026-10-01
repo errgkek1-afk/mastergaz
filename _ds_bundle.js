@@ -116,7 +116,7 @@ function Placeholder({
     style: {
       aspectRatio: aspect,
       background: 'var(--color-fog)',
-      borderRadius: 'var(--radius-xl)',
+      borderRadius: 'var(--radius-lg)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -181,7 +181,7 @@ function Button({
     letterSpacing: 'var(--button-md-spacing)',
     textTransform: 'var(--button-md-transform)',
     border: 'none',
-    borderRadius: isCta ? 'var(--radius-xl)' : 'var(--radius-md)',
+    borderRadius: 'var(--radius-md)',
     cursor: disabled ? 'not-allowed' : 'pointer',
     padding: size === 'lg' ? '0 28px' : '0 22px',
     height: size === 'lg' ? '56px' : '48px',
@@ -245,7 +245,7 @@ function Chip({
     style: {
       transform: press ? 'scale(0.97)' : 'scale(1)',
       transition: 'transform var(--dur-press) var(--ease-out), background-color 150ms ease, border-color 150ms ease',
-      borderRadius: 'var(--radius-pill)',
+      borderRadius: 'var(--radius-md)',
       border: selected ? '1px solid var(--color-primary)' : '1px solid var(--border-input)',
       background: selected ? 'var(--color-primary-soft)' : 'var(--color-canvas)',
       color: selected ? 'var(--color-primary)' : 'var(--text-body)',

@@ -5,10 +5,10 @@ const {Button}=window.DesignSystem_a63f4f;
 const brands=['STAG','Digitronic','OMVL','Lovato','Europegas','AEB','Landi Renzo','BRC','GT-Gas','Zenit','Alpha','King','Bigas','KME'];
 return <section style={{background:'var(--color-cloud)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1080,margin:'0 auto'}}>
-<h2 style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'var(--color-ink)',margin:'0 0 28px',lineHeight:1.15,textAlign:'center'}}>Поставили не у нас — <span style={{color:'var(--color-primary)'}}>всё равно разберёмся</span></h2>
+<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'var(--color-ink)',margin:'0 0 28px',lineHeight:1.15,textAlign:'center'}}>Поставили не у нас — <span style={{color:'var(--color-primary)'}}>всё равно разберёмся</span></h2>
 
 <div className="cases-lead">Реальные случаи наших клиентов</div>
-<div className="case-grid">
+<div className="case-grid" data-stagger="">
 <div className="case-card">
 <div className="case-card__head"><img className="avatar avatar--photo" src="img/face1.png" alt="Владимир"/><div><b>Сэкономили мне деньги</b><i>Владимир, Ростов-на-Дону</i></div></div>
 <span>«У меня всего лишь вышел из строя клапан. В другом автосервисе заставляли менять весь редуктор за 6 000 ₽. Здесь посмотрели и сказали: у тебя не работает только клапан. Поменяли — и я поехал».</span>

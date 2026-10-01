@@ -12,8 +12,8 @@ const payback=saveMonth>0?Math.round(C.ENGINES[engine].cost/saveMonth):0;
 const rub=n=>n.toLocaleString('ru-RU')+' ₽';
 return <section style={{background:'var(--color-primary-mist)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1080,margin:'0 auto'}}>
-<h2 className="calc-title" style={{fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px',lineHeight:1.15}}>Посчитайте, сколько вы <span style={{color:'var(--color-primary)'}}>отдаёте бензину</span> каждый месяц</h2>
-<div className="calc-card" style={{background:'#fff',borderRadius:16,boxShadow:'var(--shadow-soft)',padding:40}}>
+<h2 className="calc-title" data-reveal="" style={{fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px',lineHeight:1.15}}>Посчитайте, сколько вы <span style={{color:'var(--color-primary)'}}>отдаёте бензину</span> каждый месяц</h2>
+<div className="calc-card" style={{background:'#fff',borderRadius:14,boxShadow:'var(--shadow-soft)',padding:40}}>
 <div className="calc-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:48,alignItems:'start'}}>
 <div style={{display:'flex',flexDirection:'column',gap:28}}>
 <Slider label="Пробег в месяц, км" min={100} max={6000} value={mileage} unit=" км" onChange={e=>setMileage(+e.target.value)}/>
@@ -32,7 +32,7 @@ return <section style={{background:'var(--color-primary-mist)',padding:'96px 32p
 <span>На бензине</span><b>{rub(petrolMonth)}</b><b>{rub(petrolMonth*12)}</b>
 <span>На газе</span><b>{rub(gasMonth)}</b><b>{rub(gasMonth*12)}</b>
 </div>
-<div style={{background:'var(--color-success-soft)',borderRadius:16,padding:'24px 28px',margin:'20px 0 16px'}}>
+<div style={{background:'var(--color-success-soft)',borderRadius:10,padding:'24px 28px',margin:'20px 0 16px'}}>
 <div style={{fontSize:14,color:'var(--color-charcoal)',marginBottom:4}}>Экономия</div>
 <div style={{fontSize:52,fontWeight:700,color:'var(--color-success)',lineHeight:1.05}}>{rub(saveMonth)}</div>
 <div style={{fontSize:16,color:'var(--color-charcoal)',marginTop:6}}>в месяц · {rub(saveMonth*12)} за год</div>

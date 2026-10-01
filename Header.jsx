@@ -4,7 +4,6 @@ const C=window.GBO_CONFIG;
 const open=window.isOpenNow();
 const [hidden,setHidden]=React.useState(false);
 const [onDark,setOnDark]=React.useState(false);
-const [direction,setDirection]=React.useState(0);
 React.useEffect(()=>{
 if(!('IntersectionObserver' in window))return;
 const hero=document.getElementById('hero');
@@ -23,7 +22,7 @@ return <>
 <span style={{fontSize:12,color:'var(--color-graphite)'}}>работаем с 1996 года</span>
 </div>
 <div className="header-tabs dir-tabs" role="tablist" aria-label="Направление">
-{['ГБО','Отопители и кондиционеры'].map((t,i)=><button key={t} type="button" role="tab" aria-selected={direction===i} className={direction===i?'is-active':''} onClick={()=>setDirection(i)}>{t}</button>)}
+{['ГБО','Отопители и кондиционеры'].map((t,i)=><button key={t} type="button" role="tab" aria-selected={i===0} className={i===0?'is-active':''} onClick={()=>{if(i===1)window.location.href='otopiteli/';}}>{t}</button>)}
 </div>
 <div style={{display:'flex',alignItems:'center',gap:24}}>
 <div className="header-status" style={{display:'flex',alignItems:'center',gap:10}}>
@@ -36,8 +35,8 @@ return <>
 <a className="header-phone" href={'tel:+'+C.PHONE_GBO.replace(/\D/g,'')}>{C.PHONE_GBO}</a>
 <div className="header-cta"><Button variant="primary" onClick={()=>onCta('первый экран')}>Связаться</Button></div>
 <div className="mobile-switch" role="tablist" aria-label="Направление">
-<span className="mobile-switch__thumb" style={{transform:`translateX(${direction*100}%)`}}/>
-{['ГБО','Отопители'].map((t,i)=><button key={t} type="button" role="tab" aria-selected={direction===i} className={direction===i?'is-active':''} onClick={()=>setDirection(i)}>{t}</button>)}
+<span className="mobile-switch__thumb"/>
+{['ГБО','Отопители'].map((t,i)=><button key={t} type="button" role="tab" aria-selected={i===0} className={i===0?'is-active':''} onClick={()=>{if(i===1)window.location.href='otopiteli/';}}>{t}</button>)}
 </div>
 </div>
 </header>

@@ -19,7 +19,7 @@ const items=[
 ];
 return <section style={{background:'#fff',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:820,margin:'0 auto'}}>
-<h2 style={{fontSize:40,fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px',lineHeight:1.1}}>Частые вопросы</h2>
+<h2 data-reveal="" style={{fontSize:40,fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px',lineHeight:1.1}}>Частые вопросы</h2>
 <SmoothAccordion items={items}/>
 </div>
 </section>;

@@ -23,7 +23,7 @@ window.enableDragScroll(track.current,{align:'center'});
 },[]);
 return <section style={{background:'#fff',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
-<h2 style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 12px',lineHeight:1.15,textWrap:'balance'}}>Не на словах, <span className="nowrap" style={{color:'var(--color-primary)'}}>а по документам</span></h2>
+<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 12px',lineHeight:1.15,textWrap:'balance'}}>Не на словах, <span className="nowrap" style={{color:'var(--color-primary)'}}>а по документам</span></h2>
 <p style={{fontSize:'clamp(15px,1.35vw,17px)',color:'var(--color-charcoal)',textAlign:'center',margin:'0 0 16px'}}>Сертификаты автосервиса и допуски мастеров</p>
 <div ref={track} className="certs-track snap-track" onScroll={()=>setActive(nearest())}>
 {certs.map((n,i)=><div key={n} className={'cert-item'+(active===i?' is-active':'')} onClick={()=>{if(active!==i)track.current.scrollTo({left:centerOf(i),behavior:'smooth'});}}>
@@ -64,9 +64,9 @@ const thumb=Math.max(8,pos.perView/total*100);
 return <section className="reviews-band" style={{background:'var(--color-ink)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
 <div className="reviews-head">
-<h2 style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'#fff',margin:0,lineHeight:1.15,textWrap:'balance'}}>Слова тех, кто уже ездит на газе</h2>
-<a className="rating-plate" href={C.YANDEX} target="_blank" rel="noopener noreferrer">
-<span className="rating-plate__value">{R.rating}</span>
+<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'#fff',margin:0,lineHeight:1.15,textWrap:'balance'}}>Слова тех, кто уже ездит на газе</h2>
+<a className="rating-plate" data-count="" href={C.YANDEX} target="_blank" rel="noopener noreferrer">
+<span className="rating-plate__value" data-count-num="">{R.rating}</span>
 <span>
 <span className="stars">★★★★★</span>
 <span className="rating-plate__counts">{R.ratingsLabel} · {R.reviewsLabel}</span>
@@ -75,7 +75,7 @@ return <section className="reviews-band" style={{background:'var(--color-ink)',p
 <span className="go">→</span>
 </a>
 </div>
-<div ref={track} className="reviews-track snap-track" onScroll={measure}>
+<div ref={track} className="reviews-track snap-track" data-stagger="" onScroll={measure}>
 {R.items.map((r,i)=><a key={i} className="review-card" href={C.YANDEX} target="_blank" rel="noopener noreferrer" draggable={false}>
 <span className="review-card__top">
 <span className="review-card__ava">{r.name.charAt(0)}</span>
@@ -95,3 +95,5 @@ return <section className="reviews-band" style={{background:'var(--color-ink)',p
 </section>;
 }
 window.CertificatesReviews=CertificatesReviews;
+window.Certificates=Certificates;
+window.ReviewsBand=ReviewsBand;

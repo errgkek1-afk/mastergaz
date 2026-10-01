@@ -9,7 +9,7 @@ const [shown,setShown]=React.useState(false);
 React.useEffect(()=>{const r=requestAnimationFrame(()=>setShown(true));return ()=>cancelAnimationFrame(r);},[]);
 const msg=encodeURIComponent(C.MESSENGER_TEXTS[source]||C.MESSENGER_TEXTS['первый экран']);
 return <div style={{position:'fixed',inset:0,background:'rgba(26,26,26,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:50,padding:16,fontFamily:'var(--font-family)',opacity:shown?1:0,transition:'opacity var(--dur-modal) var(--ease-out)'}} onClick={onClose}>
-<div style={{width:420,maxWidth:'100%',background:'#fff',borderRadius:16,boxShadow:'var(--shadow-modal)',padding:32,transformOrigin:'center',transform:shown?'scale(1) translateY(0)':'scale(0.96) translateY(8px)',opacity:shown?1:0,transition:'transform var(--dur-modal) var(--ease-out), opacity var(--dur-modal) var(--ease-out)'}} onClick={e=>e.stopPropagation()}>
+<div style={{width:420,maxWidth:'100%',background:'#fff',borderRadius:14,boxShadow:'var(--shadow-modal)',padding:32,transformOrigin:'center',transform:shown?'scale(1) translateY(0)':'scale(0.96) translateY(8px)',opacity:shown?1:0,transition:'transform var(--dur-modal) var(--ease-out), opacity var(--dur-modal) var(--ease-out)'}} onClick={e=>e.stopPropagation()}>
 <h3 style={{fontSize:24,fontWeight:600,color:'var(--color-ink)',margin:'0 0 8px'}}>Оставить заявку</h3>
 <p style={{fontSize:16,color:'var(--color-charcoal)',margin:'0 0 4px'}}>Мы с вами свяжемся</p>
 <p style={{fontSize:14,color:'var(--color-graphite)',margin:'0 0 20px'}}>Ответим через 10–15 минут</p>

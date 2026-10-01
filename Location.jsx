@@ -10,10 +10,10 @@ const drives=[
 ];
 return <section className="loc-section" style={{background:'var(--color-cloud)',padding:'64px 32px 96px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
-<h2 className="loc-title" style={{fontSize:'clamp(30px,3.4vw,46px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px',lineHeight:1.1}}>Как добраться</h2>
+<h2 className="loc-title" data-reveal="" style={{fontSize:'clamp(30px,3.4vw,46px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px',lineHeight:1.1}}>Как добраться</h2>
 <div className="loc-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:40,marginBottom:40}}>
 <MapBlock/>
-<div style={{display:'flex',flexDirection:'column',gap:20}}>
+<div data-stagger="" style={{display:'flex',flexDirection:'column',gap:20}}>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Адрес</div><div style={{fontSize:24,fontWeight:600,color:'var(--color-ink)'}}>{C.ADDRESS}</div></div>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Приоритетный заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>с улицы Особенная</div></div>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Второй заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>со стороны шлагбаума, с улицы Оганова</div></div>
@@ -22,12 +22,12 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <span style={{fontSize:16,color:'var(--color-ink)'}}>{window.HOURS_LINE}</span>
 </div>
 <a href={C.YANDEX} target="_blank" rel="noreferrer" style={{display:'block'}}><Button variant="primary" fullWidth>Построить маршрут</Button></a>
-<div style={{background:'#fff',borderRadius:12,padding:'14px 16px',fontSize:15,color:'var(--color-ink)',lineHeight:1.5}}>
+<div style={{background:'#fff',borderRadius:10,padding:'14px 16px',fontSize:15,color:'var(--color-ink)',lineHeight:1.5}}>
 Если работа занимает больше дня — машину можно оставить на ночь. Территория охраняется, всё под камерами.
 </div>
 </div>
 </div>
-<div className="loc-photos" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:10}}>
+<div className="loc-photos" data-stagger="" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:10}}>
 <div>
 <img className="loc-shot" src="img/foto/fasad.jpg" alt="Фасад МастерГаза с баннером" loading="lazy"/>
 <div className="loc-photos__cap">{photos[0]}</div>
@@ -38,11 +38,11 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 </div>)}
 </div>
 <div style={{height:56}}/>
-<div className="loc-lounge" style={{background:'#fff',borderRadius:16,boxShadow:'var(--shadow-soft)',display:'grid',gridTemplateColumns:'1fr 1fr',overflow:'hidden'}}>
+<div className="loc-lounge" style={{background:'#fff',borderRadius:14,boxShadow:'var(--shadow-soft)',display:'grid',gridTemplateColumns:'1fr 1fr',overflow:'hidden'}}>
 <LoungeSlider/>
 <div style={{padding:40}}>
-<h3 style={{fontSize:32,fontWeight:600,color:'var(--color-ink)',margin:'0 0 16px'}}>Пока машина в работе — есть зона отдыха</h3>
-<p style={{fontSize:18,color:'var(--color-charcoal)',margin:0,lineHeight:1.45}}>На втором этаже — своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и Wi-Fi. Тихо и спокойно: можно поработать или просто переждать.</p>
+<h3 data-reveal="" style={{fontSize:32,fontWeight:600,color:'var(--color-ink)',margin:'0 0 16px'}}>Пока машина в работе — есть зона отдыха</h3>
+<p style={{fontSize:18,color:'var(--color-charcoal)',margin:0,lineHeight:1.45}}>На втором этаже — своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и <span className="nowrap">Wi-Fi</span>. Тихо и спокойно: можно поработать или просто переждать.</p>
 </div>
 </div>
 </div>

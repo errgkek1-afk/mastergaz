@@ -51,28 +51,28 @@ const showCars=()=>{
   setFlash(true);setTimeout(()=>setFlash(false),1600);
 };
 return <section style={{padding:'40px 32px 0',fontFamily:'var(--font-family)',background:'#fff'}}>
-<div id="hero" style={{position:'relative',maxWidth:1280,margin:'0 auto',borderRadius:16,overflow:'hidden',background:'#1f1f1f'}}>
+<div id="hero" style={{position:'relative',maxWidth:1280,margin:'0 auto',borderRadius:14,overflow:'hidden',background:'#1f1f1f'}}>
 <div className="hero-stripe hero-stripe-1" style={{position:'absolute',right:-20,top:0,bottom:0,width:60,background:'var(--color-primary)',transform:'skewX(-20deg)'}}/>
 <div className="hero-stripe hero-stripe-2" style={{position:'absolute',right:-50,top:0,bottom:0,width:36,background:'var(--color-primary-bright)',transform:'skewX(-20deg)'}}/>
 <div className="hero-stripe hero-stripe-3" style={{position:'absolute',right:-70,top:0,bottom:0,width:22,background:'var(--color-primary-soft)',transform:'skewX(-20deg)'}}/>
 <div className="hero-grid" style={{position:'relative',zIndex:2,display:'grid',gridTemplateColumns:'minmax(380px,1.2fr) minmax(260px,460px)',gap:40,alignItems:'center',padding:'40px 80px 80px 40px',minHeight:560}}>
 <div style={{color:'#fff'}}>
-<h1 className="hero-h1" style={{fontSize:'clamp(26px,3.2vw,52px)',fontWeight:600,lineHeight:1.1,margin:'0 0 14px'}}><span className="nowrap">Установка ГБО <button type="button" className="hero-star" onClick={showCars}><span style={{color:'var(--color-primary-bright)'}}>от 4 часов</span><span className="hero-star__mark">*</span></button></span><br/>в Ростове-на-Дону</h1>
+<h1 className="hero-h1" data-reveal="" onClick={e=>{if(e.target.closest('.hero-star'))showCars();}} style={{fontSize:'clamp(26px,3.2vw,52px)',fontWeight:600,lineHeight:1.1,margin:'0 0 14px'}}><span className="nowrap">Установка ГБО <button type="button" className="hero-star"><span style={{color:'var(--color-primary-bright)'}}>от 4 часов</span><span className="hero-star__mark">*</span></button></span><br/>в Ростове-на-Дону</h1>
 <p className="hero-sub" style={{fontSize:18,lineHeight:1.45,margin:'0 0 32px',color:'#c2c2c2'}}>прямой и распределённый впрыск.</p>
 <div className="hero-cta" style={{display:'flex',gap:40,alignItems:'center',flexWrap:'wrap'}}>
 <Button variant="primary" size="lg" onClick={()=>onCta('первый экран')}>Рассчитать стоимость</Button>
-<div>
+<div data-count="" style={{'--dv-accent':'var(--color-primary-bright)'}}>
 <div style={{fontSize:13,color:'#9a9a9a'}}>Установлено ГБО:</div>
-<div style={{fontSize:'clamp(32px,3vw,48px)',fontWeight:700,lineHeight:1.05}}>20 321</div>
-<div style={{fontSize:13,color:'#9a9a9a'}}>машин уехали от нас на газу</div>
+<b data-count-num="" style={{fontSize:'clamp(32px,3vw,48px)',fontWeight:700,lineHeight:1.05}}>20 321</b>
+<div data-count-text="" style={{fontSize:13,color:'#9a9a9a'}}>машин уехали от нас на газу</div>
 </div>
 </div>
 </div>
 <HeroPhotos/>
 </div>
 </div>
-<div className="hooks-grid" style={{maxWidth:1280,margin:'-48px auto 0',position:'relative',zIndex:3,display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:24,padding:'0 8px'}}>
-{hooks.map((h,i)=><div key={i} className="hook-wrap" style={{opacity:0,transform:'translateY(10px)',animation:`gboHookIn 320ms var(--ease-out) ${i*60}ms forwards`}}>
+<div className="hooks-grid" data-stagger="" style={{maxWidth:1280,margin:'-48px auto 0',position:'relative',zIndex:3,display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:24,padding:'0 8px'}}>
+{hooks.map((h,i)=><div key={i} className="hook-wrap">
 <div className="hook-card">
 <div className="hook-card__title hook-card__title--ico">{h[0]}<span>{h[1]}</span></div>
 <div className="hook-card__text">{h[2]}</div>
