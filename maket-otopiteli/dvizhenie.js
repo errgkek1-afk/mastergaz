@@ -61,7 +61,15 @@
     return words;
   }
 
-  /* --- data-reveal: строки поднимаются из-под наклона по очереди --- */
+  /* --- data-reveal: строки поднимаются из-под наклона по очереди ---
+     Слова кладутся в отдельные блоки, и это чуть меняет ширину строки (у
+     каждого слова свой трекинг). Но происходит это в момент, когда заголовок
+     ещё невидим (его прячет правило .dv [data-reveal]:not(.is-in)), поэтому
+     перестроения никто не видит. А вот возвращать сплошной текст в конце
+     нельзя: там заголовок уже на виду, и он сдвигается на доли точки -
+     на широком экране до четырёх. Поэтому разметку после выезда не трогаем,
+     а исходный текст возвращаем только при смене ширины окна, когда переносы
+     всё равно считаются заново. */
   function reveal(el) {
     onEnter(el, 0.85, function () {
       var original = el.innerHTML;
@@ -83,8 +91,15 @@
         ], { duration: 940, delay: line * 80, easing: EASE_EXHALE, fill: 'backwards' });
       });
       el.classList.add('is-in');
-      // После выезда возвращаем исходный текст — переносы строк снова живые
-      last.onfinish = function () { el.innerHTML = original; };
+      last.onfinish = function () {
+        var vernut = function () {
+          window.removeEventListener('resize', vernut);
+          window.removeEventListener('orientationchange', vernut);
+          el.innerHTML = original;
+        };
+        window.addEventListener('resize', vernut);
+        window.addEventListener('orientationchange', vernut);
+      };
     });
   }
 
@@ -119,6 +134,17 @@
     var fs = parseFloat(cs.fontSize);
     var lh = (parseFloat(cs.lineHeight) || fs * 1.2) / fs;
     var k = 0, last;
+    /* Место под цифру занимаем заранее, по её обычному виду: барабан выше и
+       шире обычного текста, и без этого строка со счётчиком (а вместе с ней
+       и вся карточка) дёргается в начале и в конце прокрутки. */
+    var mesto = el.getBoundingClientRect();
+    el.style.minWidth = mesto.width + 'px';
+    /* Высоту занимаем по строке текста (line-height), а не по рамке буквы:
+       рамка выше строки, и от неё строка со счётчиком становилась на шесть
+       точек выше, а в конце прокрутки весь первый экран прыгал обратно.
+       Выравнивание не трогаем - цифры барабана стоят по центру своих клеток,
+       и центр совпадает с обычным текстом в пределах половины точки. */
+    el.style.height = lh + 'em';
     el.textContent = '';
     el.style.display = 'inline-flex';
     text.split('').forEach(function (ch) {
@@ -151,8 +177,15 @@
         { transform: 'none' }
       ], { duration: 900, delay: k++ * 40, easing: EASE_REEL, fill: 'backwards' });
     });
-    if (!last) { el.textContent = text; el.style.display = ''; return; }
-    last.onfinish = function () { el.textContent = text; el.style.display = ''; };
+    var vernut = function () {
+      el.textContent = text;
+      el.style.display = '';
+      el.style.minWidth = '';
+      el.style.height = '';
+      el.style.verticalAlign = '';
+    };
+    if (!last) { vernut(); return; }
+    last.onfinish = vernut;
   }
 
   // Буквы подписи перебирают случайные знаки акцентным цветом и встают
@@ -160,6 +193,16 @@
   function scramble(el) {
     var text = el.textContent;
     var chars = [];
+    /* Ширину подписи держим прежней: у букв с заданной шириной строка длиннее,
+       и в конце перебора подпись прыгала вбок на полтора десятка точек.
+       Блочной подписи при этом нельзя менять display: inline-block поднимает её
+       на строку к цифре. На макете отопителей от этого весь первый экран
+       становился на 14 точек короче, а в конце перебора прыгал обратно вниз.
+       Строчной подписи inline-block нужен - иначе ширину не удержать. */
+    var mesto = el.getBoundingClientRect();
+    if (getComputedStyle(el).display === 'inline') el.style.display = 'inline-block';
+    el.style.minWidth = mesto.width + 'px';
+    el.style.minHeight = mesto.height + 'px';
     splitWords(el, function (word) {
       var w = document.createElement('span');
       w.className = 'dv-scramble';
@@ -191,7 +234,13 @@
         done = false;
         c.el.textContent = SYMBOLS[Math.random() * SYMBOLS.length | 0];
       });
-      if (done) { el.textContent = text; return; }
+      if (done) {
+        el.textContent = text;
+        el.style.display = '';
+        el.style.minWidth = '';
+        el.style.minHeight = '';
+        return;
+      }
       requestAnimationFrame(tick);
     })(start);
   }
