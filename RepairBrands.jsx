@@ -5,16 +5,16 @@ const {Button}=window.DesignSystem_a63f4f;
 const brands=['STAG','Digitronic','OMVL','Lovato','Europegas','AEB','Landi Renzo','BRC','GT-Gas','Zenit','Alpha','King','Bigas','KME'];
 return <section style={{background:'var(--color-cloud)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1080,margin:'0 auto'}}>
-<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'var(--color-ink)',margin:'0 0 28px',lineHeight:1.15,textAlign:'center'}}>Ремонт и настройка ГБО в Ростове<br/><span style={{color:'var(--color-primary)'}}>даже если ставили не у нас</span></h2>
+<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'var(--color-ink)',margin:'0 0 28px',lineHeight:1.15,textAlign:'center'}}>Ремонт и настройка ГБО в Ростове<br/><span style={{color:'var(--color-primary)'}}>даже если ставили не у нас</span></h2>
 
 <div className="case-grid" data-stagger="">
 <div className="case-card">
 <div className="case-card__head"><img className="avatar avatar--photo" src="img/face1.png" alt="Владимир"/><div><b>Сэкономили мне деньги</b><i>Владимир, Ростов-на-Дону</i></div></div>
-<span>«У меня всего лишь вышел из строя клапан. В другом автосервисе заставляли менять весь редуктор за 6 000 ₽. Здесь посмотрели и сказали: у тебя не работает только клапан. Поменяли — и я поехал».</span>
+<span>«У меня всего лишь вышел из строя клапан. В другом автосервисе заставляли менять весь редуктор за 6 000 ₽. Здесь посмотрели и сказали: у тебя не работает только клапан. Поменяли — и я поехал».</span>
 </div>
 <div className="case-card">
-<div className="case-card__head"><img className="avatar avatar--photo" src="img/face2.png" alt="Сергей"/><div><b>Не навязали лишнего</b><i>Сергей, Батайск</i></div></div>
-<span>«Мне в другом сервисе сказали менять всю проводку за 11 000 ₽. Приехал сюда — сказали, причина в одном оторванном проводе. Здесь его заменили за 500 ₽, и всё заработало».</span>
+<div className="case-card__head"><img className="avatar avatar--photo" src="img/face2.png" alt="Сергей"/><div><b>Не навязали лишнего</b><i>Сергей, Батайск</i></div></div>
+<span>«Мне в другом сервисе сказали менять всю проводку за 11 000 ₽. Приехал сюда — сказали, причина в одном оторванном проводе. Здесь его заменили за 500 ₽, и всё заработало».</span>
 </div>
 </div>
 
@@ -22,8 +22,8 @@ return <section style={{background:'var(--color-cloud)',padding:'96px 32px',font
 <span className="brands-line__label">Ремонтируем ГБО любых марок:</span>
 <span className="brands-line__list">{brands.join(' · ')}</span>
 </div>
-<Button variant="primary" size="lg" fullWidth onClick={()=>onCta('ремонт ГБО')}>Приехать на диагностику</Button>
-<div className="free-diag"><IcoGift/><span>Бесплатная диагностика, если ремонтируетесь у нас</span></div>
+<Button variant="primary" size="lg" fullWidth onClick={()=>onCta('ремонт ГБО')}>Приехать на диагностику</Button>
+<div className="free-diag"><IcoGift/><span>Бесплатная диагностика, если ремонтируетесь у нас</span></div>
 </div>
 </section>;
 }

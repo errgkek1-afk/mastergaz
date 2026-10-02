@@ -5,7 +5,7 @@ return <footer style={{background:'var(--color-ink)',color:'#fff',padding:'64px 
 <div className="footer-grid" style={{maxWidth:1280,margin:'0 auto',display:'grid',gridTemplateColumns:'1.3fr 1.3fr 1fr 1fr',gap:32,marginBottom:40}}>
 <div>
 <div style={{fontWeight:700,fontSize:20,marginBottom:10}}>МастерГаз</div>
-<div style={{fontSize:14,color:'var(--color-steel)',lineHeight:1.5}}>МастерГаз. Газобаллонное оборудование, климатические системы, автономные отопители. С 1996 года</div>
+<div style={{fontSize:14,color:'var(--color-steel)',lineHeight:1.5}}>МастерГаз. Газобаллонное оборудование, климатические системы, автономные отопители. С 1996 года</div>
 </div>
 <div>
 <div style={{fontSize:14,color:'var(--color-steel)',marginBottom:10}}>Телефоны</div>
@@ -13,13 +13,13 @@ return <footer style={{background:'var(--color-ink)',color:'#fff',padding:'64px 
 <div className="nowrap" style={{fontSize:16}}>Кондиционеры — {C.PHONE_CLIMATE}</div>
 </div>
 <div>
-<div style={{fontSize:14,color:'var(--color-steel)',marginBottom:10}}>Адрес и график</div>
+<div style={{fontSize:14,color:'var(--color-steel)',marginBottom:10}}>Адрес и график</div>
 <div style={{fontSize:14,lineHeight:1.6}}>{C.ADDRESS}<br/>{window.HOURS_LINE}</div>
 </div>
 <div>
 <div style={{fontSize:14,color:'var(--color-steel)',marginBottom:10}}>Разделы</div>
 <div style={{fontSize:14,marginBottom:6}}><a href="#" style={{color:'var(--color-primary-bright)'}}>ГБО</a></div>
-<div style={{fontSize:14,marginBottom:14}}><a href="otopiteli/" style={{color:'var(--color-steel)'}}>Отопители и кондиционеры</a></div>
+<div style={{fontSize:14,marginBottom:14}}><a href="otopiteli/" style={{color:'var(--color-steel)'}}>Отопители и кондиционеры</a></div>
 <div className="footer-contacts"><Messenger type="telegram" href="https://t.me/share/url?url=&text="/><Messenger type="whatsapp" href={C.WHATSAPP}/><Messenger type="max" href={C.MAX_LINK}/></div>
 <div style={{fontSize:13,color:'var(--color-steel)',margin:'16px 0 8px',lineHeight:1.4}}>Магазин газового оборудования: запчасти на Ozon и Wildberries</div>
 <div className="footer-contacts">{[['Ozon','img/ozon.png',C.OZON],['Wildberries','img/wb.png',C.WB]].map(([label,src,href])=>

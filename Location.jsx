@@ -2,11 +2,11 @@ function Location(){
 const {Button}=window.DesignSystem_a63f4f;
 const C=window.GBO_CONFIG;
 const open=window.isOpenNow();
-const photos=['Фасад с баннером'];
+const photos=['Фасад с баннером'];
 const [sound,setSound]=React.useState(null);
 const drives=[
-{src:'video/zaezd-osobennaya.mp4',poster:'video/zaezd-osobennaya.jpg',caption:'Заезд с ул. Особенная'},
-{src:'video/zaezd-oganova.mp4',poster:'video/zaezd-oganova.jpg',caption:'Заезд со шлагбаумом, ул. Оганова'}
+{src:'video/zaezd-osobennaya.mp4',poster:'video/zaezd-osobennaya.jpg',caption:'Заезд с ул. Особенная'},
+{src:'video/zaezd-oganova.mp4',poster:'video/zaezd-oganova.jpg',caption:'Заезд со шлагбаумом, ул. Оганова'}
 ];
 return <section className="loc-section" style={{background:'var(--color-cloud)',padding:'64px 32px 96px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
@@ -15,21 +15,21 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <MapBlock/>
 <div data-stagger="" style={{display:'flex',flexDirection:'column',gap:20}}>
 <div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Адрес</div><div style={{fontSize:24,fontWeight:600,color:'var(--color-ink)'}}>{C.ADDRESS}</div></div>
-<div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Приоритетный заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>с улицы Особенная</div></div>
-<div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Второй заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>со стороны шлагбаума, с улицы Оганова</div></div>
+<div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Приоритетный заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>с улицы Особенная</div></div>
+<div><div style={{fontSize:14,color:'var(--color-graphite)'}}>Второй заезд</div><div style={{fontSize:16,color:'var(--color-ink)'}}>со стороны шлагбаума, с улицы Оганова</div></div>
 <div style={{display:'flex',alignItems:'center',gap:10}}>
 <span className={'status-dot'+(open?' is-open':'')}/>
 <span style={{fontSize:16,color:'var(--color-ink)'}}>{window.HOURS_LINE}</span>
 </div>
 <a href={C.MAP_LINK} target="_blank" rel="noreferrer" style={{display:'block'}}><Button variant="primary" fullWidth>Построить маршрут</Button></a>
 <div style={{background:'#fff',borderRadius:10,padding:'14px 16px',fontSize:15,color:'var(--color-ink)',lineHeight:1.5}}>
-Если работа занимает больше дня — машину можно оставить на ночь. Территория охраняется, всё под камерами.
+Если работа занимает больше дня — машину можно оставить на ночь. Территория охраняется, всё под камерами.
 </div>
 </div>
 </div>
 <div className="loc-photos" data-stagger="" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:10}}>
 <div>
-<img className="loc-shot" src="img/foto/fasad.jpg" alt="Фасад МастерГаза с баннером" loading="lazy"/>
+<img className="loc-shot" src="img/foto/fasad.jpg" alt="Фасад МастерГаза с баннером" loading="lazy"/>
 <div className="loc-photos__cap">{photos[0]}</div>
 </div>
 {drives.map(d=><div key={d.src}>
@@ -41,8 +41,8 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <div className="loc-lounge" style={{background:'#fff',borderRadius:14,boxShadow:'var(--shadow-soft)',display:'grid',gridTemplateColumns:'1fr 1fr',overflow:'hidden'}}>
 <LoungeSlider/>
 <div style={{padding:40}}>
-<h3 data-reveal="" style={{fontSize:32,fontWeight:600,color:'var(--color-ink)',margin:'0 0 16px'}}>Пока машина в работе — есть зона отдыха</h3>
-<p style={{fontSize:18,color:'var(--color-charcoal)',margin:0,lineHeight:1.45}}>На втором этаже — своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и <span className="nowrap">Wi-Fi</span>. Тихо и спокойно: можно поработать или просто переждать.</p>
+<h3 data-reveal="" style={{fontSize:32,fontWeight:600,color:'var(--color-ink)',margin:'0 0 16px'}}>Пока машина в работе — есть зона отдыха</h3>
+<p style={{fontSize:18,color:'var(--color-charcoal)',margin:0,lineHeight:1.45}}>На втором этаже — своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и <span className="nowrap">Wi-Fi</span>. Тихо и спокойно: можно поработать или просто переждать.</p>
 </div>
 </div>
 </div>
@@ -52,7 +52,7 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 function LoungeSlider(){
 const slides=[
 ['img/foto/lounge1.jpg','Зона отдыха: диваны, телевизор, кулер'],
-['img/foto/lounge2.jpg','Зона отдыха на втором этаже']
+['img/foto/lounge2.jpg','Зона отдыха на втором этаже']
 ];
 const n=slides.length;
 const [index,setIndex]=React.useState(0);
@@ -71,35 +71,35 @@ onPointerUp={e=>{if(startX.current===null)return;const dx=e.clientX-startX.curre
 </div>
 </div>;
 }
-/* Карта: живой виджет Яндекса. Если он не отозвался за 8 секунд (у части
-   посетителей iframe не грузится) — молча подставляем снимок карты со ссылкой. */
+/* Карта: живой виджет Яндекса. Если он не отозвался за 8 секунд (у части
+   посетителей iframe не грузится) — молча подставляем снимок карты со ссылкой. */
 function MapBlock(){
 const C=window.GBO_CONFIG;
 const [failed,setFailed]=React.useState(false);
 const [active,setActive]=React.useState(false);
-/* На телефоне карта перехватывает движение пальцем и страница перестаёт
-   прокручиваться. Поэтому до первого нажатия карта закрыта прозрачной плашкой. */
+/* На телефоне карта перехватывает движение пальцем и страница перестаёт
+   прокручиваться. Поэтому до первого нажатия карта закрыта прозрачной плашкой. */
 const touch=typeof window!=='undefined'&&window.matchMedia&&window.matchMedia('(hover:none)').matches;
 const loaded=React.useRef(false);
 React.useEffect(()=>{
   const t=setTimeout(()=>{if(!loaded.current)setFailed(true);},8000);
   return()=>clearTimeout(t);
 },[]);
-if(failed) return <a className="loc-map loc-map--static" href={C.MAP_LINK} target="_blank" rel="noopener noreferrer" aria-label="Открыть МастерГаз на Яндекс Картах">
-<img src="img/foto/map.jpg" alt="МастерГаз на карте: Минеральная улица, 16"/>
-<span className="loc-map__open">Открыть в Яндекс Картах →</span>
+if(failed) return <a className="loc-map loc-map--static" href={C.MAP_LINK} target="_blank" rel="noopener noreferrer" aria-label="Открыть МастерГаз на Яндекс Картах">
+<img src="img/foto/map.jpg" alt="МастерГаз на карте: Минеральная улица, 16"/>
+<span className="loc-map__open">Открыть в Яндекс Картах →</span>
 </a>;
 return <div className="loc-map">
-<iframe src={C.MAP_WIDGET} title="МастерГаз на карте: Минеральная улица, 16" allowFullScreen onLoad={()=>{loaded.current=true;}}/>
+<iframe src={C.MAP_WIDGET} title="МастерГаз на карте: Минеральная улица, 16" allowFullScreen onLoad={()=>{loaded.current=true;}}/>
 {touch&&!active&&<button type="button" className="loc-map__lock" onClick={()=>setActive(true)}>
 <span>Нажмите, чтобы двигать карту</span>
 </button>}
 </div>;
 }
 
-/* Ролики с заездами. Сами не запускаются: человек видит кадр и кнопку,
-   и ролик идёт только после нажатия — со звуком, как в обычном плеере.
-   Ушли с экрана или свернули вкладку — встаёт на паузу. */
+/* Ролики с заездами. Сами не запускаются: человек видит кадр и кнопку,
+   и ролик идёт только после нажатия — со звуком, как в обычном плеере.
+   Ушли с экрана или свернули вкладку — встаёт на паузу. */
 function DriveVideo({src,poster,caption,soundOn,onSound}){
 const ref=React.useRef(null);
 const box=React.useRef(null);
@@ -127,12 +127,12 @@ React.useEffect(()=>{
   v.muted=!soundOn;
   if(v.paused){const p=v.play();if(p&&p.catch)p.catch(()=>{});}
 },[soundOn,started]);
-/* Запускаем тихо: со звуком браузер ролик просто не пустит, пока человек
-   не разрешит его отдельно — для этого рядом кнопка звука. */
+/* Запускаем тихо: со звуком браузер ролик просто не пустит, пока человек
+   не разрешит его отдельно — для этого рядом кнопка звука. */
 const start=()=>{
   const v=ref.current;
   if(!v)return;
-  /* два ролика одновременно не идут: соседний встаёт на паузу */
+  /* два ролика одновременно не идут: соседний встаёт на паузу */
   document.querySelectorAll('.loc-video__media').forEach(o=>{if(o!==v)o.pause();});
   setStarted(true);
   v.muted=true;

@@ -70,7 +70,7 @@ html,body{overflow-x:clip}
 /* только подпись «опыта»: во время барабана внутри цифры появляются свои span, им это правило не нужно */
 .sticker>span{font:500 11px/1.25 var(--font-family);letter-spacing:.06em;text-transform:uppercase}
 /* «от 4 часов» со звёздочкой: нажатие подсвечивает список машин */
-.hero-star{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer;
+.hero-star{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer;white-space:nowrap;
   border-bottom:1px dashed rgba(255,255,255,.35)}
 .dv [data-reveal]:not(.is-in) .hero-star{border-bottom-color:transparent}
 .dv [data-reveal].is-in .hero-star{transition:border-bottom-color .4s 1s}
@@ -140,7 +140,7 @@ html,body{overflow-x:clip}
 /* Плавные раскрывающиеся списки */
 .smooth-acc{border:1px solid var(--border-default);border-radius:var(--radius-lg);overflow:hidden;background:var(--color-canvas)}
 .smooth-acc__item+.smooth-acc__item{border-top:1px solid var(--border-default)}
-.smooth-acc__head{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--color-canvas);border:none;cursor:pointer;padding:18px 20px;font-family:var(--font-family);font-size:var(--body-emphasis-size);font-weight:var(--body-emphasis-weight);color:var(--text-heading);text-align:left}
+.smooth-acc__head{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;text-wrap:balance;background:var(--color-canvas);border:none;cursor:pointer;padding:18px 20px;font-family:var(--font-family);font-size:var(--body-emphasis-size);font-weight:var(--body-emphasis-weight);color:var(--text-heading);text-align:left}
 .smooth-acc__icon{color:var(--color-primary);display:inline-block;flex-shrink:0;transition:transform .45s cubic-bezier(.4,0,.2,1)}
 .smooth-acc__item.is-open .smooth-acc__icon{transform:rotate(180deg)}
 .smooth-acc__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1)}
@@ -255,7 +255,10 @@ body{padding-bottom:72px}
 .footer-grid{grid-template-columns:1fr!important;gap:24px!important}
 .calc-card{padding:20px!important;border-radius:14px!important}
 .engine-chips{flex-wrap:nowrap!important;gap:6px!important}
-.engine-chips button{flex:1 1 0;min-width:0;padding:9px 4px!important;font-size:13px!important;white-space:nowrap}
+.engine-chips button{flex:1 1 0;min-width:0;padding:9px 4px!important;font-size:14px!important;white-space:nowrap}
+.calc-table{gap:10px 14px!important;font-size:18px!important}
+/* узкий телефон (320): таблица и плашки двигателей чуть мельче, чтобы не вылезать за карточку */
+@media (max-width:360px){.calc-table{gap:10px 8px!important;font-size:15px!important}.engine-chips button{font-size:12px!important;padding:9px 2px!important}}
 .errors-photos{grid-template-columns:1fr}
 .errors-table{display:flex!important;flex-direction:column!important}
 .errors-bg{display:none!important}
@@ -308,9 +311,11 @@ h3{font-size:18px!important}
 
 /* ——— заголовок калькулятора: на большом экране одной строкой ——— */
 .calc-title{font-size:clamp(24px,2.55vw,36px)}
+/* цифры калькулятора крупнее: подписи ползунков берут размер из этой переменной (Eugene, 02.10) */
+.calc-card{--caption-md-size:16px}
 @media (min-width:1000px){.calc-title{white-space:nowrap}}
 .price-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;
-  font-size:15px;line-height:1.45}
+  font-size:16px;line-height:1.45}
 .price-row b{white-space:nowrap;color:var(--color-ink)}
 
 /* ——— истории клиентов в блоке ремонта ——— */
@@ -357,7 +362,8 @@ h3{font-size:18px!important}
    стопку даёт position: sticky, уменьшение — скролл-анимация. Где браузер
    её не понимает, кадры просто лягут стопкой, блок не сломается. */
 @media (max-width:860px){
-  .errors-photos{display:block;padding-bottom:22vh}
+  .errors-photos{display:block;padding-bottom:0}
+  .errors-final{margin-top:20px!important}
   .errors-shot{position:sticky;aspect-ratio:4/3;margin-bottom:18px;
     transform-origin:top center;box-shadow:0 -18px 34px rgba(0,0,0,.28);
     border:1px solid var(--color-hairline)}
