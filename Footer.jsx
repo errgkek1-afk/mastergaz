@@ -21,7 +21,7 @@ return <footer style={{background:'var(--color-ink)',color:'#fff',padding:'64px 
 <div style={{fontSize:14,marginBottom:6}}><a href="#" style={{color:'var(--color-primary-bright)'}}>ГБО</a></div>
 <div style={{fontSize:14,marginBottom:14}}><a href="otopiteli/" style={{color:'var(--color-steel)'}}>Отопители и кондиционеры</a></div>
 <div className="footer-contacts"><Messenger type="telegram" href="https://t.me/share/url?url=&text="/><Messenger type="whatsapp" href={C.WHATSAPP}/><Messenger type="max" href={C.MAX_LINK}/>
-{[['Ozon','img/ozon.png'],['Wildberries','img/wb.png'],['Авито','img/avito.png']].map(([label,src])=>
+{[['Ozon','img/ozon.png'],['Wildberries','img/wb.png']].map(([label,src])=>
 <a key={label} className="shop-btn" href="#" aria-label={label} title={label} onClick={e=>e.preventDefault()}><img src={src} alt={label}/></a>)}</div>
 </div>
 </div>

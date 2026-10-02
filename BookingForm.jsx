@@ -15,7 +15,7 @@ return <section className="booking-section" style={{background:'var(--color-prim
 </div>
 <div style={{maxWidth:640,margin:'0 auto',position:'relative'}}>
 <div style={{position:'relative',background:'#fff',borderRadius:14,boxShadow:'var(--shadow-modal)',padding:40,zIndex:1}}>
-<h2 data-reveal="" style={{fontSize:36,fontWeight:600,color:'var(--color-ink)',margin:'0 0 32px',textAlign:'center',lineHeight:1.12}}>Напишите марку машины<br/><span style={{color:'var(--color-primary)'}}>назовём цену и срок</span></h2>
+<h2 data-reveal="" style={{fontSize:36,fontWeight:600,color:'var(--color-ink)',margin:'0 0 32px',textAlign:'center',lineHeight:1.12}}>Узнать цену установки ГБО<br/><span style={{color:'var(--color-primary)'}}>на вашу машину</span></h2>
 <div style={{display:'flex',flexDirection:'column',gap:16,marginBottom:24}}>
 <Input label="Имя (необязательно)" placeholder="Как вас зовут" value={name} onChange={e=>setName(e.target.value)}/>
 <Input label="Телефон" placeholder="+7 (___) ___-__-__" value={phone} onChange={e=>setPhone(window.formatPhone(e.target.value))}/>

@@ -11,8 +11,7 @@ const msg=encodeURIComponent(C.MESSENGER_TEXTS[source]||C.MESSENGER_TEXTS['пе�
 return <div style={{position:'fixed',inset:0,background:'rgba(26,26,26,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:50,padding:16,fontFamily:'var(--font-family)',opacity:shown?1:0,transition:'opacity var(--dur-modal) var(--ease-out)'}} onClick={onClose}>
 <div style={{width:420,maxWidth:'100%',background:'#fff',borderRadius:14,boxShadow:'var(--shadow-modal)',padding:32,transformOrigin:'center',transform:shown?'scale(1) translateY(0)':'scale(0.96) translateY(8px)',opacity:shown?1:0,transition:'transform var(--dur-modal) var(--ease-out), opacity var(--dur-modal) var(--ease-out)'}} onClick={e=>e.stopPropagation()}>
 <h3 style={{fontSize:24,fontWeight:600,color:'var(--color-ink)',margin:'0 0 8px'}}>Оставить заявку</h3>
-<p style={{fontSize:16,color:'var(--color-charcoal)',margin:'0 0 4px'}}>Мы с вами свяжемся</p>
-<p style={{fontSize:14,color:'var(--color-graphite)',margin:'0 0 20px'}}>Ответим через 10–15 минут</p>
+<p style={{fontSize:15,color:'var(--color-charcoal)',margin:'0 0 20px',lineHeight:1.45}}>Перезвоним в рабочее время за 10–15 минут и назовём цену и срок.</p>
 <div style={{display:'flex',flexDirection:'column',gap:12,marginBottom:20}}>
 <Input label="Имя (необязательно)" placeholder="Как вас зовут" value={name} onChange={e=>setName(e.target.value)}/>
 <Input label="Телефон" placeholder="+7 (___) ___-__-__" value={phone} onChange={e=>setPhone(window.formatPhone(e.target.value))}/>

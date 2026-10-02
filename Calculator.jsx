@@ -40,12 +40,12 @@ return <section style={{background:'var(--color-primary-mist)',padding:'96px 32p
 <div style={{fontSize:20,fontWeight:600,color:'var(--color-ink)',textWrap:'balance'}}>Окупится примерно за {payback} мес.</div>
 </div>
 </div>
-<div style={{marginTop:32}}><Button variant="primary" size="lg" fullWidth onClick={()=>onCta('калькулятор')}>Рассчитать стоимость</Button></div>
+<div style={{marginTop:32}}><Button variant="primary" size="lg" fullWidth onClick={()=>onCta('калькулятор')}>Узнать цену установки ГБО</Button></div>
 <div style={{marginTop:24}}>
 <SmoothAccordion defaultOpenIndex={-1} items={[
-{title:'Что входит в установку',content:<ol style={{margin:0,paddingLeft:20,lineHeight:1.8}}>
+{title:'Что входит в установку ГБО',content:<ol style={{margin:0,paddingLeft:20,lineHeight:1.8}}>
 <li>Комплект электроники подкапотной части</li><li>Газовый баллон — тороидальный или цилиндрический</li><li>Мультиклапан класса А, Италия</li><li>Термопластиковые магистрали</li><li>Редуктор</li><li>Форсунки</li><li>Заправочное устройство</li><li>Фурнитура и крепёж</li></ol>},
-{title:'Обслуживание',content:<div>
+{title:'Обслуживание ГБО',content:<div>
 <div className="price-row" style={{borderBottom:'none'}}><span>ТО каждые 10 000 км — замена фильтров жидкой и паровой фазы, проверка герметичности, при необходимости компьютерная диагностика</span><b>1 400 – 2 000 ₽</b></div>
 <div style={{fontSize:15,color:'var(--color-ink)',marginTop:14,fontWeight:600}}>Помним вашу машину. Позвоните — скажем, когда вы последний раз обслуживались.</div>
 </div>},

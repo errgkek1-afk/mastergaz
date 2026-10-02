@@ -10,7 +10,7 @@ const roles=[
 ];
 return <section style={{background:'#fff',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
-<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 12px',lineHeight:1.15,textWrap:'balance'}}><span style={{color:'var(--color-primary)'}}>14 мастеров</span>. Средний стаж больше десяти лет</h2>
+<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 12px',lineHeight:1.15,textWrap:'balance'}}><span style={{color:'var(--color-primary)'}}>14 мастеров по ГБО</span>. Средний стаж больше десяти лет</h2>
 <p style={{fontSize:'clamp(15px,1.35vw,17px)',color:'var(--color-charcoal)',textAlign:'center',margin:'0 0 48px',lineHeight:1.45,textWrap:'balance'}}>Каждый занимается своим делом: одни ставят, другие настраивают, третьи ведут документы.</p>
 <div className="team-grid" data-stagger="" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:24,alignItems:'stretch'}}>
 {roles.map((r,i)=><div key={i} style={{display:'flex',flexDirection:'column',height:'100%'}}>

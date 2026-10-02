@@ -5,17 +5,13 @@ const rows=[
 ['Редуктор ставят туда, куда влез: он трётся, а дальше — протечка и поломка','Редуктор — строго по регламенту производителя: место, врезка, магистрали'],
 ['Форсунки прикручивают как получится — отсюда троение и провалы','Форсунки и длина трубок одинаковые на каждый цилиндр'],
 ['Газовую карту «настраивают» на холостых за десять минут в боксе','Настраиваем в движении, под нагрузкой, мастер едет вместе с вами'],
-['Баллон крепят на пару болтов','Крепим по нормам безопасности: полный комплект креплений и страховочных лент'],
-['Ставят дешёвый китайский мультиклапан','Мультиклапан класса А, Италия, с тремя системами защиты — входит в базовый комплект'],
-['«На вашу машину не поставим, решения нет»','Разбираемся индивидуально — берём в работу практически любое оборудование, без привязки к бренду'],
 ['Установили — и до свидания','Две недели после установки приезжайте на корректировку хоть каждый день, бесплатно'],
-['«Оформление 5 000» — а по факту это только лаборатория. Дальше сами: техосмотр, госпошлины, МРЭО','Оформляем под ключ: лаборатория, обе госпошлины, техосмотр, ГИБДД. Около месяца'],
-['Диагностика «на глаз» — и сразу менять','Всегда глубокая диагностика, потом ремонт']
+['«Оформление 5 000» — а по факту это только лаборатория. Дальше сами: техосмотр, госпошлины, МРЭО','Оформляем под ключ: лаборатория, обе госпошлины, техосмотр, ГИБДД']
 ];
 const cell={display:'flex',alignItems:'center',position:'relative',zIndex:1,borderBottom:'1px solid var(--color-hairline)'};
 return <section style={{background:'var(--color-cloud)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
-<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 48px',lineHeight:1.15,textWrap:'balance'}}>На рынке <span style={{color:'var(--color-primary)'}}>30 лет</span>. Знаем цену мелочам</h2>
+<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 48px',lineHeight:1.15,textWrap:'balance'}}><span style={{color:'var(--color-primary)'}}>30 лет</span> ставим ГБО в Ростове. Знаем цену мелочам</h2>
 <div className="errors-outer" style={{display:'grid',gridTemplateColumns:'minmax(0,1fr) 420px',gap:32,alignItems:'start'}}>
 <div className="errors-table" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gridTemplateRows:`repeat(${rows.length+1},auto)`,columnGap:24}}>
 <div className="errors-bg" style={{gridColumn:2,gridRow:'1 / -1',background:'#fff',borderRadius:14,boxShadow:'var(--shadow-soft)',zIndex:0}}/>
@@ -28,8 +24,7 @@ return <section style={{background:'var(--color-cloud)',padding:'96px 32px',font
 </div>
 <div className="errors-photos">
 {[['img/foto/r2.jpg','Настройка газовой карты'],
-  ['img/foto/r1.jpg','Редуктор и газовый фильтр'],
-  ['img/foto/r3.jpg','Заправочное устройство']].map(([src,alt])=>
+  ['img/foto/r1.jpg','Редуктор и газовый фильтр']].map(([src,alt])=>
   <figure key={src} className="errors-shot"><img src={src} alt={alt} loading="lazy"/></figure>)}
 </div>
 </div>

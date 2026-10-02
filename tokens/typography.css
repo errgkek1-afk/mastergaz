@@ -11,5 +11,5 @@
 --body-emphasis-size:16px;--body-emphasis-weight:600;--body-emphasis-lh:1.5;/* @kind font */
 --caption-md-size:14px;--caption-md-weight:400;--caption-md-lh:1.5;/* @kind font */
 --caption-sm-size:12px;--caption-sm-weight:400;--caption-sm-lh:1.4;/* @kind font */
---button-md-size:14px;--button-md-weight:700;--button-md-lh:1.4;/* @kind font */--button-md-spacing:0.7px;/* @kind font */--button-md-transform:uppercase;/* @kind font */
+--button-md-size:15px;--button-md-weight:500;--button-md-lh:1.4;/* @kind font */--button-md-spacing:-0.01em;/* @kind font */--button-md-transform:none;/* @kind font */
 }

@@ -1,5 +1,8 @@
+/* Шапка той же геометрии, что у страницы отопителей: тёмная плашка, которая
+   висит сверху, логотип слева, вкладки по центру, часы, телефон и кнопка
+   справа. На телефоне логотип и телефон в строку, вкладки ниже (Eugene, 02.10). */
 function Header({onCta}){
-const {Button,Tabs}=window.DesignSystem_a63f4f;
+const {Button}=window.DesignSystem_a63f4f;
 const C=window.GBO_CONFIG;
 const open=window.isOpenNow();
 const [hidden,setHidden]=React.useState(false);
@@ -16,27 +19,17 @@ if(footer)footerIo.observe(footer);
 return ()=>{heroIo.disconnect();footerIo.disconnect();};
 },[]);
 return <>
-<header className={'site-header'+(hidden?' is-hidden':'')} style={{position:'sticky',top:0,zIndex:20,background:'#fff',borderBottom:'1px solid var(--color-hairline)',height:72,display:'flex',alignItems:'center',padding:'0 32px',justifyContent:'space-between',fontFamily:'var(--font-family)',gap:24}}>
-<div style={{display:'flex',flexDirection:'column',lineHeight:1.15}}>
-<span style={{fontWeight:700,fontSize:20,color:'var(--color-ink)'}}>МастерГаз</span>
-<span style={{fontSize:12,color:'var(--color-graphite)'}}>работаем с 1996 года</span>
-</div>
-<div className="header-tabs dir-tabs" role="tablist" aria-label="Направление">
-{['ГБО','Отопители и кондиционеры'].map((t,i)=><button key={t} type="button" role="tab" aria-selected={i===0} className={i===0?'is-active':''} onClick={()=>{if(i===1)window.location.href='otopiteli/';}}>{t}</button>)}
-</div>
-<div style={{display:'flex',alignItems:'center',gap:24}}>
-<div className="header-status" style={{display:'flex',alignItems:'center',gap:10}}>
-<span className={'status-dot'+(open?' is-open':'')}/>
-<div style={{display:'flex',flexDirection:'column',lineHeight:1.15}}>
-<span style={{fontSize:14,color:'var(--color-ink)'}}>{open?'Сейчас работаем':'Сейчас закрыто'}</span>
-<span style={{fontSize:12,color:'var(--color-graphite)'}}>{window.HOURS_LINE}</span>
-</div>
-</div>
-<a className="header-phone" href={'tel:+'+C.PHONE_GBO.replace(/\D/g,'')}>{C.PHONE_GBO}</a>
-<div className="header-cta"><Button variant="primary" onClick={()=>onCta('первый экран')}>Связаться</Button></div>
-<div className="mobile-switch" role="tablist" aria-label="Направление">
-<span className="mobile-switch__thumb"/>
-{['ГБО','Отопители'].map((t,i)=><button key={t} type="button" role="tab" aria-selected={i===0} className={i===0?'is-active':''} onClick={()=>{if(i===1)window.location.href='otopiteli/';}}>{t}</button>)}
+<header className={'header'+(hidden?' is-hidden':'')}>
+<div className="wrap header__in">
+<div className="logo">МастерГаз<small>работаем с 1996 года</small></div>
+<nav className="tabs" aria-label="Направление">
+<a href="#" className="is-active" aria-current="page">ГБО</a>
+<a href="otopiteli/">Отопители и кондиционеры</a>
+</nav>
+<div className="header__right">
+<div className="hours"><b><span className={'status-dot'+(open?' is-open':'')}/>{open?'Сейчас работаем':'Сейчас закрыто'}</b>{window.HOURS_LINE}</div>
+<a className="header__phone" href={'tel:+'+C.PHONE_GBO.replace(/\D/g,'')}>{C.PHONE_GBO}</a>
+<Button variant="primary" onClick={()=>onCta('первый экран')}>Связаться</Button>
 </div>
 </div>
 </header>

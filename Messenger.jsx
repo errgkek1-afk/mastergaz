@@ -1,3 +1,4 @@
+/* Иконки нарисованы здесь же, как в макете отопителей: чужой скрипт iconify с сайта убран (02.10). */
 function Messenger({type,href}){
 const labels={telegram:'Telegram',whatsapp:'WhatsApp',max:'MAX'};
 const external=href&&href!=='#';
