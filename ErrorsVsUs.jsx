@@ -11,7 +11,7 @@ const rows=[
 const cell={display:'flex',alignItems:'center',position:'relative',zIndex:1,borderBottom:'1px solid var(--color-hairline)'};
 return <section style={{background:'var(--color-cloud)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
-<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 48px',lineHeight:1.15,textWrap:'balance'}}><span style={{color:'var(--color-primary)'}}>30 лет</span> ставим ГБО в Ростове. Знаем цену мелочам</h2>
+<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 48px',lineHeight:1.15,textWrap:'balance'}}><span style={{color:'var(--color-primary)'}}>30 лет</span> ставим газовое оборудование в Ростове. Знаем цену мелочам</h2>
 <div className="errors-outer" style={{display:'grid',gridTemplateColumns:'minmax(0,1fr) 420px',gap:32,alignItems:'start'}}>
 <div className="errors-table" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gridTemplateRows:`repeat(${rows.length+1},auto)`,columnGap:24}}>
 <div className="errors-bg" style={{gridColumn:2,gridRow:'1 / -1',background:'#fff',borderRadius:14,boxShadow:'var(--shadow-soft)',zIndex:0}}/>

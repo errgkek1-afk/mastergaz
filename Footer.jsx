@@ -20,8 +20,9 @@ return <footer style={{background:'var(--color-ink)',color:'#fff',padding:'64px 
 <div style={{fontSize:14,color:'var(--color-steel)',marginBottom:10}}>Разделы</div>
 <div style={{fontSize:14,marginBottom:6}}><a href="#" style={{color:'var(--color-primary-bright)'}}>ГБО</a></div>
 <div style={{fontSize:14,marginBottom:14}}><a href="otopiteli/" style={{color:'var(--color-steel)'}}>Отопители и кондиционеры</a></div>
-<div className="footer-contacts"><Messenger type="telegram" href="https://t.me/share/url?url=&text="/><Messenger type="whatsapp" href={C.WHATSAPP}/><Messenger type="max" href={C.MAX_LINK}/>
-{[['Ozon','img/ozon.png',C.OZON],['Wildberries','img/wb.png',C.WB]].map(([label,src,href])=>
+<div className="footer-contacts"><Messenger type="telegram" href="https://t.me/share/url?url=&text="/><Messenger type="whatsapp" href={C.WHATSAPP}/><Messenger type="max" href={C.MAX_LINK}/></div>
+<div style={{fontSize:13,color:'var(--color-steel)',margin:'16px 0 8px',lineHeight:1.4}}>Магазин газового оборудования: запчасти на Ozon и Wildberries</div>
+<div className="footer-contacts">{[['Ozon','img/ozon.png',C.OZON],['Wildberries','img/wb.png',C.WB]].map(([label,src,href])=>
 <a key={label} className="shop-btn" href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}><img src={src} alt={label}/></a>)}</div>
 </div>
 </div>

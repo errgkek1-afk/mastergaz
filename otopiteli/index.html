@@ -577,7 +577,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <div class="hero__grid">
         <div>
           <h1 data-reveal>Установка автономных отопителей <em>от&nbsp;4&nbsp;часов</em><br>в&nbsp;Ростове-на-Дону</h1>
-          <p class="hero__sub"><span class="hero__kinds">Воздушные и&nbsp;жидкостные, на&nbsp;бензин и&nbsp;дизель.</span></p>
+          <p class="hero__sub"><span class="hero__kinds">Воздушные и&nbsp;жидкостные, дизельные и&nbsp;бензиновые.</span></p>
           <div class="hero__row">
             <button class="btn btn--primary" data-cta="Рассчитать стоимость">Рассчитать стоимость</button>
             <div class="counter" data-count><b data-count-num>887</b><i data-count-text>машин уехали от&nbsp;нас с&nbsp;теплом</i></div>
@@ -598,7 +598,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></svg>
           До&nbsp;12&nbsp;часов автономной работы
         </div>
-        <p>Двигатель выключен, в&nbsp;кабине тепло.</p>
+        <p>Двигатель выключен, отопитель салона греет сам.</p>
       </div>
       <div class="hook">
         <div class="hook__t">
@@ -715,9 +715,9 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <div style="margin-top:22px"><button class="btn btn--primary btn--wide" data-cta="Узнать цену установки">Узнать цену установки</button></div>
 
       <div class="acc" id="plates" style="margin-top:22px">
-        <div class="acc__i"><button class="acc__h" type="button">Что входит в&nbsp;установку<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
+        <div class="acc__i"><button class="acc__h" type="button">Что входит: отопитель с&nbsp;установкой<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
           <ul class="kit-list">
-            <li>Автономный отопитель</li>
+            <li>Автономный отопитель на&nbsp;12 или 24&nbsp;В</li>
             <li>Комплект проводки</li>
             <li>Пульт управления</li>
             <li>Топливный бак</li>
@@ -955,6 +955,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <div class="acc__i"><button class="acc__h" type="button">Какую мощность брать&nbsp;— 2&nbsp;или 5&nbsp;кВт?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Зависит от&nbsp;объёма, который нужно прогреть. Кабина Газели&nbsp;— 2&nbsp;кВт, микроавтобус на&nbsp;восемь мест&nbsp;— 5&nbsp;кВт. <a class="lnk" href="#podbor">Выберите технику в&nbsp;подборе</a>&nbsp;— скажем точнее.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Можете приехать и&nbsp;поставить на&nbsp;месте?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Да, у&nbsp;нас есть выездная бригада. Работаем по&nbsp;Ростову и&nbsp;области&nbsp;— удобно, когда техника не&nbsp;на&nbsp;ходу или её несколько.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Что делать с&nbsp;автономкой летом?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Запускайте раз в&nbsp;две недели на&nbsp;10–15&nbsp;минут.</div></div></div></div>
+      <div class="acc__i"><button class="acc__h" type="button">Отопитель выдаёт ошибку или не&nbsp;запускается. Что делать?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Привозите. Читаем код ошибки, находим причину, чиним в&nbsp;своей мастерской. Замену предлагаем последней.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">У&nbsp;меня уже стоит, но&nbsp;работает плохо. Возьмётесь?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Да, с&nbsp;любой маркой&nbsp;— воздушной и&nbsp;жидкостной. Сначала пробуем восстановить.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Есть кредит или рассрочка?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Да, подключены 30&nbsp;банков-партнёров.</div></div></div></div>
     </div>
@@ -1007,7 +1008,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
           <a href="#" data-mess="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01"/></svg></a>
           <a href="#" data-mess="max" target="_blank" rel="noopener noreferrer" aria-label="MAX"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12.1 3.96C16.6 3.96 20.1 7.5 20.1 12.07C20.1 16.3 16.6 19.42 12.47 19.42C10.9 19.42 9.6 19.05 8.74 18.45C7.9 19.15 6.9 19.8 6.1 19.8C5.5 19.8 5.28 19.35 5.28 18.9C5.3 17.3 4.95 16.2 4.45 14.95C4.05 13.9 3.87 12.9 3.87 11.84C3.87 7.5 7.6 3.96 12.1 3.96ZM11.98 7.84C14.4 7.84 16.3 9.7 16.3 12C16.3 14.3 14.6 15.8 12.35 15.8C11.2 15.8 10.35 15.4 9.85 14.95L8.75 15.6C8.45 15.75 8.3 15.55 8.2 15.3C7.9 14.5 7.79 13.2 7.79 12.1C7.79 9.7 9.6 7.84 11.98 7.84Z"/></svg></a>
         </div>
-        <h4 style="margin-top:18px">Запчасти&nbsp;— наши магазины</h4>
+        <h4 style="margin-top:18px">Магазин газового оборудования: запчасти на&nbsp;Ozon и&nbsp;Wildberries</h4>
         <div class="circles"><a class="shop" id="shopOzon" href="#" target="_blank" rel="noopener noreferrer" aria-label="Ozon" title="Ozon"><img src="../img/ozon.png" alt="Ozon"></a><a class="shop" id="shopWb" href="#" target="_blank" rel="noopener noreferrer" aria-label="Wildberries" title="Wildberries"><img src="../img/wb.png" alt="Wildberries"></a></div>
       </div>
     </div>
@@ -1259,7 +1260,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     a.href = (a.closest('.circles') ? footLinks : messLinks)[a.dataset.mess];
   });
 
-  document.getElementById('routeBtn').href = C.YANDEX;
+  document.getElementById('routeBtn').href = C.MAP_LINK;
   document.getElementById('shopOzon').href = C.OZON;
   document.getElementById('shopWb').href = C.WB;
   document.getElementById('revAll').href = C.YANDEX;
@@ -1293,7 +1294,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     var img = document.createElement('img');
     var open = document.createElement('span');
     a.className = 'map map--static';
-    a.href = C.YANDEX;
+    a.href = C.MAP_LINK;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
     a.setAttribute('aria-label', 'Открыть МастерГаз на Яндекс Картах');

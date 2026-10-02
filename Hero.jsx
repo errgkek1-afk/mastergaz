@@ -54,7 +54,7 @@ return <section className="hero">
 <div className="hero__grid">
 <div>
 <h1 className="hero-h1" data-reveal="" onClick={e=>{if(e.target.closest('.hero-star'))showCars();}}>Установка ГБО <button type="button" className="hero-star"><em>от 4 часов</em><span className="hero-star__mark">*</span></button><br/>в Ростове-на-Дону</h1>
-<p className="hero__sub">Газовое оборудование 4 поколения на пропан и метан, прямой и распределённый впрыск.</p>
+<p className="hero__sub">Газовое оборудование 4 поколения на автомобиль: пропан и метан, прямой и распределённый впрыск.</p>
 <div className="hero__row">
 <Button variant="primary" size="lg" onClick={()=>onCta('первый экран')}>Рассчитать стоимость</Button>
 <div className="counter" data-count=""><b data-count-num="">20 321</b><i data-count-text="">машин уехали от нас на газу</i></div>

@@ -21,7 +21,7 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <span className={'status-dot'+(open?' is-open':'')}/>
 <span style={{fontSize:16,color:'var(--color-ink)'}}>{window.HOURS_LINE}</span>
 </div>
-<a href={C.YANDEX} target="_blank" rel="noreferrer" style={{display:'block'}}><Button variant="primary" fullWidth>Построить маршрут</Button></a>
+<a href={C.MAP_LINK} target="_blank" rel="noreferrer" style={{display:'block'}}><Button variant="primary" fullWidth>Построить маршрут</Button></a>
 <div style={{background:'#fff',borderRadius:10,padding:'14px 16px',fontSize:15,color:'var(--color-ink)',lineHeight:1.5}}>
 Если работа занимает больше дня — машину можно оставить на ночь. Территория охраняется, всё под камерами.
 </div>
@@ -85,7 +85,7 @@ React.useEffect(()=>{
   const t=setTimeout(()=>{if(!loaded.current)setFailed(true);},8000);
   return()=>clearTimeout(t);
 },[]);
-if(failed) return <a className="loc-map loc-map--static" href={C.YANDEX} target="_blank" rel="noopener noreferrer" aria-label="Открыть МастерГаз на Яндекс Картах">
+if(failed) return <a className="loc-map loc-map--static" href={C.MAP_LINK} target="_blank" rel="noopener noreferrer" aria-label="Открыть МастерГаз на Яндекс Картах">
 <img src="img/foto/map.jpg" alt="МастерГаз на карте: Минеральная улица, 16"/>
 <span className="loc-map__open">Открыть в Яндекс Картах →</span>
 </a>;

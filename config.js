@@ -14,6 +14,8 @@ WHATSAPP:'https://wa.me/79381470590',
 MAX_LINK:'https://max.ru/u/f9LHodD0cOKaE-NnTzCcVk45pTqTh-1dUU_XRrzmHH1Q89qxA5xYSuolrk',
 ADDRESS:'Ростов-на-Дону, Минеральная улица, 16',
 YANDEX:'https://yandex.com/maps/-/CThvaEZm',
+// Точка на карте от Eugene 02.10: маршрут и запасной снимок карты ведут сюда
+MAP_LINK:'https://yandex.ru/maps/-/CXaWvX66',
 // Магазины запчастей (Eugene, 02.10)
 OZON:'https://am.ozon.com/s/mastergaz-2578914',
 WB:'https://www.wildberries.ru/seller/673218',
