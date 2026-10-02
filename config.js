@@ -14,6 +14,9 @@ WHATSAPP:'https://wa.me/79381470590',
 MAX_LINK:'https://max.ru/u/f9LHodD0cOKaE-NnTzCcVk45pTqTh-1dUU_XRrzmHH1Q89qxA5xYSuolrk',
 ADDRESS:'Ростов-на-Дону, Минеральная улица, 16',
 YANDEX:'https://yandex.com/maps/-/CThvaEZm',
+// Магазины запчастей (Eugene, 02.10)
+OZON:'https://am.ozon.com/s/mastergaz-2578914',
+WB:'https://www.wildberries.ru/seller/673218',
 // Карточка МастерГаза на Яндексе (с их меткой), по центру — дом Минеральная улица, 16
 MAP_WIDGET:'https://yandex.ru/map-widget/v1/org/mastergaz/1623032286/?ll=39.662102%2C47.289856&z=17',
 // Данные карточки на Яндекс Картах на 15.09.2026: имя, дата и оценка — как на Яндексе,
