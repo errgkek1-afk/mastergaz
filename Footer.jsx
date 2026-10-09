@@ -4,7 +4,7 @@ const C=window.GBO_CONFIG;
 return <footer style={{background:'var(--color-ink)',color:'#fff',padding:'64px 32px 24px',fontFamily:'var(--font-family)'}}>
 <div className="footer-grid" style={{maxWidth:1280,margin:'0 auto',display:'grid',gridTemplateColumns:'1.3fr 1.3fr 1fr 1fr',gap:32,marginBottom:40}}>
 <div>
-<div style={{fontWeight:700,fontSize:20,marginBottom:10}}>МастерГаз</div>
+<img src="img/logo.png?v=24" alt="МастерГаз" width="712" height="192" style={{height:56,width:"auto",display:"block",marginBottom:14}}/>
 <div style={{fontSize:14,color:'var(--color-steel)',lineHeight:1.5}}>МастерГаз. Газобаллонное оборудование, климатические системы, автономные отопители. С 1996 года</div>
 </div>
 <div>

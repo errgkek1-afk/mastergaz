@@ -41,7 +41,7 @@ return <section className="loc-section" style={{background:'var(--color-cloud)',
 <div className="loc-lounge" style={{background:'#fff',borderRadius:14,boxShadow:'var(--shadow-soft)',display:'grid',gridTemplateColumns:'1fr 1fr',overflow:'hidden'}}>
 <LoungeSlider/>
 <div style={{padding:40}}>
-<h3 data-reveal="" style={{fontSize:32,fontWeight:600,color:'var(--color-ink)',margin:'0 0 16px'}}>Пока машина в работе — есть зона отдыха</h3>
+<h3 data-reveal="" style={{fontSize:32,fontWeight:600,color:'var(--color-ink)',margin:'0 0 16px'}}>Зона отдыха</h3>
 <p style={{fontSize:18,color:'var(--color-charcoal)',margin:0,lineHeight:1.45}}>На втором этаже — своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и <span className="nowrap">Wi-Fi</span>. Тихо и спокойно: можно поработать или просто переждать.</p>
 </div>
 </div>

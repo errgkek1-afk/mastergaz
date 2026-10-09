@@ -5,6 +5,7 @@ const [name,setName]=React.useState('');
 const [phone,setPhone]=React.useState('+7');
 const [car,setCar]=React.useState('');
 const [sent,setSent]=React.useState(false);
+const [trap,setTrap]=React.useState('');
 const ready=window.phoneComplete(phone);
 const msg=encodeURIComponent(C.MESSENGER_TEXTS['форма записи']);
 return <section className="booking-section" style={{background:'var(--color-primary-mist)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
@@ -21,7 +22,9 @@ return <section className="booking-section" style={{background:'var(--color-prim
 <Input label="Телефон" placeholder="+7 (___) ___-__-__" value={phone} onChange={e=>setPhone(window.formatPhone(e.target.value))}/>
 <Input label="Марка и год авто (необязательно)" placeholder="Например, Toyota Camry, 2015" value={car} onChange={e=>setCar(e.target.value)}/>
 </div>
-<SubmitMorph ready={ready} sent={sent} size="lg" label="Рассчитать стоимость" onSubmit={()=>setSent(true)}/>
+<input className="lead-trap" type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" value={trap} onChange={e=>setTrap(e.target.value)}/>
+<SubmitMorph ready={ready} sent={sent} size="lg" label="Рассчитать стоимость" onSubmit={()=>{setSent(true);window.sendLead({name,phone,note:car,source:'форма записи',company:trap});}}/>
+<p className="lead-consent">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки персональных данных</a></p>
 <div style={{marginTop:12}}>
 <Button variant="ghost" fullWidth onClick={()=>onCta&&onCta('ближайшее свободное время')}>Записаться на ближайшее свободное время</Button>
 </div>

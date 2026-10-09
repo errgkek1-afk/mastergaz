@@ -21,7 +21,7 @@ return ()=>{heroIo.disconnect();footerIo.disconnect();};
 return <>
 <header className={'header'+(hidden?' is-hidden':'')}>
 <div className="wrap header__in">
-<div className="logo">МастерГаз<small>работаем с 1996 года</small></div>
+<a className="logo" href="#" aria-label="МастерГаз"><img src="img/logo.png?v=24" alt="МастерГаз" width="712" height="192"/></a>
 <nav className="tabs" aria-label="Направление">
 <a href="#" className="is-active" aria-current="page">ГБО</a>
 <a href="otopiteli/">Отопители и кондиционеры</a>

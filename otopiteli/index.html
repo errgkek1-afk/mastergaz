@@ -9,7 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../dvizhenie.css?v=18">
+<link rel="icon" href="../favicon.ico?v=24" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=24">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png?v=24">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=24">
+<link rel="stylesheet" href="../dvizhenie.css?v=24">
 <style>
 /* Страница «Автономные отопители» сайта МастерГаз в шаблоне «Голубая тяжесть»: чёрный лист,
    мягкие углы, квадратики как сквозной знак, акцент красный, как у МастерГаза. Светлые разделы -
@@ -127,9 +131,10 @@ h2 em{font-style:normal;color:var(--accent-bright)}
 .header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;padding:10px 16px 0}
 .header__in{display:flex;align-items:center;gap:24px;padding:12px 12px 12px 22px;border-radius:var(--r-l);
   background:rgba(20,22,25,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.logo{font-size:23px;font-weight:600;letter-spacing:-.02em;color:var(--t-fg);line-height:1.1}
-.logo em{font-style:normal}
-.logo small{display:block;font-size:13px;font-weight:400;letter-spacing:0;color:var(--t-muted);margin-top:3px}
+/* логотип - картинка из img/logo.png (эмблема + слова в строку), вырезан по форме, без подложки */
+.logo{display:block;line-height:0;flex-shrink:0}
+.logo img{height:48px;width:auto;display:block}
+.f-logo{height:56px;width:auto;display:block;margin-bottom:14px}
 .tabs{display:flex;gap:4px;background:rgba(255,255,255,.06);border-radius:11px;padding:5px;margin-inline:auto}
 .tabs a{padding:10px 18px;border-radius:var(--r-s);font-size:15px;font-weight:500;color:var(--t-muted);white-space:nowrap}
 .tabs a.is-active{background:var(--accent);color:#fff}
@@ -331,7 +336,8 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .snow{width:26px;height:26px;color:var(--cold-bright);display:block;margin:0 auto 10px}
 .tagline{display:inline-block;background:var(--cold);color:#fff;border-radius:6px;padding:4px 8px;
   font:600 12px/1.3 var(--font);letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
-.cold__doc{display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:center;margin-top:28px}
+/* сертификата дилера TerraFrigo нет (Eugene, 09.10) - осталась одна кнопка */
+.cold__doc{max-width:420px;margin-top:28px}
 
 /* ——— автопарки ——— */
 .marquee{overflow:hidden;padding-block:8px;max-width:720px;margin:0 auto;
@@ -377,6 +383,10 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .team{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .team h3{font-size:18px;margin:16px 0 4px}
 .team p{font-size:14px;color:var(--t-muted);line-height:1.5}
+/* сертификат мастера - скан в правом нижнем углу фото, около 15 % площади (Eugene, 09.10) */
+.team-photo{position:relative}
+.team-cert{position:absolute;right:5px;bottom:5px;width:34%;height:auto;display:block;border-radius:6px;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);background:#fff;padding:3px;box-sizing:border-box}
 .team .wait{margin-top:12px;border:1px solid var(--t-line);border-radius:var(--r-s);padding:11px 14px;font:400 13px/1.45 var(--font);color:var(--t-muted)}
 
 /* ——— как добраться ——— */
@@ -432,6 +442,10 @@ input,select{width:100%;padding:14px 16px;border:1px solid var(--t-line-2);borde
   font-family:var(--font);font-size:16px;color:var(--t-fg);background:transparent}
 input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
 .note{font-size:13px;line-height:1.55;color:var(--t-muted);text-align:center}
+/* заявки: невидимое поле-ловушка для роботов и строка согласия под кнопкой */
+.lead-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.lead-consent{font-size:12px;line-height:1.45;color:var(--t-muted);text-align:center;margin:0}
+.lead-consent a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .mess{display:flex;gap:4px;justify-content:center;margin-top:4px}
 .mess a{width:44px;height:44px;border-radius:var(--r-s);background:var(--accent);color:#fff;display:flex;
   align-items:center;justify-content:center;transition:background .25s var(--ease),box-shadow .25s var(--ease)}
@@ -501,7 +515,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   .shots{grid-column:1 / -1;grid-template-columns:1fr 1fr;position:static}
 }
 @media (max-width:980px){
-  .hero__grid,.pick,.two,.lounge,.why,.cold__doc{grid-template-columns:1fr}
+  .hero__grid,.pick,.two,.lounge,.why{grid-template-columns:1fr}
   .hooks,.cards3,.rev-grid,.team{grid-template-columns:1fr 1fr}
   .f-grid{grid-template-columns:1fr 1fr}
   .rev-head{flex-direction:column;align-items:flex-start}
@@ -543,8 +557,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   /* шапка на телефоне компактная: логотип и телефон в строку, вкладки ниже; подпись «с 1996 года» есть в «30 лет опыта» */
   .header{padding:6px 8px 0}
   .header__in{flex-wrap:wrap;gap:6px 12px;padding:8px 8px 8px 14px;border-radius:var(--r)}
-  .logo{font-size:19px}
-  .logo small{display:none}
+  .logo img{height:36px}
   .header__phone{font-size:15px}
   .hours,.header .btn{display:none}
   .tabs{order:3;width:100%;margin-inline:0;justify-content:center;padding:3px;border-radius:9px}
@@ -558,7 +571,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 
 <header class="header">
   <div class="wrap header__in">
-    <div class="logo">Мастер<em>Газ</em><small>работаем с&nbsp;1996&nbsp;года</small></div>
+    <a class="logo" href="#" aria-label="МастерГаз"><img src="../img/logo.png?v=24" alt="МастерГаз" width="712" height="192"></a>
     <nav class="tabs">
       <a href="../">ГБО</a>
       <a href="#" class="is-active">Отопители и&nbsp;кондиционеры</a>
@@ -830,7 +843,6 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     </div>
 
     <div class="cold__doc">
-      <div class="ph ph--a4"><b>Документ</b>Сертификат дилера TerraFrigo&nbsp;— ждём скан</div>
       <div><button class="btn btn--cold btn--wide btn--big" data-cta="Узнать цену кондиционера">Узнать цену кондиционера</button></div>
     </div>
   </div>
@@ -858,9 +870,9 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <p class="sub sub--one">Каждый занимается своим делом: одни ставят, другие настраивают, третьи ведут документы.</p>
     </div>
     <div class="team" data-stagger>
-      <div><div class="ph ph--tall">Фото мастера</div><h3>Мастер по&nbsp;автономным отопителям</h3><p>Установка воздушных и&nbsp;жидкостных, любая техника</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
-      <div><div class="ph ph--tall">Фото мастера</div><h3>Автоэлектрик</h3><p>Проводка, пульты, климат-контроль</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
-      <div><div class="ph ph--tall">Фото мастера</div><h3>Мастер по&nbsp;климату</h3><p>Кондиционеры и&nbsp;рефрижераторы</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
+      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/olkhovoy.jpg?v=24" alt="Сертификат Saver, 2025" loading="lazy"></div><h3>Мастер по&nbsp;автономным отопителям</h3><p>Установка воздушных и&nbsp;жидкостных, любая техника</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
+      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/zhdanov.jpg?v=24" alt="Сертификат Saver, 2025" loading="lazy"></div><h3>Автоэлектрик</h3><p>Проводка, пульты, климат-контроль</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
+      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/korsunov-dsat.jpg?v=24" alt="Сертификат соответствия ДСАТ, 2026" loading="lazy"></div><h3>Мастер по&nbsp;климату</h3><p>Кондиционеры и&nbsp;рефрижераторы</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
     </div>
   </div>
 </section>
@@ -919,7 +931,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
         </div>
       </div>
       <div class="lounge__txt">
-        <h3 data-reveal>Есть зона отдыха</h3>
+        <h3 data-reveal>Зона отдыха</h3>
         <p>На&nbsp;втором этаже своя зона отдыха: диваны, нарды, телевизор, кулер, кофе и&nbsp;Wi-Fi.</p>
       </div>
     </div>
@@ -939,6 +951,31 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     <div class="rev-foot"><a href="#" id="revAll" target="_blank" rel="noopener noreferrer">Все отзывы на&nbsp;Яндекс&nbsp;Картах&nbsp;→</a></div>
   </div>
 </section>
+
+<section class="book s-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-reveal>Напишите, какая у&nbsp;вас техника&nbsp;— <em>подберём отопитель</em></h2>
+    </div>
+    <form class="form" id="bookForm">
+      <div><label for="fName">Как к&nbsp;вам обращаться</label><input id="fName" type="text" placeholder="Необязательно"></div>
+      <div><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" placeholder="+7"></div>
+      <div><label for="fCar">Марка и&nbsp;модель (необязательно)</label><input id="fCar" type="text" placeholder="Газель Next"></div>
+      <input class="lead-trap" type="text" name="company" id="fTrap" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="bookBtn" disabled><span class="morph__label">Рассчитать стоимость</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
+      <button class="btn btn--quiet btn--wide" type="button" data-cta="Ближайшее свободное время">Записаться на&nbsp;ближайшее свободное время</button>
+      <p class="note">Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут и&nbsp;назовём цену и&nbsp;срок.</p>
+      <p class="lead-consent">Нажимая кнопку, вы соглашаетесь с&nbsp;<a href="#">политикой обработки персональных данных</a></p>
+      <div class="mess">
+        <a href="#" data-mess="telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></a>
+        <a href="#" data-mess="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01"/></svg></a>
+        <a href="#" data-mess="max" target="_blank" rel="noopener noreferrer" aria-label="MAX"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12.1 3.96C16.6 3.96 20.1 7.5 20.1 12.07C20.1 16.3 16.6 19.42 12.47 19.42C10.9 19.42 9.6 19.05 8.74 18.45C7.9 19.15 6.9 19.8 6.1 19.8C5.5 19.8 5.28 19.35 5.28 18.9C5.3 17.3 4.95 16.2 4.45 14.95C4.05 13.9 3.87 12.9 3.87 11.84C3.87 7.5 7.6 3.96 12.1 3.96ZM11.98 7.84C14.4 7.84 16.3 9.7 16.3 12C16.3 14.3 14.6 15.8 12.35 15.8C11.2 15.8 10.35 15.4 9.85 14.95L8.75 15.6C8.45 15.75 8.3 15.55 8.2 15.3C7.9 14.5 7.79 13.2 7.79 12.1C7.79 9.7 9.6 7.84 11.98 7.84Z"/></svg></a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="wrap dv-row"><div data-divider><i></i><i></i></div></div>
 
 <section class="s-stone">
   <div class="wrap">
@@ -962,34 +999,11 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   </div>
 </section>
 
-<div class="wrap dv-row"><div data-divider><i></i><i></i></div></div>
-
-<section class="book s-paper">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 data-reveal>Напишите, какая у&nbsp;вас техника&nbsp;— <em>подберём отопитель</em></h2>
-    </div>
-    <form class="form" id="bookForm">
-      <div><label for="fName">Как к&nbsp;вам обращаться</label><input id="fName" type="text" placeholder="Необязательно"></div>
-      <div><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" placeholder="+7"></div>
-      <div><label for="fCar">Марка и&nbsp;модель (необязательно)</label><input id="fCar" type="text" placeholder="Газель Next"></div>
-      <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="bookBtn" disabled><span class="morph__label">Рассчитать стоимость</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
-      <button class="btn btn--quiet btn--wide" type="button" data-cta="Ближайшее свободное время">Записаться на&nbsp;ближайшее свободное время</button>
-      <p class="note">Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут и&nbsp;назовём цену и&nbsp;срок.</p>
-      <div class="mess">
-        <a href="#" data-mess="telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></a>
-        <a href="#" data-mess="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01"/></svg></a>
-        <a href="#" data-mess="max" target="_blank" rel="noopener noreferrer" aria-label="MAX"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12.1 3.96C16.6 3.96 20.1 7.5 20.1 12.07C20.1 16.3 16.6 19.42 12.47 19.42C10.9 19.42 9.6 19.05 8.74 18.45C7.9 19.15 6.9 19.8 6.1 19.8C5.5 19.8 5.28 19.35 5.28 18.9C5.3 17.3 4.95 16.2 4.45 14.95C4.05 13.9 3.87 12.9 3.87 11.84C3.87 7.5 7.6 3.96 12.1 3.96ZM11.98 7.84C14.4 7.84 16.3 9.7 16.3 12C16.3 14.3 14.6 15.8 12.35 15.8C11.2 15.8 10.35 15.4 9.85 14.95L8.75 15.6C8.45 15.75 8.3 15.55 8.2 15.3C7.9 14.5 7.79 13.2 7.79 12.1C7.79 9.7 9.6 7.84 11.98 7.84Z"/></svg></a>
-      </div>
-    </form>
-  </div>
-</section>
-
 <footer class="footer">
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <div class="logo" style="color:#fff">Мастер<em>Газ</em></div>
+        <img class="f-logo" src="../img/logo.png?v=24" alt="МастерГаз" width="712" height="192">
         <p>МастерГаз. Газобаллонное оборудование, климатические системы, автономные отопители. С&nbsp;1996&nbsp;года.</p>
       </div>
       <div>
@@ -1031,6 +1045,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     <p class="note" style="text-align:left" id="mSub">Оставьте телефон&nbsp;— перезвоним, уточним технику и&nbsp;назовём цену и&nbsp;срок.</p>
     <form id="mForm" style="display:grid;gap:12px;margin-top:16px">
       <div><label for="mPhone">Телефон</label><input id="mPhone" type="tel" inputmode="tel" placeholder="+7"></div>
+      <input class="lead-trap" type="text" name="company" id="mTrap" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="mBtn" disabled><span class="morph__label">Перезвоните мне</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
       <div class="mess mess--after">
         <a href="#" data-mess="telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></a>
@@ -1041,8 +1056,9 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   </div>
 </div>
 
-<script src="../config.js?v=18"></script>
-<script src="../swipe.js?v=18"></script>
+<script src="../config.js?v=24"></script>
+<script src="../swipe.js?v=24"></script>
+<script src="../zayavki.js?v=24"></script>
 <script>
 (function(){
   var tiles = document.querySelectorAll('#tiles .tile');
@@ -1159,13 +1175,16 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   ovl.addEventListener('click', function(e){ if(e.target === ovl) close(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
 
-  // Заявка «ушла»: кнопка превращается в галочку; сообщение пока никуда не отправляется (приём заявок подключим отдельно)
+  // Заявка «ушла»: кнопка превращается в галочку сразу, отправка идёт в фоне (../zayavki.js → приём заявок)
   function sent(form, btn){ form.classList.add('is-sent'); btn.disabled = true; }
+  var v = function(id){ var el = document.getElementById(id); return el ? el.value : ''; };
   document.getElementById('mForm').addEventListener('submit', function(e){
     e.preventDefault(); sent(this, document.getElementById('mBtn'));
+    window.sendLead({ phone: v('mPhone'), source: 'отопители: ' + mTitle.textContent, company: v('mTrap') });
   });
   document.getElementById('bookForm').addEventListener('submit', function(e){
     e.preventDefault(); sent(this, document.getElementById('bookBtn'));
+    window.sendLead({ name: v('fName'), phone: v('fPhone'), note: v('fCar'), source: 'отопители: форма внизу', company: v('fTrap') });
   });
 
   // ——— Ролики с заездами ———
@@ -1263,7 +1282,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   document.getElementById('routeBtn').href = C.MAP_LINK;
   document.getElementById('shopOzon').href = C.OZON;
   document.getElementById('shopWb').href = C.WB;
-  document.getElementById('revAll').href = C.YANDEX;
+  document.getElementById('revAll').href = C.YANDEX_REVIEWS;
 
   // Карта: живой виджет Яндекса. Если он не отозвался за 8 секунд (у части посетителей
   // iframe не грузится) - молча подставляем снимок карты со ссылкой.
@@ -1308,6 +1327,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   }, 8000);
 
   // Отзывы: настоящие, с Яндекс Карт. Первым стоит отзыв про отопители, остальные в исходном порядке.
+  // Карточки и «Все отзывы» ведут на вкладку отзывов карточки (Eugene, 03.10).
   // Рисуются до запуска dvizhenie.js: он ждёт готовые карточки, чтобы вывести их по очереди.
   function node(tag, cls, text){
     var e = document.createElement(tag);
@@ -1321,7 +1341,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   var grid = document.getElementById('revGrid');
   about.concat(others).forEach(function(r){
     var card = node('a', 'rev');
-    card.href = C.YANDEX; card.target = '_blank'; card.rel = 'noopener noreferrer'; card.draggable = false;
+    card.href = C.YANDEX_REVIEWS; card.target = '_blank'; card.rel = 'noopener noreferrer'; card.draggable = false;
     var top = node('div', 'rev__top');
     var who = node('div');
     who.appendChild(node('div', 'rev__n', r.name));
@@ -1344,7 +1364,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   var pokazatVsyo=function(){document.documentElement.classList.remove('dv');};
   var storozh=setTimeout(pokazatVsyo,3000);
   var s=document.createElement('script');
-  s.src='../dvizhenie.js?v=18';
+  s.src='../dvizhenie.js?v=24';
   s.onload=function(){clearTimeout(storozh);};
   s.onerror=function(){clearTimeout(storozh);pokazatVsyo();};
   document.body.appendChild(s);

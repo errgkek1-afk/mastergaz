@@ -4,6 +4,7 @@ const C=window.GBO_CONFIG;
 const [name,setName]=React.useState('');
 const [phone,setPhone]=React.useState('+7');
 const [sent,setSent]=React.useState(false);
+const [trap,setTrap]=React.useState('');
 const ready=window.phoneComplete(phone);
 const [shown,setShown]=React.useState(false);
 React.useEffect(()=>{const r=requestAnimationFrame(()=>setShown(true));return ()=>cancelAnimationFrame(r);},[]);
@@ -16,7 +17,9 @@ return <div style={{position:'fixed',inset:0,background:'rgba(26,26,26,0.5)',dis
 <Input label="Имя (необязательно)" placeholder="Как вас зовут" value={name} onChange={e=>setName(e.target.value)}/>
 <Input label="Телефон" placeholder="+7 (___) ___-__-__" value={phone} onChange={e=>setPhone(window.formatPhone(e.target.value))}/>
 </div>
-<SubmitMorph ready={ready} sent={sent} label="Оставить заявку" onSubmit={()=>setSent(true)}/>
+<input className="lead-trap" type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" value={trap} onChange={e=>setTrap(e.target.value)}/>
+<SubmitMorph ready={ready} sent={sent} label="Оставить заявку" onSubmit={()=>{setSent(true);window.sendLead({name,phone,source,company:trap});}}/>
+<p className="lead-consent">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки персональных данных</a></p>
 <div style={{textAlign:'center',fontSize:16,fontWeight:600,color:'var(--color-ink)',margin:'24px 0 12px'}}>Напишите нам прямо сейчас</div>
 <div style={{display:'flex',justifyContent:'center',gap:12}}>
 <Messenger type="telegram" href={'https://t.me/share/url?url=&text='+msg}/>
