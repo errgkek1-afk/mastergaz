@@ -14,10 +14,10 @@ const C=window.GBO_CONFIG;
 const R=C.REVIEWS;
 const track=React.useRef(null);
 React.useEffect(()=>{window.enableDragScroll(track.current,{align:'start'});},[]);
-return <section className="reviews-band" style={{background:'var(--color-ink)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
+return <section className="reviews-band" style={{background:'var(--color-ink)',padding:'76px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
 <div className="rev-head">
-<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'#fff',margin:0,lineHeight:1.15,textWrap:'balance'}}>Отзывы об установке ГБО <span style={{color:'var(--color-primary-bright)'}}>в Ростове-на-Дону</span></h2>
+<h2 data-reveal="" style={{fontWeight:600,color:'#fff',margin:0}}>Отзывы об установке ГБО <span style={{color:'var(--color-primary-bright)'}}>в Ростове-на-Дону</span></h2>
 <a className="rate" data-count="" href={C.YANDEX} target="_blank" rel="noopener noreferrer">
 <b data-count-num="">{R.rating}</b>
 <span><span className="stars">★★★★★</span><small>{R.ratingsLabel} · {R.reviewsLabel}<br/>Яндекс Карты</small></span>

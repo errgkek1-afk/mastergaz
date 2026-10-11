@@ -8,9 +8,9 @@ const drives=[
 {src:'video/zaezd-osobennaya.mp4',poster:'video/zaezd-osobennaya.jpg',caption:'Заезд с ул. Особенная'},
 {src:'video/zaezd-oganova.mp4',poster:'video/zaezd-oganova.jpg',caption:'Заезд со шлагбаумом, ул. Оганова'}
 ];
-return <section className="loc-section" style={{background:'var(--color-cloud)',padding:'64px 32px 96px',fontFamily:'var(--font-family)'}}>
+return <section className="loc-section" style={{background:'var(--color-cloud)',padding:'56px 32px 76px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1280,margin:'0 auto'}}>
-<h2 className="loc-title" data-reveal="" style={{fontSize:'clamp(30px,3.4vw,46px)',fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px',lineHeight:1.1}}>Как добраться</h2>
+<h2 className="loc-title" data-reveal="" style={{fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 32px'}}>Как добраться</h2>
 <div className="loc-grid" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:40,marginBottom:40}}>
 <MapBlock/>
 <div data-stagger="" style={{display:'flex',flexDirection:'column',gap:20}}>

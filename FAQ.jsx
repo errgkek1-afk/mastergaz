@@ -20,9 +20,9 @@ const items=[
 {title:'У меня прямой впрыск или китайская машина. Поставите?',content:'Ставим и прямой, и распределённый впрыск, работаем практически со всеми марками. По китайским — только распределённый впрыск: Haval Jolion, Haval M6, Geely Atlas, Москвич 3. Напишите модель и год — скажем точно, возможно ли.'},
 {title:'У меня уже стоит газ, но работает плохо. Возьмётесь?',content:'Возьмёмся. Работаем с оборудованием любой марки: находим причину, подбираем и заказываем запчасти, ремонтируем в короткие сроки.'}
 ];
-return <section style={{background:'#fff',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
+return <section style={{background:'#fff',padding:'76px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:820,margin:'0 auto'}}>
-<h2 data-reveal="" style={{fontSize:40,fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px',lineHeight:1.1}}>Вопросы про установку ГБО</h2>
+<h2 data-reveal="" style={{fontWeight:600,textAlign:'center',color:'var(--color-ink)',margin:'0 0 40px'}}>Вопросы про установку ГБО</h2>
 <SmoothAccordion items={items}/>
 </div>
 </section>;

@@ -3,9 +3,9 @@ const IcoGift=()=><svg viewBox="0 0 24 24" aria-hidden="true" className="gift-ic
 function RepairBrands({onCta}){
 const {Button}=window.DesignSystem_a63f4f;
 const brands=['STAG','Digitronic','OMVL','Lovato','Europegas','AEB','Landi Renzo','BRC','GT-Gas','Zenit','Alpha','King','Bigas','KME'];
-return <section style={{background:'var(--color-cloud)',padding:'96px 32px',fontFamily:'var(--font-family)'}}>
+return <section style={{background:'var(--color-cloud)',padding:'76px 32px',fontFamily:'var(--font-family)'}}>
 <div style={{maxWidth:1080,margin:'0 auto'}}>
-<h2 data-reveal="" style={{fontSize:'clamp(26px,3vw,40px)',fontWeight:600,color:'var(--color-ink)',margin:'0 0 28px',lineHeight:1.15,textAlign:'center'}}>Ремонт и настройка ГБО в Ростове<br/><span style={{color:'var(--color-primary)'}}>даже если ставили не у нас</span></h2>
+<h2 data-reveal="" data-fit="3" style={{fontWeight:600,color:'var(--color-ink)',margin:'0 0 28px',textAlign:'center'}}><span className="l1">Ремонт и настройка ГБО в Ростове</span><em>даже если ставили не у нас</em></h2>
 
 <div className="case-grid" data-stagger="">
 <div className="case-card">

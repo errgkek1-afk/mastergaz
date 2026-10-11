@@ -9,11 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
-<link rel="icon" href="../favicon.ico?v=24" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=24">
-<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png?v=24">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=24">
-<link rel="stylesheet" href="../dvizhenie.css?v=24">
+<link rel="icon" href="../favicon.ico?v=36" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=36">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png?v=36">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=36">
+<link rel="stylesheet" href="../dvizhenie.css?v=36">
 <style>
 /* Страница «Автономные отопители» сайта МастерГаз в шаблоне «Голубая тяжесть»: чёрный лист,
    мягкие углы, квадратики как сквозной знак, акцент красный, как у МастерГаза. Светлые разделы -
@@ -165,11 +165,53 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .hero__photo{position:relative}
 .hero__shot{border-radius:var(--r);overflow:hidden}
 .hero__cap{font-size:13px;color:var(--t-muted);margin-top:12px;text-align:center}
+/* слайдер первого экрана: кадры лежат стопкой, активный проявляется (как на ГБО) */
+.hero-photos{position:relative;aspect-ratio:16/10;background:var(--t-ph)}
+.hero-photos__shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .9s var(--ease),transform 6.5s linear}
+.hero-photos__shot.is-active{opacity:1;transform:scale(1)}
+.hero__cap{transition:opacity .45s var(--ease)}
+.hero__cap.is-fading{opacity:0}
+/* «что входит»: список слева, фото комплекта справа */
+.kit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:22px;align-items:center}
+.acc__b:has(.kit){max-width:none}
+.kit__photo{width:100%;height:auto;display:block;border-radius:var(--r-s);justify-self:end}
+/* фото мастерской под плашкой «Собственная мастерская»: ровно в ряд, чуть касаются плашки, друг на друга не наезжают (Eugene, 10.10) */
+.rem-shots{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(88%,900px);margin:-14px auto 0}
+.rem-shot{margin:0;border-radius:var(--r-s);overflow:hidden;border:3px solid var(--t-bg);box-shadow:0 14px 34px rgba(0,0,0,.35);background:var(--t-card)}
+.rem-shot img{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
+/* лента работ - механика АвтоРегиона 161: все слоты одной ширины, активный по центру, соседи
+   приглушены и уменьшены; фото целиком, без обрезки; палец за один мах - одна карточка.
+   На мыши притягивание делает скрипт (initDock), CSS-snap выключен, иначе лента дёргалась (Eugene, 10.10) */
+/* заголовок ленты в две строки: вторая акцентом. Строка - свой блок, чтобы при
+   нехватке ширины делилась ровно, а не словом на строку (Eugene, 10.10) */
+.s-cloud .sec-head h2 .l1,.s-cloud .sec-head h2 em{display:block;text-wrap:balance}
+.dock{position:relative;--dock-h:420px;--dock-w:170px;display:flex;gap:24px;margin-top:8px;padding:20px calc(50% - var(--dock-w) / 2) 12px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;cursor:grab;user-select:none;-webkit-user-select:none}
+.dock::-webkit-scrollbar{display:none}
+.dock.is-dragging{scroll-snap-type:none;cursor:grabbing}
+.dock.is-dragging *{pointer-events:none}
+.dock__item{flex:0 0 auto;max-width:calc(100vw - 48px);scroll-snap-align:center;scroll-snap-stop:always;cursor:pointer;margin:0}
+.dock__card{height:var(--dock-h);display:flex;justify-content:center;align-items:center;gap:8px;opacity:.45;transform:scale(.88);transition:opacity .45s cubic-bezier(.22,.61,.36,1),transform .45s cubic-bezier(.22,.61,.36,1)}
+.dock__item.is-active .dock__card{opacity:1;transform:translateY(-8px) scale(1)}
+.dock__card img{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;border-radius:var(--r);pointer-events:none}
+.dock__cap{display:block;margin:12px auto 0;max-width:340px;font-size:14px;line-height:1.35;color:var(--t-muted);text-align:center;opacity:.55;transition:opacity .45s,color .45s}
+.dock__item.is-active .dock__cap{opacity:1;color:var(--t-fg)}
+@media (max-width:760px){.dock{--dock-h:300px;--dock-w:120px;gap:14px}.dock__cap{font-size:12px;max-width:260px}
+}
+/* стрелки и счётчик под лентой (swipe.js, buildNav) - знак, что лента листается */
+.dock-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px}
+.dock-nav__b{width:42px;height:42px;padding:0;border:1px solid var(--t-line-2);border-radius:50%;background:transparent;color:var(--t-fg);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease),opacity .25s var(--ease)}
+.dock-nav__b svg{width:20px;height:20px}
+.dock-nav__b--next svg{transform:scaleX(-1)}
+.dock-nav__b:disabled{opacity:.28;cursor:default}
+@media (hover:hover){.dock-nav__b:hover:not(:disabled){border-color:var(--accent-bright);color:var(--accent-bright);box-shadow:0 0 0 4px var(--accent-ring)}}
+.dock-nav__n{min-width:62px;text-align:center;font-size:14px;color:var(--t-muted);font-variant-numeric:tabular-nums}
+@media (max-width:760px){.dock-nav{gap:14px;margin-top:8px}.dock-nav__b{width:38px;height:38px}.dock-nav__n{font-size:13px;min-width:56px}}
+@media (prefers-reduced-motion:reduce){.dock__card{transition:none}}
 /* «30 лет опыта» - синяя плитка, как плитки с цифрами в шаблоне */
 .sticker{position:absolute;z-index:3;top:-11px;left:-11px;width:78px;height:78px;border-radius:var(--r);
   background:var(--accent);color:#fff;display:flex;flex-direction:column;justify-content:space-between;
   align-items:flex-start;padding:8px}
-.sticker::after{content:"";position:absolute;top:8px;right:8px;width:5px;height:5px;background:#fff}
+.sticker::after{content:"";position:absolute;top:5px;right:5px;width:5px;height:5px;background:#fff}
 .sticker b{font-size:19px;font-weight:400;letter-spacing:-.03em;line-height:1.1;white-space:nowrap}
 /* только подпись «опыта», прямой ребёнок: правило «.sticker span» ловило и
    цифры барабана - они тоже span внутри плашки - и во время прокрутки
@@ -256,7 +298,7 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .errors{display:grid;grid-template-columns:1fr 1.05fr .85fr;gap:32px;align-items:start}
 .errors>div{display:flex;flex-direction:column}
 .errors .good{flex:1}
-.errors .shots{display:grid}
+.errors .shots{display:grid;min-width:0}
 .errors__t{font-size:18px;font-weight:500;color:var(--t-fg);margin-bottom:18px;min-height:27px}
 .bad ul,.good ul{margin:0;padding:0;display:grid;gap:16px}
 .bad-list{padding-top:24px!important}
@@ -266,6 +308,10 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .v{color:var(--ok);font-weight:700;line-height:1.4}
 .good{background:var(--t-card);border:1px solid var(--t-line);border-radius:var(--r);padding:24px}
 .shots{display:grid;gap:4px;position:sticky;top:104px}
+/* фото от заказчика вместо заглушек: кадр целиком, без обрезки, по центру колонки */
+.shot{margin:0;display:grid;gap:7px;justify-items:center;min-width:0}
+.shot img{display:block;width:auto;max-width:100%;max-height:330px;border-radius:var(--r)}
+.shot figcaption{font:400 12px/1.35 var(--font);color:var(--t-muted);text-align:center}
 /* проверка безопасности - синий блок */
 .safety{position:relative;margin:22px 0 0;background:var(--accent);color:rgba(255,255,255,.85);border-radius:var(--r-l);padding:26px 34px 30px}
 .safety::after{content:"";position:absolute;top:14px;right:14px;width:8px;height:8px;background:#fff}
@@ -317,7 +363,8 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .acc__b{padding:0 22px 18px;font-size:15px;line-height:1.55;color:var(--t-soft);max-width:74ch}
 .acc--narrow{max-width:820px;margin:0 auto}
 
-.cta-wide{max-width:900px;margin:26px auto 0}
+.cta-wide{max-width:none;margin:26px auto 0}
+.cta-wide .btn{padding:22px 34px;font-size:17px}
 
 /* ——— кондиционеры: синий раздел ——— */
 .cold{
@@ -537,6 +584,17 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   .hooks{margin-top:-32px;grid-template-columns:1fr}
   .hook__t{font-size:16px}
   .errors,.cards3,.cards2,.team,.f-grid,.shots,.vs{grid-template-columns:1fr}
+  .kit{grid-template-columns:1fr}
+  .kit__photo{width:100%}
+  /* фото мастерской на телефоне: шторка, второй кадр наезжает на первый (приём АвтоРегиона 161) */
+  .rem-shots{display:block;width:92%;margin-top:-18px}
+  .rem-shot{transform:none!important;margin:0 0 16px!important;position:sticky;aspect-ratio:4/3;transform-origin:top center}
+  .rem-shot:nth-child(1){top:92px}
+  .rem-shot:nth-child(2){top:108px}
+  @supports (animation-timeline: view()){
+    .rem-shot{animation:rem-shrink linear both;animation-timeline:view();animation-range:exit-crossing 0% exit-crossing 100%}
+    @keyframes rem-shrink{to{transform:scale(.9)}}
+  }
   .vs__head{display:none}
   .vs__pair{display:block;border-bottom:4px solid var(--bg)}
   .vs__pair:last-child{border-bottom:0}
@@ -571,7 +629,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 
 <header class="header">
   <div class="wrap header__in">
-    <a class="logo" href="#" aria-label="МастерГаз"><img src="../img/logo.png?v=24" alt="МастерГаз" width="712" height="192"></a>
+    <a class="logo" href="#" aria-label="МастерГаз"><img src="../img/logo.png?v=36" alt="МастерГаз" width="712" height="192"></a>
     <nav class="tabs">
       <a href="../">ГБО</a>
       <a href="#" class="is-active">Отопители и&nbsp;кондиционеры</a>
@@ -598,8 +656,15 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
         </div>
         <div class="hero__photo">
           <div class="sticker" data-count><b data-count-num>30 лет</b><span data-count-text>опыта</span></div>
-          <div class="hero__shot ph ph--wide"><b>Фото</b>Отопитель, установленный в&nbsp;кабине</div>
-          <div class="hero__cap">Газель Next, отопитель 2&nbsp;кВт</div>
+          <!-- слайдер как на ГБО: четыре фото, смена каждые 6 секунд; подписи - марка и модель для поиска (Eugene, 09.10, на согласовании) -->
+          <div class="hero__shot hero-photos" data-hero-photos>
+            <img class="hero-photos__shot is-active" src="../img/foto/o1.jpg" alt="Scania: воздушный отопитель в кабине" width="1200" height="900">
+            <img class="hero-photos__shot" src="../img/foto/o2.jpg" alt="Газель Next, дизель: отопитель Webasto под сиденьем" width="1039" height="1200" loading="lazy">
+            <img class="hero-photos__shot" src="../img/foto/o3.jpg" alt="КАМАЗ: воздушный отопитель на полу кабины" width="1200" height="900" loading="lazy">
+            <img class="hero-photos__shot" src="../img/foto/o4.jpg" alt="Mercedes-Benz Sprinter: воздушный отопитель под сиденьем" width="686" height="1200" loading="lazy">
+          </div>
+          <div class="hero__cap" data-hero-cap aria-live="polite">Scania P-серии: воздушный отопитель в&nbsp;кабине</div>
+          <script type="application/json" data-hero-caps>["Scania P-серии: воздушный отопитель в\u00a0кабине","Газель Next, дизель: отопитель Webasto под\u00a0сиденьем","КАМАЗ: воздушный отопитель на\u00a0полу кабины","Mercedes-Benz Sprinter: воздушный отопитель под\u00a0сиденьем"]</script>
           <p class="hero__rate"><span class="hero__stars">★★★★★</span>5,0 на&nbsp;Яндекс Картах · 310&nbsp;отзывов</p>
         </div>
       </div>
@@ -729,6 +794,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 
       <div class="acc" id="plates" style="margin-top:22px">
         <div class="acc__i"><button class="acc__h" type="button">Что входит: отопитель с&nbsp;установкой<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
+          <div class="kit">
           <ul class="kit-list">
             <li>Автономный отопитель на&nbsp;12 или 24&nbsp;В</li>
             <li>Комплект проводки</li>
@@ -737,6 +803,9 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
             <li>Топливный насос</li>
             <li>Топливные магистрали</li>
           </ul>
+          <!-- фото комплекта справа от списка, появляется вместе со шторкой (Eugene, 09.10) -->
+          <img class="kit__photo" src="../img/foto/kit.jpg" alt="Монтажный комплект отопителя: воздуховоды, выхлоп, крепёж, топливная магистраль" width="1200" height="675" loading="lazy">
+          </div>
         </div></div></div></div>
         <div class="acc__i"><button class="acc__h" type="button">Как обслуживать<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
           Раз в&nbsp;сезон, перед осенью&nbsp;— приезжайте, обслужим. Мы помним вашу машину.<br>
@@ -774,9 +843,10 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
         </div>
       </div>
 
+      <!-- фото Eugene (10.10) вместо заглушек; эти кадры убраны из ленты работ, чтобы не повторялись -->
       <div class="shots" data-stagger>
-        <div class="ph ph--wide"><b>Фото</b>Установка в&nbsp;кабине</div>
-        <div class="ph ph--wide"><b>Фото</b>Выхлоп и&nbsp;крепление</div>
+        <figure class="shot"><img src="../img/foto/err1.jpg?v=36" alt="Выхлопная труба отопителя на кронштейнах под днищем" width="1000" height="1000" loading="lazy"><figcaption>Труба на&nbsp;кронштейнах, стыки плотные&nbsp;— газы в&nbsp;салон не&nbsp;идут</figcaption></figure>
+        <figure class="shot"><img src="../img/foto/err2.jpg?v=36" alt="Вывод выхлопа отопителя на кронштейне у рамы" width="963" height="1000" loading="lazy"><figcaption>Выхлоп и&nbsp;крепление</figcaption></figure>
       </div>
     </div>
 
@@ -796,6 +866,12 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       </div>
     </div>
 
+    <!-- два фото мастерской под плашкой, чуть наезжают на неё и друг на друга; на телефоне складываются шторкой, как на АвтоРегионе (Eugene, 09.10) -->
+    <div class="rem-shots" data-stagger>
+      <figure class="rem-shot"><img src="../img/foto/rem1.jpg" alt="Отопитель на стенде в мастерской МастерГаза" width="1024" height="768" loading="lazy"></figure>
+      <figure class="rem-shot"><img src="../img/foto/rem2.jpg" alt="Мастера разбирают отопитель на верстаке" width="1200" height="675" loading="lazy"></figure>
+    </div>
+
     <div class="cta-wide"><button class="btn btn--primary btn--wide" data-cta="Записаться на установку">Записаться на&nbsp;установку</button></div>
   </div>
 </section>
@@ -805,13 +881,32 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 <section class="s-cloud">
   <div class="wrap">
     <div class="sec-head">
-      <h2 data-reveal>Наши <em>работы</em></h2>
-      <p class="sub sub--one">Ставим не&nbsp;только на&nbsp;машины: катера, автокраны, кемперы, спецтехника.</p>
+      <h2 data-reveal data-fit="2"><span class="l1">Наши работы по&nbsp;установке</span><em>автономных отопителей в&nbsp;Ростове</em></h2>
     </div>
-    <div class="cards3" data-stagger>
-      <div class="ph ph--sq"><b>Фото</b>Кемпер&nbsp;— первым делом</div>
-      <div class="ph ph--sq"><b>Фото</b>Катер или лодка</div>
-      <div class="ph ph--sq"><b>Фото</b>Автокран, спецтехника</div>
+    <!-- лента работ: порядок Eugene (10.10), механика АвтоРегиона 161 (swipe.js, initDock); два узких кадра КАМАЗа в одном слоте; кадры 06 и 20 не стоят -->
+    <div class="dock" data-dock>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/01.jpg?v=36" alt="Scania P440: воздушный отопитель в кабине" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Scania P440: воздушный отопитель в кабине</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/04.jpg?v=36" alt="Газель Next: автономный отопитель" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель Next: автономный отопитель</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card dock__card--pair"><img src="../img/raboty/03.jpg?v=36" alt="КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия" width="451" height="1000" loading="lazy" draggable="false"><img src="../img/raboty/19.jpg?v=36" alt="КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия" width="429" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/07.jpg?v=36" alt="Mercedes-Benz Sprinter: автономный отопитель салона" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Mercedes-Benz Sprinter: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/08.jpg?v=36" alt="Peugeot Boxer: автономный отопитель салона" width="1000" height="562" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Peugeot Boxer: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/09.jpg?v=36" alt="Топливный насос и магистрали отопителя" width="1000" height="634" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Топливный насос и магистрали отопителя</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/10.jpg?v=36" alt="Mercedes-Benz Sprinter, фургон: воздушный отопитель" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Mercedes-Benz Sprinter, фургон: воздушный отопитель</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/12.jpg?v=36" alt="Монтаж отопителя: воздуховод и выхлопная труба" width="597" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Монтаж отопителя: воздуховод и выхлопная труба</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/13.jpg?v=36" alt="Hyundai Grand Starex: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Hyundai Grand Starex: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/11.jpg?v=36" alt="Пульт управления отопителем с дисплеем" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Пульт управления отопителем с дисплеем</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/14.jpg?v=36" alt="Ремонт отопителя на стенде в нашей мастерской" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Ремонт отопителя на стенде в нашей мастерской</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/15.jpg?v=36" alt="Установка отопителя: топливная магистраль" width="699" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Установка отопителя: топливная магистраль</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/17.jpg?v=36" alt="Nissan Leaf: жидкостный отопитель двигателя" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Nissan Leaf: жидкостный отопитель двигателя</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/16.jpg?v=36" alt="Проводка отопителя в гофре по штатной трассе" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Проводка отопителя в гофре по штатной трассе</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/18.jpg?v=36" alt="Пульт Thermotrans: управление отопителем" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Пульт Thermotrans: управление отопителем</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/22.jpg?v=36" alt="Fiat Ducato: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Fiat Ducato: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/02.jpg?v=36" alt="Газель Next: жидкостный подогреватель двигателя под капотом" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель Next: жидкостный подогреватель двигателя под капотом</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/23.jpg?v=36" alt="Foton Aumark, манипулятор: отопитель в кабине" width="571" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Foton Aumark, манипулятор: отопитель в кабине</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/24.jpg?v=36" alt="Установка отопителя: вывод выхлопа под днище" width="924" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Установка отопителя: вывод выхлопа под днище</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/25.jpg?v=36" alt="Renault Trafic: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Renault Trafic: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/27.jpg?v=36" alt="Ремонт отопителя" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Ремонт отопителя</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/26.jpg?v=36" alt="Газель: автономный отопитель кабины" width="429" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель: автономный отопитель кабины</figcaption></figure>
     </div>
   </div>
 </section>
@@ -870,9 +965,9 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <p class="sub sub--one">Каждый занимается своим делом: одни ставят, другие настраивают, третьи ведут документы.</p>
     </div>
     <div class="team" data-stagger>
-      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/olkhovoy.jpg?v=24" alt="Сертификат Saver, 2025" loading="lazy"></div><h3>Мастер по&nbsp;автономным отопителям</h3><p>Установка воздушных и&nbsp;жидкостных, любая техника</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
-      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/zhdanov.jpg?v=24" alt="Сертификат Saver, 2025" loading="lazy"></div><h3>Автоэлектрик</h3><p>Проводка, пульты, климат-контроль</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
-      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/korsunov-dsat.jpg?v=24" alt="Сертификат соответствия ДСАТ, 2026" loading="lazy"></div><h3>Мастер по&nbsp;климату</h3><p>Кондиционеры и&nbsp;рефрижераторы</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
+      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/olkhovoy.jpg?v=36" alt="Сертификат Saver, 2025" loading="lazy"></div><h3>Мастер по&nbsp;автономным отопителям</h3><p>Установка воздушных и&nbsp;жидкостных, любая техника</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
+      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/zhdanov.jpg?v=36" alt="Сертификат Saver, 2025" loading="lazy"></div><h3>Автоэлектрик</h3><p>Проводка, пульты, климат-контроль</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
+      <div><div class="team-photo"><div class="ph ph--tall">Фото мастера</div><img class="team-cert" src="../img/sert/korsunov-dsat.jpg?v=36" alt="Сертификат соответствия ДСАТ, 2026" loading="lazy"></div><h3>Мастер по&nbsp;климату</h3><p>Кондиционеры и&nbsp;рефрижераторы</p><div class="wait">Имя и&nbsp;стаж&nbsp;— ждём от&nbsp;заказчика</div></div>
     </div>
   </div>
 </section>
@@ -964,8 +1059,8 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <input class="lead-trap" type="text" name="company" id="fTrap" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="bookBtn" disabled><span class="morph__label">Рассчитать стоимость</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
       <button class="btn btn--quiet btn--wide" type="button" data-cta="Ближайшее свободное время">Записаться на&nbsp;ближайшее свободное время</button>
-      <p class="note">Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут и&nbsp;назовём цену и&nbsp;срок.</p>
       <p class="lead-consent">Нажимая кнопку, вы соглашаетесь с&nbsp;<a href="#">политикой обработки персональных данных</a></p>
+      <p class="note">Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут и&nbsp;назовём цену и&nbsp;срок.</p>
       <div class="mess">
         <a href="#" data-mess="telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></a>
         <a href="#" data-mess="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01"/></svg></a>
@@ -1003,7 +1098,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <img class="f-logo" src="../img/logo.png?v=24" alt="МастерГаз" width="712" height="192">
+        <img class="f-logo" src="../img/logo.png?v=36" alt="МастерГаз" width="712" height="192">
         <p>МастерГаз. Газобаллонное оборудование, климатические системы, автономные отопители. С&nbsp;1996&nbsp;года.</p>
       </div>
       <div>
@@ -1056,9 +1151,9 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   </div>
 </div>
 
-<script src="../config.js?v=24"></script>
-<script src="../swipe.js?v=24"></script>
-<script src="../zayavki.js?v=24"></script>
+<script src="../config.js?v=36"></script>
+<script src="../swipe.js?v=36"></script>
+<script src="../zayavki.js?v=36"></script>
 <script>
 (function(){
   var tiles = document.querySelectorAll('#tiles .tile');
@@ -1364,10 +1459,29 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   var pokazatVsyo=function(){document.documentElement.classList.remove('dv');};
   var storozh=setTimeout(pokazatVsyo,3000);
   var s=document.createElement('script');
-  s.src='../dvizhenie.js?v=24';
+  s.src='../dvizhenie.js?v=36';
   s.onload=function(){clearTimeout(storozh);};
   s.onerror=function(){clearTimeout(storozh);pokazatVsyo();};
   document.body.appendChild(s);
+})();
+</script>
+<script>
+/* слайдер первого экрана: кадр и подпись меняются одновременно, подпись гаснет и проявляется
+   (Eugene, 10.10: текст не должен прыгать раньше картинки); при reduced motion стоит первый кадр */
+(function(){
+  var w=document.querySelector('[data-dock]'); if(w&&window.initDock) window.initDock(w);
+  var box=document.querySelector('[data-hero-photos]'); if(!box) return;
+  var shots=box.querySelectorAll('.hero-photos__shot'), cap=document.querySelector('[data-hero-cap]');
+  var caps=[]; try{caps=JSON.parse(document.querySelector('[data-hero-caps]').textContent);}catch(e){}
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||shots.length<2) return;
+  var i=0;
+  setInterval(function(){
+    if(cap) cap.classList.add('is-fading');
+    setTimeout(function(){
+      shots[i].classList.remove('is-active'); i=(i+1)%shots.length; shots[i].classList.add('is-active');
+      if(cap&&caps[i]){ cap.textContent=caps[i]; cap.classList.remove('is-fading'); }
+    },450);
+  },6000);
 })();
 </script>
 </body>
