@@ -4,82 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>МастерГаз — Установка ГБО в Ростове-на-Дону</title>
+<meta name="description" content="Установка ГБО от 4 часов в Ростове-на-Дону. Гарантия до 1 года или 100 000 км, настройка в движении, 14 мастеров, своя мастерская на Минеральной, 16.">
 <script>document.documentElement.classList.add('dv')</script>
-<link rel="icon" href="favicon.ico?v=36" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=36">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png?v=36">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=36">
-<link rel="stylesheet" href="dvizhenie.css?v=36">
-<link rel="stylesheet" href="styles.css?v=36">
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script src="_ds_bundle.js?v=36"></script>
-<script src="config.js?v=36"></script>
-<script src="swipe.js?v=36"></script>
-<script src="zayavki.js?v=36"></script>
-<link rel="stylesheet" href="landing.css?v=36">
+<link rel="preload" href="font/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/foto/h4.webp" as="image" fetchpriority="high">
+<link rel="icon" href="favicon.ico?v=38" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=38">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png?v=38">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=38">
+<link rel="stylesheet" href="site.css?v=38">
+<!-- Файлы собраны командой sborka/sobrat.js: react.js - Реакт в рабочей сборке,
+     osnova.js - дизайн-система и настройки, app.js - блоки страницы из .jsx.
+     Порядок менять нельзя: в osnova.js лежат старые копии блоков, их должны
+     перезаписать свежие из app.js. После правки .jsx - пересобрать и поднять ?v= -->
+<script src="react.js?v=38" defer></script>
+<script src="osnova.js?v=38" defer></script>
+<script src="app.js?v=38" defer></script>
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel" src="SmoothAccordion.jsx?v=36"></script>
-<script type="text/babel" src="Messenger.jsx?v=36"></script>
-<script type="text/babel" src="SubmitMorph.jsx?v=36"></script>
-<script type="text/babel" src="Header.jsx?v=36"></script>
-<script type="text/babel" src="Hero.jsx?v=36"></script>
-<script type="text/babel" src="ErrorsVsUs.jsx?v=36"></script>
-<script type="text/babel" src="Calculator.jsx?v=36"></script>
-<script type="text/babel" src="Team.jsx?v=36"></script>
-<script type="text/babel" src="Works.jsx?v=36"></script>
-<script type="text/babel" src="RepairBrands.jsx?v=36"></script>
-<script type="text/babel" src="CertificatesReviews.jsx?v=36"></script>
-<script type="text/babel" src="Fleets.jsx?v=36"></script>
-<script type="text/babel" src="FAQ.jsx?v=36"></script>
-<script type="text/babel" src="Location.jsx?v=36"></script>
-<script type="text/babel" src="BookingForm.jsx?v=36"></script>
-<script type="text/babel" src="Footer.jsx?v=36"></script>
-<script type="text/babel" src="Popup.jsx?v=36"></script>
-<script type="text/babel">
-/* Разделитель между блоками: линия с двумя квадратиками из dvizhenie.js */
-function Divider(){
-return <div className="dv-row"><div data-divider=""><i></i><i></i></div></div>;
-}
-function App(){
-const [popup,setPopup]=React.useState(null);
-const onCta=src=>setPopup(src);
-/* dvizhenie.js вешает наблюдатели один раз при запуске, а страницу рисует React -
-   поэтому файл подключаем после отрисовки. Не ожил за 3 секунды - показываем всё без движения. */
-React.useEffect(()=>{
-  const pokazatVsyo=()=>document.documentElement.classList.remove('dv');
-  const storozh=setTimeout(pokazatVsyo,3000);
-  const s=document.createElement('script');
-  s.src='dvizhenie.js?v=36';
-  s.onload=()=>clearTimeout(storozh);
-  s.onerror=()=>{clearTimeout(storozh);pokazatVsyo();};
-  document.body.appendChild(s);
-},[]);
-return <div>
-<Header onCta={onCta}/>
-<Hero onCta={onCta}/>
-<Divider/>
-<ErrorsVsUs/>
-<Calculator onCta={onCta}/>
-<Works/>
-<RepairBrands onCta={onCta}/>
-<Divider/>
-<Fleets/>
-<Team/>
-<Divider/>
-<Location/>
-<ReviewsBand/>
-<BookingForm onCta={onCta}/>
-<Divider/>
-<FAQ/>
-<Footer/>
-{popup&&<Popup source={popup} onClose={()=>setPopup(null)}/>}
-</div>;
-}
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
-</script>
 </body>
 </html>

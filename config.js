@@ -88,3 +88,27 @@ if(day>=1&&day<=5)return h>=9&&h<18;   // Пн–Пт 09:00–18:00
 if(day===6)return h>=9&&h<17;          // суббота — рабочая, до 17:00
 return false;
 };
+
+/* Счётчик машин на первом экране ГБО. Заказчик считает 0,7 машины в день
+   (слово Eugene, 12.10.2026): число растёт само от базы, а подпись
+   согласуется с ним по падежу - 20 321 машина уехала, 20 322 машины уехали,
+   20 325 машин уехали. Часы московские, как в isOpenNow. */
+window.MASHIN={baza:20321,data:'2026-10-12',vDen:0.7};
+window.mashinSeychas=function(){
+const m=window.MASHIN;
+const now=new Date();
+const msk=new Date(now.getTime()+(now.getTimezoneOffset()+180)*60000);
+const segodnya=Date.UTC(msk.getFullYear(),msk.getMonth(),msk.getDate());
+const ch=m.data.split('-');
+const bazaDen=Date.UTC(+ch[0],+ch[1]-1,+ch[2]);
+const dney=Math.max(0,Math.round((segodnya-bazaDen)/86400000));
+return m.baza+Math.floor(dney*m.vDen);
+};
+window.mashinPodpis=function(n){
+const d=n%10,s=n%100;
+if(d===1&&s!==11)return 'машина уехала';
+if(d>=2&&d<=4&&(s<12||s>14))return 'машины уехали';
+return 'машин уехали';
+};
+/* 20321 -> «20 321», пробел неразрывный: число не должно рваться по строкам */
+window.chisloSProbelami=function(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0');};
