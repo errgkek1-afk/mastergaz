@@ -741,7 +741,7 @@ function Team() {
     className: "team-photo"
   }, /*#__PURE__*/React.createElement("img", {
     className: "team-face",
-    src: 'img/team/' + m[0] + '.webp?v=43',
+    src: 'img/team/' + m[0] + '.webp?v=45',
     alt: m[1] + ' — ' + m[2] + ', МастерГаз',
     width: RAZM[m[0]][0],
     height: RAZM[m[0]][1],
