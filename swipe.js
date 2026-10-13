@@ -48,6 +48,15 @@
       suppressClick=true;
       setTimeout(function(){suppressClick=false;},80);
       if(performance.now()-st.lt>100)st.v=0;
+      // settle:false - лента не доезжает до карточки, а гасит бросок там, где отпустили
+      // (Eugene, 13.10: доводка читалась как дёрганье на половине отзыва)
+      if(opts&&opts.settle===false){
+        var max=el.scrollWidth-el.clientWidth;
+        var cel=Math.max(0,Math.min(max,el.scrollLeft-st.v*180));
+        el.classList.remove('is-dragging');
+        el.scrollTo({left:cel,behavior:'smooth'});
+        return;
+      }
       settleNear(el.scrollLeft-st.v*180);
     }
     el.addEventListener('pointerdown',function(e){
