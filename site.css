@@ -141,6 +141,7 @@ html,body{overflow-x:clip}
 @media (max-width:380px){.hero__cap{min-height:36px}}
 .hero__rate{margin:8px 0 0;font-size:13px;line-height:1.4;color:rgba(255,255,255,.55);text-align:center}
 .hero__stars{color:#f5b301;letter-spacing:2px;margin-right:8px}
+html{scrollbar-gutter:stable}
 h2{font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:balance}
 .sticker{position:absolute;z-index:3;top:-11px;left:-11px;width:78px;height:78px;border-radius:10px;box-sizing:border-box;
   background:var(--color-primary);color:#fff;display:flex;flex-direction:column;justify-content:space-between;
@@ -238,6 +239,7 @@ h2{font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-.03em;text-
 .works-head{max-width:1280px;margin:0 auto;padding:0 32px}
 .works-head h2{margin:0;font-weight:600;text-align:center;color:var(--color-ink)}
 h2 .l1,h2 em{display:block;text-wrap:balance}
+@media (max-width:760px){.reviews-band h2 .l1{display:inline}}
 h2 em{font-style:normal;color:var(--color-primary)}
 @media (max-width:760px){.works-head{padding:0}}
 .dock-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px}

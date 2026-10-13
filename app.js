@@ -741,7 +741,7 @@ function Team() {
     className: "team-photo"
   }, /*#__PURE__*/React.createElement("img", {
     className: "team-face",
-    src: 'img/team/' + m[0] + '.webp?v=45',
+    src: 'img/team/' + m[0] + '.webp?v=46',
     alt: m[1] + ' — ' + m[2] + ', МастерГаз',
     width: RAZM[m[0]][0],
     height: RAZM[m[0]][1],
@@ -960,7 +960,10 @@ function ReviewsBand() {
       color: '#fff',
       margin: 0
     }
-  }, "\u041E\u0442\u0437\u044B\u0432\u044B \u043E\u0431\xA0\u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435 \u0413\u0411\u041E ", /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "l1"
+  }, "\u041E\u0442\u0437\u044B\u0432\u044B \u043E\u0431\xA0\u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435 \u0413\u0411\u041E"), " ", /*#__PURE__*/React.createElement("span", {
+    className: "l1",
     style: {
       color: 'var(--color-primary-bright)'
     }
