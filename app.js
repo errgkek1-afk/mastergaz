@@ -128,7 +128,7 @@ function Header({
     className: "wrap header__in"
   }, /*#__PURE__*/React.createElement("a", {
     className: "logo",
-    href: "#",
+    href: "/",
     "aria-label": "\u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437"
   }, /*#__PURE__*/React.createElement("img", {
     src: "img/logo.webp?v=37",
@@ -139,7 +139,7 @@ function Header({
     className: "tabs",
     "aria-label": "\u041D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#",
+    href: "/",
     className: "is-active",
     "aria-current": "page"
   }, "\u0413\u0411\u041E"), /*#__PURE__*/React.createElement("a", {
@@ -683,13 +683,22 @@ function Calculator({
 }
 window.Calculator = Calculator;
 function Team() {
-  const {
-    Placeholder
-  } = window.DesignSystem_a63f4f;
-  const roles = [
-  /* третий элемент - скан сертификата в углу фото (img/sert/), четвёртый - скан альбомный,
-     пятый - подпись. Карточки без сертификата убраны (Eugene, 09.10): три мастера, у каждого скан. */
-  ['Мастер по подкапотной части', 'Электроника, редуктор, форсунки, магистрали', 'korsunov', false, 'Сертификат Italgas и OMVL, 2020'], ['Мастер по баллонам и заправочным устройствам', 'Монтаж баллона по нормам безопасности, установка ВЗУ', 'pukhov', true, 'Сертификат Italgas и OMVL, 2020'], ['Диагност-настройщик', 'Настройка газовой карты в движении, диагностика неисправностей', 'drobotov', false, 'Свидетельство Газпарт, 2018']];
+  /* Семь мастеров: фото от заказчика 12.10, имена, роли и стаж - его подписи к файлам.
+     Кадры нарезаны под лицо и лежат в img/team/ (исходники - папка `мастера/`).
+     Сертификатов в углу фото нет: решение Eugene 13.10 - из семи человек документ
+     нашёлся только у Ольхового, у одного из семи плашка смотрится случайной.
+     Сканы лежат в `img/sert/`, вернуть - добавить шестой и седьмой столбец, как
+     было в версии 41. */
+  const RAZM = {
+    "getmanskiy": [700, 875],
+    "zarbaliev": [700, 875],
+    "olkhovoy": [700, 875],
+    "ionkin": [672, 840],
+    "aleshkin": [656, 820],
+    "kuznetsov": [700, 875],
+    "buslaev": [656, 820]
+  };
+  const masters = [['getmanskiy', 'Павел Гетманский', 'Мастер-универсал', '10 лет'], ['zarbaliev', 'Заур Зарбалиев', 'Мастер по установке газовых баллонов', '5 лет'], ['olkhovoy', 'Евгений Ольховой', 'Мастер по установке ГБО с непосредственным впрыском', '5 лет'], ['ionkin', 'Ярослав Ионкин', 'Мастер по нестандартным работам, установщик ГБО и климатики', '10 лет'], ['aleshkin', 'Артём Алёшкин', 'Слесарь по ремонту ГБО и автоклиматики', '5 лет'], ['kuznetsov', 'Иван Кузнецов', 'Слесарь по ремонту ГБО', '2 года'], ['buslaev', 'Роман Буслаев', 'Администратор', '10 лет']];
   return /*#__PURE__*/React.createElement("section", {
     style: {
       background: '#fff',
@@ -713,7 +722,7 @@ function Team() {
     style: {
       color: 'var(--color-primary)'
     }
-  }, "14\xA0\u043C\u0430\u0441\u0442\u0435\u0440\u043E\u0432 \u043F\u043E\xA0\u0413\u0411\u041E"), ". \u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u0441\u0442\u0430\u0436 \u0431\u043E\u043B\u044C\u0448\u0435 \u0434\u0435\u0441\u044F\u0442\u0438 \u043B\u0435\u0442"), /*#__PURE__*/React.createElement("p", {
+  }, "14 \u043C\u0430\u0441\u0442\u0435\u0440\u043E\u0432 \u043F\u043E \u0413\u0411\u041E"), ". \u0420\u0430\u0431\u043E\u0442\u0430\u044E\u0442 \u0443 \u043D\u0430\u0441 \u0433\u043E\u0434\u0430\u043C\u0438"), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 'clamp(15px,1.35vw,17px)',
       color: 'var(--color-charcoal)',
@@ -724,30 +733,20 @@ function Team() {
     }
   }, "\u041A\u0430\u0436\u0434\u044B\u0439 \u0437\u0430\u043D\u0438\u043C\u0430\u0435\u0442\u0441\u044F \u0441\u0432\u043E\u0438\u043C \u0434\u0435\u043B\u043E\u043C: \u043E\u0434\u043D\u0438 \u0441\u0442\u0430\u0432\u044F\u0442, \u0434\u0440\u0443\u0433\u0438\u0435 \u043D\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u044E\u0442, \u0442\u0440\u0435\u0442\u044C\u0438 \u0432\u0435\u0434\u0443\u0442 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B."), /*#__PURE__*/React.createElement("div", {
     className: "team-grid",
-    "data-stagger": "",
-    style: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: 24,
-      alignItems: 'stretch'
-    }
-  }, roles.map((r, i) => /*#__PURE__*/React.createElement("div", {
+    "data-stagger": ""
+  }, masters.map((m, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%'
-    }
+    className: "team-card"
   }, /*#__PURE__*/React.createElement("div", {
     className: "team-photo"
-  }, /*#__PURE__*/React.createElement(Placeholder, {
-    label: "\u0424\u043E\u0442\u043E \u043C\u0430\u0441\u0442\u0435\u0440\u0430",
-    aspect: "4 / 5"
-  }), r[2] && /*#__PURE__*/React.createElement("img", {
-    className: 'team-cert' + (r[3] ? ' team-cert--wide' : ''),
-    src: 'img/sert/' + r[2] + '.webp?v=37',
-    alt: r[4],
-    loading: "lazy"
+  }, /*#__PURE__*/React.createElement("img", {
+    className: "team-face",
+    src: 'img/team/' + m[0] + '.webp?v=42',
+    alt: m[1] + ' — ' + m[2] + ', МастерГаз',
+    width: RAZM[m[0]][0],
+    height: RAZM[m[0]][1],
+    loading: "lazy",
+    decoding: "async"
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 20,
@@ -755,14 +754,14 @@ function Team() {
       color: 'var(--color-ink)',
       margin: '16px 0 4px'
     }
-  }, r[0]), /*#__PURE__*/React.createElement("div", {
+  }, m[1]), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: 'var(--color-graphite)',
       lineHeight: 1.5,
       marginBottom: 16
     }
-  }, r[1]), /*#__PURE__*/React.createElement("div", {
+  }, m[2]), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 'auto',
       fontSize: 13,
@@ -771,7 +770,7 @@ function Team() {
       borderRadius: 8,
       padding: '10px 14px'
     }
-  }, "\u0418\u043C\u044F \u0438\xA0\u0441\u0442\u0430\u0436 \u2014 \u0436\u0434\u0451\u043C \u043E\u0442\xA0\u0437\u0430\u043A\u0430\u0437\u0447\u0438\u043A\u0430"))))));
+  }, "\u0421\u0442\u0430\u0436 ", m[3]))))));
 }
 window.Team = Team;
 
@@ -1651,7 +1650,9 @@ function BookingForm({
   }, "\u0417\u0430\u043F\u0438\u0441\u0430\u0442\u044C\u0441\u044F \u043D\u0430\xA0\u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F"), /*#__PURE__*/React.createElement("p", {
     className: "lead-consent"
   }, "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0443, \u0432\u044B \u0441\u043E\u0433\u043B\u0430\u0448\u0430\u0435\u0442\u0435\u0441\u044C \u0441 ", /*#__PURE__*/React.createElement("a", {
-    href: "#"
+    href: "policy.html",
+    target: "_blank",
+    rel: "noopener"
   }, "\u043F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445"))), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'center',
@@ -1768,7 +1769,7 @@ function Footer() {
       marginBottom: 6
     }
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#",
+    href: "/",
     style: {
       color: 'var(--color-primary-bright)'
     }
@@ -1829,7 +1830,7 @@ function Footer() {
       flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("span", null, "\u0418\u041F \u041A\u043E\u0440\u0441\u0443\u043D\u043E\u0432 \u0410\u043D\u0442\u043E\u043D \u0418\u0433\u043E\u0440\u0435\u0432\u0438\u0447 \xB7 \u0418\u041D\u041D 890414959136 \xB7 \u041E\u0413\u0420\u041D\u0418\u041F 324619600106274"), /*#__PURE__*/React.createElement("a", {
-    href: "#",
+    href: "policy.html",
     style: {
       color: 'var(--color-steel)'
     }
@@ -1940,7 +1941,9 @@ function Popup({
   }), /*#__PURE__*/React.createElement("p", {
     className: "lead-consent"
   }, "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0443, \u0432\u044B \u0441\u043E\u0433\u043B\u0430\u0448\u0430\u0435\u0442\u0435\u0441\u044C \u0441 ", /*#__PURE__*/React.createElement("a", {
-    href: "#"
+    href: "policy.html",
+    target: "_blank",
+    rel: "noopener"
   }, "\u043F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445")), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'center',

@@ -10,6 +10,8 @@ ENGINES:[
 PHONE_GBO:'+7 (938) 147-05-90',
 PHONE_CLIMATE:'+7 (929) 818-19-99',
 WHATSAPP:'https://wa.me/79381470590',
+// WhatsApp на странице отопителей - на номер заказчика 929 818-19-99 (он сам назвал его 12.10)
+WHATSAPP_CLIMATE:'https://wa.me/79298181999',
 // У MAX нет ссылки на чат по номеру, поэтому здесь личная ссылка профиля
 MAX_LINK:'https://max.ru/u/f9LHodD0cOKaE-NnTzCcVk45pTqTh-1dUU_XRrzmHH1Q89qxA5xYSuolrk',
 ADDRESS:'Ростов-на-Дону, Минеральная улица, 16',
