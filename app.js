@@ -716,22 +716,13 @@ function Team() {
       fontWeight: 600,
       textAlign: 'center',
       color: 'var(--color-ink)',
-      margin: '0 0 12px'
+      margin: '0 0 48px'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--color-primary)'
     }
-  }, "14 \u043C\u0430\u0441\u0442\u0435\u0440\u043E\u0432 \u043F\u043E \u0413\u0411\u041E"), ". \u0420\u0430\u0431\u043E\u0442\u0430\u044E\u0442 \u0443 \u043D\u0430\u0441 \u0433\u043E\u0434\u0430\u043C\u0438"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 'clamp(15px,1.35vw,17px)',
-      color: 'var(--color-charcoal)',
-      textAlign: 'center',
-      margin: '0 0 48px',
-      lineHeight: 1.45,
-      textWrap: 'balance'
-    }
-  }, "\u041A\u0430\u0436\u0434\u044B\u0439 \u0437\u0430\u043D\u0438\u043C\u0430\u0435\u0442\u0441\u044F \u0441\u0432\u043E\u0438\u043C \u0434\u0435\u043B\u043E\u043C: \u043E\u0434\u043D\u0438 \u0441\u0442\u0430\u0432\u044F\u0442, \u0434\u0440\u0443\u0433\u0438\u0435 \u043D\u0430\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u044E\u0442, \u0442\u0440\u0435\u0442\u044C\u0438 \u0432\u0435\u0434\u0443\u0442 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B."), /*#__PURE__*/React.createElement("div", {
+  }, "14 \u043C\u0430\u0441\u0442\u0435\u0440\u043E\u0432"), " \u043F\u043E\u0441\u0442\u0430\u0432\u0438\u043B\u0438 \u0433\u0430\u0437\u043E\u0432\u043E\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435 \u043D\u0430\xA020\xA0000+ \u043C\u0430\u0448\u0438\u043D"), /*#__PURE__*/React.createElement("div", {
     className: "team-grid",
     "data-stagger": ""
   }, masters.map((m, i) => /*#__PURE__*/React.createElement("div", {
@@ -741,7 +732,7 @@ function Team() {
     className: "team-photo"
   }, /*#__PURE__*/React.createElement("img", {
     className: "team-face",
-    src: 'img/team/' + m[0] + '.webp?v=47',
+    src: 'img/team/' + m[0] + '.webp?v=49',
     alt: m[1] + ' — ' + m[2] + ', МастерГаз',
     width: RAZM[m[0]][0],
     height: RAZM[m[0]][1],
