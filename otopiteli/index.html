@@ -16,13 +16,13 @@
 <meta property="og:image" content="https://mastergaz.ru/img/foto/o1.webp">
 <script>document.documentElement.classList.add('dv')</script>
 <link rel="preload" href="../font/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../img/foto/o1.webp" as="image" fetchpriority="high">
-<link rel="stylesheet" href="../font/onest.css?v=50">
-<link rel="icon" href="../favicon.ico?v=50" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=50">
-<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png?v=50">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=50">
-<link rel="stylesheet" href="../dvizhenie.css?v=50">
+<link rel="preload" href="../img/foto/o1-760.webp" as="image" imagesrcset="../img/foto/o1-760.webp 760w, ../img/foto/o1.webp 1000w" imagesizes="(max-width:760px) calc(100vw - 76px), 520px" fetchpriority="high">
+<link rel="stylesheet" href="../font/onest.css?v=54">
+<link rel="icon" href="../favicon.ico?v=54" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png?v=54">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png?v=54">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=54">
+<link rel="stylesheet" href="../dvizhenie.css?v=54">
 <style>
 /* Страница «Автономные отопители» сайта МастерГаз в шаблоне «Голубая тяжесть»: чёрный лист,
    мягкие углы, квадратики как сквозной знак, акцент красный, как у МастерГаза. Светлые разделы -
@@ -32,9 +32,12 @@
   --font:'Onest','Helvetica Neue',Arial,sans-serif;
 
   /* акцент красный, как у МастерГаза; синий - только блок кондиционеров */
+  --soglasie-fon:#17191c; --soglasie-text:#f2f3f5; --soglasie-knopka:#dc2626; --soglasie-ramka:rgba(255,255,255,.22);
   --accent:#dc2626;
   --accent-bright:#ef4444;
   --accent-ring:rgba(220,38,38,.3);
+  --accent-soft:#f8cfcf;
+  --accent-mist:#fdeeee;
   --glow:rgba(239,68,68,.5);
   --cold:#1e6ef3;
   --cold-bright:#3d84f7;
@@ -253,9 +256,9 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .card p{font-size:15px;line-height:1.5;color:var(--t-muted)}
 .card--wide{margin-top:4px;padding:30px 34px}
 .card--wide h3{font-size:clamp(22px,2.4vw,30px);margin-bottom:10px}
-.card--icon{position:relative}
-.card--icon .gear{position:absolute;top:20px;left:20px;width:30px;height:30px;color:var(--accent);animation:spin 30s linear infinite}
-.card--icon .card__txt{padding-left:56px;padding-top:24px}
+.card--icon{position:relative;display:flex;gap:14px;align-items:flex-start}
+.card--icon .gear{position:static;flex:0 0 30px;width:30px;height:30px;margin-top:4px;color:var(--accent);animation:spin 30s linear infinite}
+.card--icon .card__txt{padding:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .card--wide p{font-size:clamp(16px,1.6vw,18px);line-height:1.5;color:var(--t-soft);max-width:68ch}
 
@@ -328,10 +331,10 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .shot img{display:block;width:auto;max-width:100%;max-height:330px;border-radius:var(--r)}
 .shot figcaption{font:400 12px/1.35 var(--font);color:var(--t-muted);text-align:center}
 /* проверка безопасности - синий блок */
-.safety{position:relative;margin:22px 0 0;background:var(--accent);color:rgba(255,255,255,.85);border-radius:var(--r-l);padding:26px 34px 30px}
+.safety{position:relative;margin:22px 0 0;display:flex;gap:14px;align-items:flex-start;background:var(--accent);color:rgba(255,255,255,.85);border-radius:var(--r-l);padding:26px 34px 30px}
 .safety::after{content:"";position:absolute;top:14px;right:14px;width:8px;height:8px;background:#fff}
-.safety svg{position:absolute;top:20px;left:20px;width:30px;height:30px;color:#fff}
-.safety__txt{padding-left:56px;padding-top:24px}
+.safety svg{position:static;flex:0 0 30px;width:30px;height:30px;margin-top:2px;color:#fff}
+.safety__txt{padding:0}
 .safety b{display:block;color:#fff;font-size:clamp(22px,2.4vw,30px);font-weight:500;letter-spacing:-.02em;line-height:1.15;margin-bottom:10px;text-wrap:balance}
 .safety p{font-size:clamp(16px,1.6vw,18px);line-height:1.45;max-width:68ch}
 .safety p+p{margin-top:6px}
@@ -447,13 +450,14 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 .team{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
 .team-card{display:flex;flex-direction:column;flex:0 1 calc(25% - 17px)}
 .team-face{display:block;width:100%;height:auto}
-.team h3{font-size:18px;margin:16px 0 4px}
+.team h3{font-size:16px;margin:16px 0 4px}  /* 16, чтобы имя со стажем держалось в одну строку */
 .team p{font-size:14px;color:var(--t-muted);line-height:1.5}
 /* сертификат мастера - скан в правом нижнем углу фото, около 15 % площади (Eugene, 09.10) */
 .team-photo{position:relative;border-radius:var(--r-m,14px);overflow:hidden;background:var(--t-card)}
 .team-cert{position:absolute;right:5px;bottom:5px;width:34%;height:auto;display:block;border-radius:6px;
   box-shadow:0 6px 18px rgba(0,0,0,.35);background:#fff;padding:3px;box-sizing:border-box}
-.team .wait{margin-top:auto;border:1px solid var(--t-line);border-radius:var(--r-s);padding:11px 14px;font:400 13px/1.45 var(--font);color:var(--t-muted)}
+/* стаж строкой рядом с именем, плашки нет (Eugene, 13.10) */
+.team-exp{white-space:nowrap}
 
 /* ——— как добраться ——— */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
@@ -502,9 +506,26 @@ h1 em{font-style:normal;color:var(--accent-bright)}
 
 /* ——— форма (светлый раздел) ——— */
 .book{position:relative;overflow:hidden}
-.book .sec-head{position:relative;z-index:2}
-.form{position:relative;background:var(--t-card);border:1px solid var(--t-line);border-radius:var(--r-l);padding:32px;
-  max-width:560px;margin:0 auto;display:grid;gap:14px}
+/* Блок заявки собран как на ГБО: светлая подложка, косые полосы слева, белая карточка,
+   заголовок и обещание перезвонить - внутри карточки (Eugene, 14.10) */
+.book.s-paper{background:var(--accent-mist)}
+.book .wrap{position:relative;z-index:2}
+.booking-stripes{position:absolute;top:0;bottom:0;right:calc(50% + 348px);width:130px;pointer-events:none}
+.booking-stripe{position:absolute;top:0;bottom:0;transform:skewX(-14deg);transform-origin:top}
+.booking-stripe--1{right:0;width:16px;background:var(--accent)}
+.booking-stripe--2{right:26px;width:26px;background:var(--accent-bright)}
+.booking-stripe--3{right:64px;width:40px;background:var(--accent-soft)}
+@media (max-width:1100px){.booking-stripes{display:none}}
+.form{position:relative;background:var(--t-card);border-radius:var(--r-l);padding:40px;
+  box-shadow:0 8px 24px rgba(26,26,26,.12);
+  max-width:640px;margin:0 auto;display:grid;gap:14px}
+.form__h{margin:0;text-align:center}
+.form__sub{margin:0;font-size:15px;line-height:1.45;color:var(--t-soft);text-align:center}
+.form__fields{display:grid;gap:14px;margin-top:12px}
+.form__after{text-align:center;margin-top:14px}
+.form__after b{display:block;font-size:16px;font-weight:600;color:var(--t-fg);margin-bottom:6px}
+.form__after span{display:block;font-size:14px;line-height:1.5;color:var(--t-muted);text-wrap:balance}
+.form .mess{margin-top:10px}
 label{font-size:13px;font-weight:500;color:var(--t-muted);display:block;margin-bottom:8px}
 input,select{width:100%;padding:14px 16px;border:1px solid var(--t-line-2);border-radius:var(--r-s);
   font-family:var(--font);font-size:16px;color:var(--t-fg);background:transparent}
@@ -512,7 +533,25 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 .note{font-size:13px;line-height:1.55;color:var(--t-muted);text-align:center}
 /* заявки: невидимое поле-ловушка для роботов и строка согласия под кнопкой */
 .lead-trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
-.lead-consent{font-size:12px;line-height:1.45;color:var(--t-muted);text-align:center;margin:0}
+.lead-check{display:flex;flex-direction:column;gap:10px;margin:2px 0 4px}
+/* телефон: карточка заявки и окно с полями уже */
+/* заголовок формы на телефоне идёт от ширины экрана: на 375 при 30 px строка
+   «отопитель» оставалась одна (правило Eugene: одно слово на строке не вешаем) */
+@media (max-width:760px){.form{padding:20px}.modal{padding:20px}.form__sub{font-size:13px}
+  .form__h{font-size:clamp(20px,6.2vw,30px)}}
+.lead-check label{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--t-muted);cursor:pointer}
+/* Галочки согласия: красный ободок, внутри белое пустое поле, при нажатии красная галка
+   (Eugene, 14.10). Своего рисунка не было - страница тёмная, и браузер красил их чёрным. */
+.lead-check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;margin:1px 0 0;flex:0 0 auto;
+  position:relative;padding:0;border:1.5px solid var(--accent);border-radius:4px;background:#fff;cursor:pointer}
+.lead-check input::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:9px;
+  border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg) scale(.4);opacity:0;
+  transition:opacity .15s var(--ease),transform .15s var(--ease)}
+.lead-check input:checked::after{opacity:1;transform:rotate(45deg) scale(1)}
+.lead-check input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lead-check a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.lead-check.nado-zapolnit label:first-child{color:var(--accent-bright)}
+.lead-check.nado-zapolnit input[data-nado]{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 .lead-consent a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .mess{display:flex;gap:4px;justify-content:center;margin-top:4px}
 .mess a{width:44px;height:44px;border-radius:var(--r-s);background:var(--accent);color:#fff;display:flex;
@@ -533,6 +572,9 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 .morph__note{max-height:0;opacity:0;overflow:hidden;text-align:center;font-size:15px;font-weight:600;line-height:1.4;color:var(--t-fg);
   transition:max-height .4s .55s,opacity .3s .65s,margin-top .4s .55s}
 .is-sent .morph__note{max-height:80px;opacity:1;margin-top:14px}
+/* телефона ещё нет: кнопка не серая и нажимается, по нажатию показывает, что заполнить (Eugene, 13.10) */
+.morph__btn:not(.is-ready):not(:disabled){background:rgba(220,38,38,.18);color:var(--accent-bright);box-shadow:none}
+.pole-telefon.nado-zapolnit input{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring)}
 .mess--after{display:none}
 .is-sent .mess--after{display:flex}
 .is-sent .mess a{animation:pop .5s cubic-bezier(.19,1,.22,1) both}
@@ -622,7 +664,8 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   .vs__pair{display:block;border-bottom:4px solid var(--bg)}
   .vs__pair:last-child{border-bottom:0}
   .vs__pair .vs__cell{border-bottom:0}
-  .lbl{display:block;font:500 11px/1.3 var(--font);letter-spacing:.06em;
+  /* 12 px - наш порог для телефона, было 11 (находка из CLAUDE.md, закрыта 14.10) */
+  .lbl{display:block;font:500 12px/1.3 var(--font);letter-spacing:.06em;
     text-transform:uppercase;color:var(--t-muted);margin-bottom:6px}
   .vs__cell--good .lbl{color:var(--ok)}
   .rev-grid.sl-track>*{flex-basis:86%}
@@ -634,7 +677,11 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   .sl-btn{width:34px;height:34px;font-size:20px}
   .sl-btn--prev{left:-15px}
   .sl-btn--next{right:-15px}
-  .safety__txt,.card--icon .card__txt{padding-left:0;padding-top:44px}
+  /* на телефоне значок встаёт над текстом: в строку тексту остаётся 230 px.
+     Правило с padding-top:44px осталось от прежней раскладки со значком в углу
+     и после перехода на flex давало пустую дыру сверху (14.10) */
+  .safety,.card--icon{flex-direction:column;gap:10px}
+  .safety__txt,.card--icon .card__txt{padding:0}
   /* шапка на телефоне компактная: логотип и телефон в строку, вкладки ниже; подпись «с 1996 года» есть в «30 лет опыта» */
   .header{padding:6px 8px 0}
   .header__in{flex-wrap:wrap;gap:6px 12px;padding:8px 8px 8px 14px;border-radius:var(--r)}
@@ -647,12 +694,16 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<!--razmetka-->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoRepair","name":"МастерГаз","description":"Установка и обслуживание газового оборудования на автомобиль, автономные отопители и автокондиционеры в Ростове-на-Дону. С 1996 года.","url":"https://mastergaz.ru/otopiteli/","image":"https://mastergaz.ru/img/foto/fasad.webp","logo":"https://mastergaz.ru/img/logo.webp","telephone":"+7 (938) 147-05-90","address":{"@type":"PostalAddress","addressLocality":"Ростов-на-Дону","streetAddress":"Минеральная улица, 16","addressCountry":"RU"},"priceRange":"₽₽","currenciesAccepted":"RUB","geo":{"@type":"GeoCoordinates","latitude":47.289856,"longitude":39.662102},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Mo","Tu","We","Th","Fr"],"opens":"09:00","closes":"18:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Sa"],"opens":"09:00","closes":"17:00"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Сколько стоит установка автономного отопителя?","acceptedAnswer":{"@type":"Answer","text":"Зависит от мощности прибора (2 или 5 кВт) и техники. Напишите марку и модель — назовём цену и срок установки за 10–15 минут. Год гарантии на отопитель входит в цену."}},{"@type":"Question","name":"Можно пользоваться отопителем на заглушенной машине?","acceptedAnswer":{"@type":"Answer","text":"Да, ради этого он и нужен. Отопитель работает независимо от двигателя — важно только, чтобы аккумулятор был заряжен."}},{"@type":"Question","name":"Сколько он может работать с выключенным мотором?","acceptedAnswer":{"@type":"Answer","text":"До 12 часов. Этого хватает на полную ночёвку в рейсе."}},{"@type":"Question","name":"Сколько он ест топлива?","acceptedAnswer":{"@type":"Answer","text":"Двухкиловаттный — около 200 граммов в час, пятикиловаттный — около 400. Для сравнения, прогрев на холостых у легковой съедает почти литр в час, у грузовика — до трёх."}},{"@type":"Question","name":"Не угорю ли, если спать с включённым отопителем?","acceptedAnswer":{"@type":"Answer","text":"Выхлоп выводится наружу отдельной трубой, а в салон идёт только нагретый воздух — они не смешиваются. Мы беспокоимся о безопасности: герметичность выхлопа проверяем несколько раз при каждой установке и при каждом обслуживании."}},{"@type":"Question","name":"Сколько занимает установка?","acceptedAnswer":{"@type":"Answer","text":"Воздушный отопитель — от 4 до 8 часов, жидкостный подогреватель — рабочий день. Ждать можно у нас: есть зона отдыха."}},{"@type":"Question","name":"Какая гарантия?","acceptedAnswer":{"@type":"Answer","text":"Купили отопитель у нас — полгода. Купили и поставили у нас — год."}},{"@type":"Question","name":"Чем дизельный воздушный отопитель отличается от жидкостного?","acceptedAnswer":{"@type":"Answer","text":"Воздушный греет салон. Жидкостный — предпусковой подогреватель: он греет антифриз, то есть сам двигатель перед запуском."}},{"@type":"Question","name":"Какую мощность брать — 2 или 5 кВт?","acceptedAnswer":{"@type":"Answer","text":"Зависит от объёма, который нужно прогреть. Кабина Газели — 2 кВт, микроавтобус на восемь мест — 5 кВт. Выберите технику в подборе — скажем точнее."}},{"@type":"Question","name":"Можете приехать и поставить на месте?","acceptedAnswer":{"@type":"Answer","text":"Да, у нас есть выездная бригада. Работаем по Ростову и области — удобно, когда техника не на ходу или её несколько."}},{"@type":"Question","name":"Что делать с автономкой летом?","acceptedAnswer":{"@type":"Answer","text":"Запускайте раз в две недели на 10–15 минут."}},{"@type":"Question","name":"Автономный отопитель выдаёт ошибку и не запускается — что делать?","acceptedAnswer":{"@type":"Answer","text":"Привозите. Читаем код ошибки, находим причину, чиним в своей мастерской. Замену предлагаем последней."}},{"@type":"Question","name":"Автономный отопитель стоит, но работает плохо. Возьмётесь?","acceptedAnswer":{"@type":"Answer","text":"Да, с любой маркой — воздушной и жидкостной. Сначала пробуем восстановить."}},{"@type":"Question","name":"Есть кредит или рассрочка?","acceptedAnswer":{"@type":"Answer","text":"Да, подключены 30 банков-партнёров."}}]}</script>
+<!--/razmetka-->
 </head>
 <body>
 
 <header class="header">
   <div class="wrap header__in">
-    <a class="logo" href="#" aria-label="МастерГаз"><img src="../img/logo.webp?v=50" alt="МастерГаз" width="712" height="192"></a>
+    <a class="logo" href="#" aria-label="МастерГаз"><img src="../img/logo.webp?v=37" alt="МастерГаз" width="712" height="192"></a>
     <nav class="tabs">
       <a href="../">ГБО</a>
       <a href="#" class="is-active">Отопители и&nbsp;кондиционеры</a>
@@ -681,10 +732,10 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
           <div class="sticker" data-count><b data-count-num>30 лет</b><span data-count-text>опыта</span></div>
           <!-- слайдер как на ГБО: четыре фото, смена каждые 6 секунд; подписи - марка и модель для поиска (Eugene, 09.10, на согласовании) -->
           <div class="hero__shot hero-photos" data-hero-photos>
-            <img class="hero-photos__shot is-active" src="../img/foto/o1.webp" alt="Scania: воздушный отопитель в кабине" width="1200" height="900">
-            <img class="hero-photos__shot" src="../img/foto/o2.webp" alt="Газель Next, дизель: отопитель Webasto под сиденьем" width="1039" height="1200" loading="lazy">
-            <img class="hero-photos__shot" src="../img/foto/o3.webp" alt="КАМАЗ: воздушный отопитель на полу кабины" width="1200" height="900" loading="lazy">
-            <img class="hero-photos__shot" src="../img/foto/o4.webp" alt="Mercedes-Benz Sprinter: воздушный отопитель под сиденьем" width="686" height="1200" loading="lazy">
+            <img class="hero-photos__shot is-active" src="../img/foto/o1.webp" srcset="../img/foto/o1-760.webp 760w, ../img/foto/o1.webp 1000w" sizes="(max-width:760px) calc(100vw - 76px), 520px" alt="Scania: воздушный отопитель в кабине" width="1200" height="900" fetchpriority="high">
+            <img class="hero-photos__shot" src="../img/foto/o2.webp" alt="Газель Next, дизель: отопитель Webasto под сиденьем" width="1039" height="1200" loading="lazy" fetchpriority="low">
+            <img class="hero-photos__shot" src="../img/foto/o3.webp" srcset="../img/foto/o3-760.webp 760w, ../img/foto/o3.webp 1000w" sizes="(max-width:760px) calc(100vw - 76px), 520px" alt="КАМАЗ: воздушный отопитель на полу кабины" width="1200" height="900" loading="lazy" fetchpriority="low">
+            <img class="hero-photos__shot" src="../img/foto/o4.webp" alt="Mercedes-Benz Sprinter: воздушный отопитель под сиденьем" width="686" height="1200" loading="lazy" fetchpriority="low">
           </div>
           <div class="hero__cap" data-hero-cap aria-live="polite">Scania P-серии: воздушный отопитель в&nbsp;кабине</div>
           <script type="application/json" data-hero-caps>["Scania P-серии: воздушный отопитель в\u00a0кабине","Газель Next, дизель: отопитель Webasto под\u00a0сиденьем","КАМАЗ: воздушный отопитель на\u00a0полу кабины","Mercedes-Benz Sprinter: воздушный отопитель под\u00a0сиденьем"]</script>
@@ -816,7 +867,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <div style="margin-top:22px"><button class="btn btn--primary btn--wide" data-cta="Узнать цену установки">Узнать цену установки</button></div>
 
       <div class="acc" id="plates" style="margin-top:22px">
-        <div class="acc__i"><button class="acc__h" type="button">Что входит: отопитель с&nbsp;установкой<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
+        <div class="acc__i"><button class="acc__h" type="button">Что входит: купить автономный отопитель с&nbsp;установкой<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
           <div class="kit">
           <ul class="kit-list">
             <li>Автономный отопитель на&nbsp;12 или 24&nbsp;В</li>
@@ -830,7 +881,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
           <img class="kit__photo" src="../img/foto/kit.webp" alt="Монтажный комплект отопителя: воздуховоды, выхлоп, крепёж, топливная магистраль" width="1200" height="675" loading="lazy">
           </div>
         </div></div></div></div>
-        <div class="acc__i"><button class="acc__h" type="button">Как обслуживать<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
+        <div class="acc__i"><button class="acc__h" type="button">Как обслуживать автономный отопитель<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">
           Раз в&nbsp;сезон, перед осенью&nbsp;— приезжайте, обслужим. Мы помним вашу машину.<br>
           Летом запускайте раз в&nbsp;две недели на&nbsp;10–15&nbsp;минут.
         </div></div></div></div>
@@ -868,8 +919,8 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 
       <!-- фото Eugene (10.10) вместо заглушек; эти кадры убраны из ленты работ, чтобы не повторялись -->
       <div class="shots" data-stagger>
-        <figure class="shot"><img src="../img/foto/err1.webp?v=50" alt="Выхлопная труба отопителя на кронштейнах под днищем" width="1000" height="1000" loading="lazy"><figcaption>Труба на&nbsp;кронштейнах, стыки плотные&nbsp;— газы в&nbsp;салон не&nbsp;идут</figcaption></figure>
-        <figure class="shot"><img src="../img/foto/err2.webp?v=50" alt="Вывод выхлопа отопителя на кронштейне у рамы" width="963" height="1000" loading="lazy"><figcaption>Выхлоп и&nbsp;крепление</figcaption></figure>
+        <figure class="shot"><img src="../img/foto/err1.webp?v=53" alt="Выхлопная труба отопителя на кронштейнах под днищем" width="1000" height="1000" loading="lazy"><figcaption>Труба на&nbsp;кронштейнах, стыки плотные&nbsp;— газы в&nbsp;салон не&nbsp;идут</figcaption></figure>
+        <figure class="shot"><img src="../img/foto/err2.webp?v=53" alt="Вывод выхлопа отопителя на кронштейне у рамы" width="963" height="1000" loading="lazy"><figcaption>Выхлоп и&nbsp;крепление</figcaption></figure>
       </div>
     </div>
 
@@ -908,28 +959,28 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     </div>
     <!-- лента работ: порядок Eugene (10.10), механика АвтоРегиона 161 (swipe.js, initDock); два узких кадра КАМАЗа в одном слоте; кадры 06 и 20 не стоят -->
     <div class="dock" data-dock>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/01.webp?v=50" alt="Scania P440: воздушный отопитель в кабине" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Scania P440: воздушный отопитель в кабине</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/04.webp?v=50" alt="Газель Next: автономный отопитель" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель Next: автономный отопитель</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card dock__card--pair"><img src="../img/raboty/03.webp?v=50" alt="КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия" width="451" height="1000" loading="lazy" draggable="false"><img src="../img/raboty/19.webp?v=50" alt="КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия" width="429" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/07.webp?v=50" alt="Mercedes-Benz Sprinter: автономный отопитель салона" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Mercedes-Benz Sprinter: автономный отопитель салона</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/08.webp?v=50" alt="Peugeot Boxer: автономный отопитель салона" width="1000" height="562" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Peugeot Boxer: автономный отопитель салона</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/09.webp?v=50" alt="Топливный насос и магистрали отопителя" width="1000" height="634" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Топливный насос и магистрали отопителя</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/10.webp?v=50" alt="Mercedes-Benz Sprinter, фургон: воздушный отопитель" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Mercedes-Benz Sprinter, фургон: воздушный отопитель</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/12.webp?v=50" alt="Монтаж отопителя: воздуховод и выхлопная труба" width="597" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Монтаж отопителя: воздуховод и выхлопная труба</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/13.webp?v=50" alt="Hyundai Grand Starex: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Hyundai Grand Starex: автономный отопитель салона</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/11.webp?v=50" alt="Пульт управления отопителем с дисплеем" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Пульт управления отопителем с дисплеем</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/14.webp?v=50" alt="Ремонт отопителя на стенде в нашей мастерской" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Ремонт отопителя на стенде в нашей мастерской</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/15.webp?v=50" alt="Установка отопителя: топливная магистраль" width="699" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Установка отопителя: топливная магистраль</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/17.webp?v=50" alt="Nissan Leaf: жидкостный отопитель двигателя" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Nissan Leaf: жидкостный отопитель двигателя</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/16.webp?v=50" alt="Проводка отопителя в гофре по штатной трассе" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Проводка отопителя в гофре по штатной трассе</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/18.webp?v=50" alt="Пульт Thermotrans: управление отопителем" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Пульт Thermotrans: управление отопителем</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/22.webp?v=50" alt="Fiat Ducato: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Fiat Ducato: автономный отопитель салона</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/02.webp?v=50" alt="Газель Next: жидкостный подогреватель двигателя под капотом" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель Next: жидкостный подогреватель двигателя под капотом</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/23.webp?v=50" alt="Foton Aumark, манипулятор: отопитель в кабине" width="571" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Foton Aumark, манипулятор: отопитель в кабине</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/24.webp?v=50" alt="Установка отопителя: вывод выхлопа под днище" width="924" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Установка отопителя: вывод выхлопа под днище</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/25.webp?v=50" alt="Renault Trafic: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Renault Trafic: автономный отопитель салона</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/27.webp?v=50" alt="Ремонт отопителя" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Ремонт отопителя</figcaption></figure>
-      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/26.webp?v=50" alt="Газель: автономный отопитель кабины" width="429" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель: автономный отопитель кабины</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/01.webp?v=53" alt="Scania P440: воздушный отопитель в кабине" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Scania P440: воздушный отопитель в кабине</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/04.webp?v=53" alt="Газель Next: автономный отопитель" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель Next: автономный отопитель</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card dock__card--pair"><img src="../img/raboty/03.webp?v=53" alt="КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия" width="451" height="1000" loading="lazy" draggable="false"><img src="../img/raboty/19.webp?v=53" alt="КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия" width="429" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">КАМАЗ, самосвал: отопитель кабины, проводка и топливная линия</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/07.webp?v=53" alt="Mercedes-Benz Sprinter: автономный отопитель салона" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Mercedes-Benz Sprinter: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/08.webp?v=53" alt="Peugeot Boxer: автономный отопитель салона" width="1000" height="562" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Peugeot Boxer: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/09.webp?v=53" alt="Топливный насос и магистрали отопителя" width="1000" height="634" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Топливный насос и магистрали отопителя</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/10.webp?v=53" alt="Mercedes-Benz Sprinter, фургон: воздушный отопитель" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Mercedes-Benz Sprinter, фургон: воздушный отопитель</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/12.webp?v=53" alt="Монтаж отопителя: воздуховод и выхлопная труба" width="597" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Монтаж отопителя: воздуховод и выхлопная труба</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/13.webp?v=53" alt="Hyundai Grand Starex: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Hyundai Grand Starex: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/11.webp?v=53" alt="Пульт управления отопителем с дисплеем" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Пульт управления отопителем с дисплеем</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/14.webp?v=53" alt="Ремонт отопителя на стенде в нашей мастерской" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Ремонт отопителя на стенде в нашей мастерской</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/15.webp?v=53" alt="Установка отопителя: топливная магистраль" width="699" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Установка отопителя: топливная магистраль</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/17.webp?v=53" alt="Nissan Leaf: жидкостный отопитель двигателя" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Nissan Leaf: жидкостный отопитель двигателя</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/16.webp?v=53" alt="Проводка отопителя в гофре по штатной трассе" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Проводка отопителя в гофре по штатной трассе</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/18.webp?v=53" alt="Пульт Thermotrans: управление отопителем" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Пульт Thermotrans: управление отопителем</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/22.webp?v=53" alt="Fiat Ducato: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Fiat Ducato: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/02.webp?v=53" alt="Газель Next: жидкостный подогреватель двигателя под капотом" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель Next: жидкостный подогреватель двигателя под капотом</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/23.webp?v=53" alt="Foton Aumark, манипулятор: отопитель в кабине" width="571" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Foton Aumark, манипулятор: отопитель в кабине</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/24.webp?v=53" alt="Установка отопителя: вывод выхлопа под днище" width="924" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Установка отопителя: вывод выхлопа под днище</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/25.webp?v=53" alt="Renault Trafic: автономный отопитель салона" width="750" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Renault Trafic: автономный отопитель салона</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/27.webp?v=53" alt="Ремонт отопителя" width="1000" height="750" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Ремонт отопителя</figcaption></figure>
+      <figure class="dock__item"><div class="dock__card"><img src="../img/raboty/26.webp?v=53" alt="Газель: автономный отопитель кабины" width="429" height="1000" loading="lazy" draggable="false"></div><figcaption class="dock__cap">Газель: автономный отопитель кабины</figcaption></figure>
     </div>
   </div>
 </section>
@@ -989,10 +1040,10 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     <!-- мастера: фото от заказчика 12.10, имена, роли и стаж - его подписи к файлам;
          сертификаты в углу сняты - сканы на другие фамилии, вернуть после ответа заказчика -->
     <div class="team" data-stagger>
-      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/ionkin.webp?v=50" alt="Ярослав Ионкин — Мастер по нестандартным работам, установщик ГБО и климатики, МастерГаз" width="672" height="840" loading="lazy" decoding="async"></div><h3>Ярослав Ионкин</h3><p>Мастер по&nbsp;нестандартным работам, установщик ГБО и&nbsp;климатики</p><div class="wait">Стаж 10 лет</div></div>
-      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/aleshkin.webp?v=50" alt="Артём Алёшкин — Слесарь по ремонту ГБО и автоклиматики, МастерГаз" width="656" height="820" loading="lazy" decoding="async"></div><h3>Артём Алёшкин</h3><p>Слесарь по&nbsp;ремонту ГБО и&nbsp;автоклиматики</p><div class="wait">Стаж 5 лет</div></div>
-      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/getmanskiy.webp?v=50" alt="Павел Гетманский — Мастер-универсал, МастерГаз" width="700" height="875" loading="lazy" decoding="async"></div><h3>Павел Гетманский</h3><p>Мастер-универсал</p><div class="wait">Стаж 10 лет</div></div>
-      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/buslaev.webp?v=50" alt="Роман Буслаев — Администратор, МастерГаз" width="656" height="820" loading="lazy" decoding="async"></div><h3>Роман Буслаев</h3><p>Администратор</p><div class="wait">Стаж 10 лет</div></div>
+      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/ionkin.webp?v=50" alt="Ярослав Ионкин — Мастер по нестандартным работам, установщик ГБО и климатики, МастерГаз" width="672" height="840" loading="lazy" decoding="async"></div><h3>Ярослав Ионкин, <span class="team-exp">стаж 10 лет</span></h3><p>Мастер по&nbsp;нестандартным работам, установщик ГБО и&nbsp;климатики</p></div>
+      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/aleshkin.webp?v=50" alt="Артём Алёшкин — Слесарь по ремонту ГБО и автоклиматики, МастерГаз" width="656" height="820" loading="lazy" decoding="async"></div><h3>Артём Алёшкин, <span class="team-exp">стаж 5 лет</span></h3><p>Слесарь по&nbsp;ремонту ГБО и&nbsp;автоклиматики</p></div>
+      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/getmanskiy.webp?v=50" alt="Павел Гетманский — Мастер-универсал, МастерГаз" width="700" height="875" loading="lazy" decoding="async"></div><h3>Павел Гетманский, <span class="team-exp">стаж 10 лет</span></h3><p>Мастер-универсал</p></div>
+      <div class="team-card"><div class="team-photo"><img class="team-face" src="../img/team/buslaev.webp?v=50" alt="Роман Буслаев — Администратор, МастерГаз" width="656" height="820" loading="lazy" decoding="async"></div><h3>Роман Буслаев, <span class="team-exp">стаж 10 лет</span></h3><p>Администратор</p></div>
     </div>
   </div>
 </section>
@@ -1016,12 +1067,12 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 
     <div class="cards3" data-stagger style="margin-top:26px">
       <div>
-        <img class="shot" src="../img/foto/fasad.webp" alt="Фасад МастерГаза с баннером" loading="lazy">
+        <img class="shot" src="../img/foto/fasad.webp?v=51" alt="Фасад МастерГаза с баннером" loading="lazy">
         <div class="shot-cap">Фасад с&nbsp;баннером</div>
       </div>
       <div>
         <div class="vid">
-          <video class="vid__media" muted loop playsinline preload="metadata" poster="../video/zaezd-osobennaya.webp" aria-label="Заезд с ул. Особенная">
+          <video class="vid__media" muted loop playsinline preload="metadata" data-poster="../video/zaezd-osobennaya.webp" aria-label="Заезд с ул. Особенная">
             <source src="../video/zaezd-osobennaya.mp4" type="video/mp4">
           </video>
           <button type="button" class="vid__play" aria-label="Смотреть: Заезд с ул. Особенная"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .62.68 1 1.21.68l10.9-6.8a.8.8 0 0 0 0-1.36L9.21 4.52A.8.8 0 0 0 8 5.2"/></svg></button>
@@ -1031,7 +1082,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       </div>
       <div>
         <div class="vid">
-          <video class="vid__media" muted loop playsinline preload="metadata" poster="../video/zaezd-oganova.webp" aria-label="Заезд со шлагбаумом, ул. Оганова">
+          <video class="vid__media" muted loop playsinline preload="metadata" data-poster="../video/zaezd-oganova.webp" aria-label="Заезд со шлагбаумом, ул. Оганова">
             <source src="../video/zaezd-oganova.mp4" type="video/mp4">
           </video>
           <button type="button" class="vid__play" aria-label="Смотреть: Заезд со шлагбаумом, ул. Оганова"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6c0 .62.68 1 1.21.68l10.9-6.8a.8.8 0 0 0 0-1.36L9.21 4.52A.8.8 0 0 0 8 5.2"/></svg></button>
@@ -1073,19 +1124,30 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 </section>
 
 <section class="book s-paper">
+  <div class="booking-stripes" aria-hidden="true">
+    <div class="booking-stripe booking-stripe--3"></div>
+    <div class="booking-stripe booking-stripe--2"></div>
+    <div class="booking-stripe booking-stripe--1"></div>
+  </div>
   <div class="wrap">
-    <div class="sec-head">
-      <h2 data-reveal>Подберём <em>дизельный или бензиновый отопитель</em> под&nbsp;вашу машину</h2>
-    </div>
     <form class="form" id="bookForm">
-      <div><label for="fName">Как к&nbsp;вам обращаться</label><input id="fName" type="text" placeholder="Необязательно"></div>
-      <div><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" placeholder="+7"></div>
-      <div><label for="fCar">Марка и&nbsp;модель (необязательно)</label><input id="fCar" type="text" placeholder="Газель Next"></div>
+      <h2 class="form__h" data-reveal>Подберём <em>дизельный или бензиновый отопитель</em> под&nbsp;вашу машину</h2>
+      <p class="form__sub">Перезвоним через&nbsp;15&nbsp;минут в&nbsp;рабочее время</p>
+      <div class="form__fields">
+        <div><label for="fName">Как к&nbsp;вам обращаться</label><input id="fName" type="text" placeholder="Необязательно"></div>
+        <div class="pole-telefon"><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" placeholder="+7"></div>
+        <div><label for="fCar">Марка и&nbsp;модель (необязательно)</label><input id="fCar" type="text" placeholder="Газель Next"></div>
+      </div>
       <input class="lead-trap" type="text" name="company" id="fTrap" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="bookBtn" disabled><span class="morph__label">Рассчитать стоимость</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
-      <button class="btn btn--quiet btn--wide" type="button" data-cta="Ближайшее свободное время">Записаться на&nbsp;ближайшее свободное время</button>
-      <p class="lead-consent">Нажимая кнопку, вы соглашаетесь с&nbsp;<a href="../policy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a></p>
-      <p class="note">Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут и&nbsp;назовём цену и&nbsp;срок.</p>
+      <div class="lead-check">
+        <label><input type="checkbox" data-nado><span>Даю <a href="../consent-pd.html" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a> и&nbsp;принимаю <a href="../policy.html" target="_blank" rel="noopener">политику</a></span></label>
+        <label><input type="checkbox" data-reklama><span>Хочу получать <a href="../consent-ads.html" target="_blank" rel="noopener">новости и&nbsp;акции МастерГаза</a></span></label>
+      </div>
+      <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="bookBtn"><span class="morph__label">Рассчитать стоимость</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
+      <div class="form__after">
+        <b>Не готовы записываться?</b>
+        <span>Просто напишите марку и&nbsp;модель. Скажем, сколько будет стоить и&nbsp;сколько займёт времени. Без обязательств.</span>
+      </div>
       <div class="mess">
         <a href="#" data-mess="telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></a>
         <a href="#" data-mess="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01"/></svg></a>
@@ -1108,12 +1170,12 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       <div class="acc__i"><button class="acc__h" type="button">Не&nbsp;угорю ли, если спать с&nbsp;включённым отопителем?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Выхлоп выводится наружу отдельной трубой, а&nbsp;в&nbsp;салон идёт только нагретый воздух&nbsp;— они не&nbsp;смешиваются. Мы беспокоимся о&nbsp;безопасности: герметичность выхлопа проверяем несколько раз при&nbsp;каждой установке и&nbsp;при&nbsp;каждом обслуживании.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Сколько занимает установка?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Воздушный отопитель&nbsp;— от&nbsp;4&nbsp;до&nbsp;8&nbsp;часов, жидкостный подогреватель&nbsp;— рабочий день. Ждать можно у&nbsp;нас: есть зона отдыха.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Какая гарантия?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Купили отопитель у&nbsp;нас&nbsp;— полгода. Купили и&nbsp;поставили у&nbsp;нас&nbsp;— год.</div></div></div></div>
-      <div class="acc__i"><button class="acc__h" type="button">Чем воздушный отличается от&nbsp;жидкостного?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Воздушный греет салон. Жидкостный&nbsp;— предпусковой подогреватель: он греет антифриз, то есть сам двигатель перед запуском.</div></div></div></div>
+      <div class="acc__i"><button class="acc__h" type="button">Чем дизельный воздушный отопитель отличается от&nbsp;жидкостного?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Воздушный греет салон. Жидкостный&nbsp;— предпусковой подогреватель: он греет антифриз, то есть сам двигатель перед запуском.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Какую мощность брать&nbsp;— 2&nbsp;или 5&nbsp;кВт?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Зависит от&nbsp;объёма, который нужно прогреть. Кабина Газели&nbsp;— 2&nbsp;кВт, микроавтобус на&nbsp;восемь мест&nbsp;— 5&nbsp;кВт. <a class="lnk" href="#podbor">Выберите технику в&nbsp;подборе</a>&nbsp;— скажем точнее.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Можете приехать и&nbsp;поставить на&nbsp;месте?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Да, у&nbsp;нас есть выездная бригада. Работаем по&nbsp;Ростову и&nbsp;области&nbsp;— удобно, когда техника не&nbsp;на&nbsp;ходу или её несколько.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Что делать с&nbsp;автономкой летом?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Запускайте раз в&nbsp;две недели на&nbsp;10–15&nbsp;минут.</div></div></div></div>
-      <div class="acc__i"><button class="acc__h" type="button">Отопитель выдаёт ошибку или не&nbsp;запускается. Что делать?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Привозите. Читаем код ошибки, находим причину, чиним в&nbsp;своей мастерской. Замену предлагаем последней.</div></div></div></div>
-      <div class="acc__i"><button class="acc__h" type="button">У&nbsp;меня уже стоит, но&nbsp;работает плохо. Возьмётесь?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Да, с&nbsp;любой маркой&nbsp;— воздушной и&nbsp;жидкостной. Сначала пробуем восстановить.</div></div></div></div>
+      <div class="acc__i"><button class="acc__h" type="button">Автономный отопитель выдаёт ошибку и&nbsp;не&nbsp;запускается — что делать?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Привозите. Читаем код ошибки, находим причину, чиним в&nbsp;своей мастерской. Замену предлагаем последней.</div></div></div></div>
+      <div class="acc__i"><button class="acc__h" type="button">Автономный отопитель стоит, но&nbsp;работает плохо. Возьмётесь?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Да, с&nbsp;любой маркой&nbsp;— воздушной и&nbsp;жидкостной. Сначала пробуем восстановить.</div></div></div></div>
       <div class="acc__i"><button class="acc__h" type="button">Есть кредит или рассрочка?<span class="acc__ic">⌄</span></button><div class="acc__p"><div class="acc__in"><div class="acc__b">Да, подключены 30&nbsp;банков-партнёров.</div></div></div></div>
     </div>
   </div>
@@ -1123,7 +1185,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <img class="f-logo" src="../img/logo.webp?v=50" alt="МастерГаз" width="712" height="192">
+        <img class="f-logo" src="../img/logo.webp?v=37" alt="МастерГаз" width="712" height="192">
         <p>МастерГаз. Газобаллонное оборудование, климатические системы, автономные отопители. С&nbsp;1996&nbsp;года.</p>
       </div>
       <div>
@@ -1146,7 +1208,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
         <div class="circles"><a class="shop" id="shopOzon" href="#" target="_blank" rel="noopener noreferrer" aria-label="Ozon" title="Ozon"><img src="../img/ozon.webp" alt="Ozon"></a><a class="shop" id="shopWb" href="#" target="_blank" rel="noopener noreferrer" aria-label="Wildberries" title="Wildberries"><img src="../img/wb.webp" alt="Wildberries"></a></div>
       </div>
     </div>
-    <div class="f-bot"><span>ИП Корсунов Антон Игоревич · ИНН 890414959136 · ОГРНИП 324619600106274</span><a href="../policy.html">Политика обработки персональных данных</a><span>© 1996–2026 МастерГаз</span></div>
+    <div class="f-bot"><span>ИП Корсунов Антон Игоревич · ИНН 890414959136 · ОГРНИП 324619600106274</span><a href="../policy.html">Политика обработки персональных данных</a><a href="../cookie.html">Какие cookie</a><span>© 1996–2026 МастерГаз · 0+</span></div>
   </div>
 </footer>
 
@@ -1162,14 +1224,17 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   <div class="modal">
     <button class="close" id="mClose" type="button" aria-label="Закрыть">×</button>
     <h3 id="mTitle">Рассчитать стоимость</h3>
-    <p class="note" style="text-align:left" id="mSub">Оставьте телефон&nbsp;— перезвоним, уточним технику и&nbsp;назовём цену и&nbsp;срок.</p>
+    <p class="note" style="text-align:left" id="mSub">Оставьте телефон&nbsp;— перезвоним через&nbsp;15&nbsp;минут в&nbsp;рабочее время</p>
     <form id="mForm" style="display:grid;gap:12px;margin-top:16px">
-      <div><label for="mPhone">Телефон</label><input id="mPhone" type="tel" inputmode="tel" placeholder="+7"></div>
+      <div class="pole-telefon"><label for="mPhone">Телефон</label><input id="mPhone" type="tel" inputmode="tel" placeholder="+7"></div>
       <input class="lead-trap" type="text" name="company" id="mTrap" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="mBtn" disabled><span class="morph__label">Перезвоните мне</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
       <!-- Эта форма тоже собирает телефон, значит человека надо известить о политике -
            как в форме внизу страницы. Нашёл гейт РКН 13.10: строки здесь не было. -->
-      <p class="lead-consent">Нажимая кнопку, вы соглашаетесь с&nbsp;<a href="../policy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a></p>
+      <div class="lead-check">
+        <label><input type="checkbox" data-nado><span>Даю <a href="../consent-pd.html" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a> и&nbsp;принимаю <a href="../policy.html" target="_blank" rel="noopener">политику</a></span></label>
+        <label><input type="checkbox" data-reklama><span>Хочу получать <a href="../consent-ads.html" target="_blank" rel="noopener">новости и&nbsp;акции МастерГаза</a></span></label>
+      </div>
+      <div class="morph"><button class="btn btn--primary btn--wide morph__btn" type="submit" id="mBtn"><span class="morph__label">Перезвоните мне</span><svg class="morph__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="morph__note">Заявка отправлена. Перезвоним в&nbsp;рабочее время за&nbsp;10–15&nbsp;минут.</div></div>
       <div class="mess mess--after">
         <a href="#" data-mess="telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></a>
         <a href="#" data-mess="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01"/></svg></a>
@@ -1179,9 +1244,10 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   </div>
 </div>
 
-<script src="../config.js?v=50"></script>
-<script src="../swipe.js?v=50"></script>
-<script src="../zayavki.js?v=50"></script>
+<script src="../config.js?v=54"></script>
+<script src="../swipe.js?v=54"></script>
+<script src="../zayavki.js?v=54"></script>
+<script src="../soglasie.js?v=54"></script>
 <script>
 (function(){
   var tiles = document.querySelectorAll('#tiles .tile');
@@ -1277,11 +1343,33 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       if(d.length >= 8) out += '-' + d.slice(7,9);
       if(d.length >= 10) out += '-' + d.slice(9,11);
       el.value = out;
-      if(btn) btn.disabled = d.length < 11;
+      if(btn) btn.classList.toggle('is-ready', d.length >= 11 && gotovaGalka(btn));
     });
   }
+  function gotovaGalka(btn){
+    var g = btn.closest('form').querySelector('.lead-check input[data-nado]');
+    return !g || g.checked;
+  }
+  /* Галочку тоже слушаем: кнопка должна светиться, когда собрано всё */
+  document.querySelectorAll('.lead-check input[data-nado]').forEach(function(g){
+    g.addEventListener('change', function(){
+      var f = g.closest('form'), b = f.querySelector('.morph__btn');
+      if(b) b.classList.toggle('is-ready', gotov(f));
+    });
+  });
   mask(document.getElementById('fPhone'), document.getElementById('bookBtn'));
   mask(document.getElementById('mPhone'), document.getElementById('mBtn'));
+
+  /* Постеры роликов - по 60-90 КБ, и браузер качал их сразу, хотя блок с заездами
+     далеко внизу. Ставим постер, когда блок подъезжает к экрану (Eugene, 13.10). */
+  (function(){
+    var roliki = document.querySelectorAll('video[data-poster]');
+    if(!window.IntersectionObserver){ roliki.forEach(function(v){ v.poster = v.dataset.poster; }); return; }
+    var n = new IntersectionObserver(function(spisok){
+      spisok.forEach(function(z){ if(z.isIntersecting){ z.target.poster = z.target.dataset.poster; n.unobserve(z.target); } });
+    }, { rootMargin: '400px' });
+    roliki.forEach(function(v){ n.observe(v); });
+  })();
 
   var ovl = document.getElementById('ovl'), mTitle = document.getElementById('mTitle');
   document.querySelectorAll('[data-cta]').forEach(function(b){
@@ -1289,7 +1377,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
       mTitle.textContent = b.dataset.cta;
       document.getElementById('mForm').classList.remove('is-sent');
       document.getElementById('mPhone').value = '';
-      document.getElementById('mBtn').disabled = true;
+      document.getElementById('mBtn').classList.remove('is-ready');
       ovl.hidden = false;
     });
   });
@@ -1298,16 +1386,46 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   ovl.addEventListener('click', function(e){ if(e.target === ovl) close(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
 
+  // Телефона нет - показываем, какое поле заполнить, а не молчим (Eugene, 13.10)
+  function podsvetit(obertka, pole){
+    obertka.classList.add('nado-zapolnit');
+    if(pole && pole.focus) pole.focus();
+    var snyat = function(){ obertka.classList.remove('nado-zapolnit');
+      pole.removeEventListener('input', snyat); pole.removeEventListener('change', snyat); };
+    pole.addEventListener('input', snyat); pole.addEventListener('change', snyat);
+  }
+  /* Чего не хватает - то и подсвечиваем: сперва телефон, потом галочку согласия */
+  function pokazatChegoNet(forma){
+    var pole = forma.querySelector('.pole-telefon input');
+    if(pole && pole.value.replace(/\D/g,'').length < 11){ podsvetit(pole.closest('.pole-telefon'), pole); return; }
+    var galka = forma.querySelector('.lead-check input[data-nado]');
+    if(galka && !galka.checked) podsvetit(galka.closest('.lead-check'), galka);
+  }
+  function gotov(forma){
+    var pole = forma.querySelector('.pole-telefon input');
+    var galka = forma.querySelector('.lead-check input[data-nado]');
+    return pole.value.replace(/\D/g,'').length >= 11 && (!galka || galka.checked);
+  }
+
   // Заявка «ушла»: кнопка превращается в галочку сразу, отправка идёт в фоне (../zayavki.js → приём заявок)
   function sent(form, btn){ form.classList.add('is-sent'); btn.disabled = true; }
   var v = function(id){ var el = document.getElementById(id); return el ? el.value : ''; };
   document.getElementById('mForm').addEventListener('submit', function(e){
-    e.preventDefault(); sent(this, document.getElementById('mBtn'));
-    window.sendLead({ phone: v('mPhone'), source: 'отопители: ' + mTitle.textContent, company: v('mTrap') });
+    e.preventDefault();
+    if(!gotov(this)) return pokazatChegoNet(this);
+    sent(this, document.getElementById('mBtn'));
+    var rekl = this.querySelector('[data-reklama]').checked;
+    window.sendLead({ phone: v('mPhone'), source: 'отопители: ' + mTitle.textContent + (rekl ? ' · согласен на рассылку' : ''),
+                      company: v('mTrap'), pdConsent: true });
   });
   document.getElementById('bookForm').addEventListener('submit', function(e){
-    e.preventDefault(); sent(this, document.getElementById('bookBtn'));
-    window.sendLead({ name: v('fName'), phone: v('fPhone'), note: v('fCar'), source: 'отопители: форма внизу', company: v('fTrap') });
+    e.preventDefault();
+    if(!gotov(this)) return pokazatChegoNet(this);
+    sent(this, document.getElementById('bookBtn'));
+    var rekl = this.querySelector('[data-reklama]').checked;
+    window.sendLead({ name: v('fName'), phone: v('fPhone'), note: v('fCar'),
+                      source: 'отопители: форма внизу' + (rekl ? ' · согласен на рассылку' : ''),
+                      company: v('fTrap'), pdConsent: true });
   });
 
   // ——— Ролики с заездами ———
@@ -1489,7 +1607,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   var pokazatVsyo=function(){document.documentElement.classList.remove('dv');};
   var storozh=setTimeout(pokazatVsyo,3000);
   var s=document.createElement('script');
-  s.src='../dvizhenie.js?v=50';
+  s.src='../dvizhenie.js?v=54';
   s.onload=function(){clearTimeout(storozh);};
   s.onerror=function(){clearTimeout(storozh);pokazatVsyo();};
   document.body.appendChild(s);

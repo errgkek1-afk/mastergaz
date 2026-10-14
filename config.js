@@ -29,7 +29,7 @@ WB:'https://www.wildberries.ru/seller/673218',
 MAP_WIDGET:'https://yandex.ru/map-widget/v1/?ll=39.662102%2C47.289856&z=17&pt=39.662102,47.289856,pm2rdm',
 // Приём заявок: адрес программы в Яндекс Облаке (папка yandex-cloud-leads, инструкция там же).
 // ПОКА ПУСТО: заявка никуда не уходит, человек видит «Заявка отправлена». Отправляет zayavki.js.
-LEADS_ENDPOINT:'',
+LEADS_ENDPOINT:'https://mastergaz.ru/zayavka.php',
 // Данные карточки на Яндекс Картах на 15.09.2026: имя, дата и оценка — как на Яндексе,
 // текст — краткий пересказ, целиком отзыв открывается по ссылке.
 REVIEWS:{
@@ -83,6 +83,11 @@ if(d.length>8)out+='-'+d.slice(8,10);
 return out;
 };
 window.phoneComplete=function(v){return String(v).replace(/\D/g,'').length>=11;};
+/* Номер счётчика Яндекс Метрики. Пока пусто - счётчика нет и уведомления о cookie
+   тоже нет: сайт не ставит ни одной cookie, спрашивать не о чем. Впишете номер -
+   уведомление появится само, и счётчик запустится только после «Принять»
+   (152-ФЗ ст. 9, soglasie.js). */
+window.GBO_CONFIG.METRIKA_ID='';
 window.HOURS_LINE='Пн–Пт 09:00–18:00 · Сб 09:00–17:00';
 window.isOpenNow=function(){
 const now=new Date();

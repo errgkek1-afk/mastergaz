@@ -76,8 +76,47 @@ function SubmitMorph({
   label,
   size
 }) {
+  /* Кнопка никогда не выглядит мёртвой: пока не хватает телефона или галочки
+     согласия, она светло-голубая и нажимается, а по нажатию показывает, что
+     именно заполнить - ставит курсор в поле и подсвечивает его. Текста под
+     кнопкой нет: над формой уже написано, что перезвоним (Eugene, 13.10). */
   const h = size === 'lg' ? 56 : 48;
+  const korzh = React.useRef(null);
+  function podsvetit(obertka, pole) {
+    obertka.classList.add('nado-zapolnit');
+    if (pole && pole.focus) pole.focus();
+    const snyat = () => {
+      obertka.classList.remove('nado-zapolnit');
+      (pole || obertka).removeEventListener('input', snyat);
+      (pole || obertka).removeEventListener('change', snyat);
+    };
+    (pole || obertka).addEventListener('input', snyat);
+    (pole || obertka).addEventListener('change', snyat);
+  }
+  function nazhal() {
+    if (sent) return;
+    if (ready) {
+      onSubmit();
+      return;
+    }
+    // ищем ближайшего родителя, внутри которого лежит эта форма
+    let n = korzh.current,
+      forma = null;
+    while (n && !forma) {
+      n = n.parentElement;
+      forma = n && n.querySelector && n.querySelector('.pole-telefon input') ? n : null;
+    }
+    if (!forma) return;
+    const pole = forma.querySelector('.pole-telefon input');
+    if (pole && !window.phoneComplete(pole.value)) {
+      podsvetit(pole.closest('.pole-telefon'), pole);
+      return;
+    }
+    const galka = forma.querySelector('.lead-check input[data-nado]');
+    if (galka && !galka.checked) podsvetit(galka.closest('.lead-check'), galka);
+  }
   return /*#__PURE__*/React.createElement("div", {
+    ref: korzh,
     className: 'submit-morph' + (sent ? ' is-sent' : ''),
     style: {
       '--h': h + 'px'
@@ -85,8 +124,8 @@ function SubmitMorph({
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: 'submit-morph__btn' + (ready && !sent ? ' is-ready' : ''),
-    disabled: !ready || sent,
-    onClick: onSubmit,
+    disabled: sent,
+    onClick: nazhal,
     "aria-label": sent ? 'Заявка отправлена' : label
   }, /*#__PURE__*/React.createElement("span", {
     className: "submit-morph__label"
@@ -104,7 +143,7 @@ function SubmitMorph({
   }))), /*#__PURE__*/React.createElement("div", {
     className: "submit-morph__note",
     "aria-live": "polite"
-  }, sent ? 'Заявка отправлена. Ожидайте ответа — свяжемся через 10–15 минут' : ''));
+  }, sent ? 'Заявка отправлена. Ожидайте ответа — свяжемся через 10–15 минут' : ''));
 }
 window.SubmitMorph = SubmitMorph;
 
@@ -248,7 +287,12 @@ const IcoDoc = () => /*#__PURE__*/React.createElement("svg", {
 /* Слайдер первого экрана: кадры лежат друг на друге, меняется прозрачность
    и лёгкий зум — это тянет видеокарта, страница не дёргается.
    Кадры сменяются сами, полосок переключения нет (Eugene, 02.10). */
-const HERO_PHOTOS = [['img/foto/h4.webp', 'Lada Vesta'], ['img/foto/h2.webp', 'Audi A6, мотор V6 2.4'], ['img/foto/h1.webp', 'Газовая рампа и форсунки под капотом'], ['img/foto/h3.webp', 'Haval'], ['img/foto/h5.webp', 'Kia Rio IV, 1.6'], ['img/foto/h6.webp', 'Nissan Murano Z50']];
+/* Третье число - своя ширина файла. Рядом лежат копии на 700 точек: на телефоне
+   кадр показывается в 327 точек, и тысяча там не нужна (Eugene, 13.10). */
+const HERO_PHOTOS = [['img/foto/h4.webp?v=53', 'Lada Vesta', 1000], ['img/foto/h2.webp', 'Audi A6, мотор V6 2.4', 1000], ['img/foto/h1.webp', 'Газовая рампа и форсунки под капотом', 950], ['img/foto/h3.webp', 'Haval', 1000], ['img/foto/h5.webp', 'Kia Rio IV, 1.6', 1000], ['img/foto/h6.webp', 'Nissan Murano Z50', 1000]];
+const RAZMERY = '(max-width:760px) calc(100vw - 32px), 464px';
+const UZKO = 760; /* ширина узкой копии кадра; собирается строкой, чтобы проверка путей не приняла её за файл */
+const uzkiy = src => src.replace(/\.webp(\?.*)?$/, '-' + UZKO + '.webp');
 function HeroPhotos() {
   const [i, setI] = React.useState(0);
   React.useEffect(() => {
@@ -258,10 +302,12 @@ function HeroPhotos() {
   }, [i]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "hero-photos__frame"
-  }, HERO_PHOTOS.map(([src, cap], k) => /*#__PURE__*/React.createElement("img", {
+  }, HERO_PHOTOS.map(([src, cap, w], k) => /*#__PURE__*/React.createElement("img", {
     key: src,
     className: 'hero-photos__shot' + (k === i ? ' is-active' : ''),
     src: k <= i + 1 ? src : undefined,
+    srcSet: k <= i + 1 ? uzkiy(src) + ' ' + UZKO + 'w, ' + src + ' ' + w + 'w' : undefined,
+    sizes: RAZMERY,
     alt: cap,
     fetchPriority: k === 0 ? 'high' : undefined,
     decoding: "async"
@@ -642,7 +688,7 @@ function Calculator({
   }, /*#__PURE__*/React.createElement(SmoothAccordion, {
     defaultOpenIndex: -1,
     items: [{
-      title: /*#__PURE__*/React.createElement("span", null, "\u0427\u0442\u043E \u0432\u0445\u043E\u0434\u0438\u0442 \u0432\xA0\u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443", /*#__PURE__*/React.createElement("br", null), "\u0433\u0430\u0437\u043E\u0432\u043E\u0433\u043E \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F"),
+      title: /*#__PURE__*/React.createElement("span", null, "\u0427\u0442\u043E \u0432\u0445\u043E\u0434\u0438\u0442 \u0432\xA0\u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0443 \u0433\u0430\u0437\u043E\u0432\u043E\u0433\u043E \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F"),
       content: /*#__PURE__*/React.createElement("ol", {
         style: {
           margin: 0,
@@ -651,7 +697,7 @@ function Calculator({
         }
       }, /*#__PURE__*/React.createElement("li", null, "\u041A\u043E\u043C\u043F\u043B\u0435\u043A\u0442 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u0438\u043A\u0438 \u043F\u043E\u0434\u043A\u0430\u043F\u043E\u0442\u043D\u043E\u0439 \u0447\u0430\u0441\u0442\u0438"), /*#__PURE__*/React.createElement("li", null, "\u0413\u0430\u0437\u043E\u0432\u044B\u0439 \u0431\u0430\u043B\u043B\u043E\u043D \u2014 \u0442\u043E\u0440\u043E\u0438\u0434\u0430\u043B\u044C\u043D\u044B\u0439 \u0438\u043B\u0438 \u0446\u0438\u043B\u0438\u043D\u0434\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0439"), /*#__PURE__*/React.createElement("li", null, "\u041C\u0443\u043B\u044C\u0442\u0438\u043A\u043B\u0430\u043F\u0430\u043D \u043A\u043B\u0430\u0441\u0441\u0430 \u0410, \u0418\u0442\u0430\u043B\u0438\u044F"), /*#__PURE__*/React.createElement("li", null, "\u0422\u0435\u0440\u043C\u043E\u043F\u043B\u0430\u0441\u0442\u0438\u043A\u043E\u0432\u044B\u0435 \u043C\u0430\u0433\u0438\u0441\u0442\u0440\u0430\u043B\u0438"), /*#__PURE__*/React.createElement("li", null, "\u0420\u0435\u0434\u0443\u043A\u0442\u043E\u0440"), /*#__PURE__*/React.createElement("li", null, "\u0424\u043E\u0440\u0441\u0443\u043D\u043A\u0438"), /*#__PURE__*/React.createElement("li", null, "\u0417\u0430\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u043E\u0435 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u043E"), /*#__PURE__*/React.createElement("li", null, "\u0424\u0443\u0440\u043D\u0438\u0442\u0443\u0440\u0430 \u0438\xA0\u043A\u0440\u0435\u043F\u0451\u0436"))
     }, {
-      title: /*#__PURE__*/React.createElement("span", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435 \u0433\u0430\u0437\u043E\u0432\u043E\u0433\u043E \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F:", /*#__PURE__*/React.createElement("br", null), "\u0422\u041E \u043A\u0430\u0436\u0434\u044B\u0435 ", /*#__PURE__*/React.createElement("span", {
+      title: /*#__PURE__*/React.createElement("span", null, "\u041E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043D\u0438\u0435 \u0433\u0430\u0437\u043E\u0432\u043E\u0433\u043E \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: \u0422\u041E \u043A\u0430\u0436\u0434\u044B\u0435 ", /*#__PURE__*/React.createElement("span", {
         className: "nowrap"
       }, "10\xA0000\xA0\u043A\u043C")),
       content: /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
@@ -668,7 +714,7 @@ function Calculator({
         }
       }, "\u041F\u043E\u043C\u043D\u0438\u043C \u0432\u0430\u0448\u0443 \u043C\u0430\u0448\u0438\u043D\u0443. \u041F\u043E\u0437\u0432\u043E\u043D\u0438\u0442\u0435 \u2014 \u0441\u043A\u0430\u0436\u0435\u043C, \u043A\u043E\u0433\u0434\u0430 \u0432\u044B \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u0440\u0430\u0437 \u043E\u0431\u0441\u043B\u0443\u0436\u0438\u0432\u0430\u043B\u0438\u0441\u044C."))
     }, {
-      title: /*#__PURE__*/React.createElement("span", null, "\u041D\u0430\u0448\u0430 \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u044F", /*#__PURE__*/React.createElement("br", null), "\u0434\u043E\xA01\xA0\u0433\u043E\u0434\u0430 \u0438\u043B\u0438 ", /*#__PURE__*/React.createElement("span", {
+      title: /*#__PURE__*/React.createElement("span", null, "\u041D\u0430\u0448\u0430 \u0433\u0430\u0440\u0430\u043D\u0442\u0438\u044F \u0434\u043E\xA01\xA0\u0433\u043E\u0434\u0430 \u0438\u043B\u0438 ", /*#__PURE__*/React.createElement("span", {
         className: "nowrap"
       }, "100\xA0000\xA0\u043A\u043C")),
       content: /*#__PURE__*/React.createElement("div", {
@@ -688,7 +734,10 @@ function Team() {
      Сертификатов в углу фото нет: решение Eugene 13.10 - из семи человек документ
      нашёлся только у Ольхового, у одного из семи плашка смотрится случайной.
      Сканы лежат в `img/sert/`, вернуть - добавить шестой и седьмой столбец, как
-     было в версии 41. */
+     было в версии 41.
+     Стаж - в одну строку с именем, тем же чёрным и жирным: решение Eugene 13.10.
+     Размер 18, а не 20: при 20 «Павел Гетманский, стаж 10 лет» занимает 304 точки
+     и не влезает в карточку 282 - строка рвалась бы надвое. */
   const RAZM = {
     "getmanskiy": [700, 875],
     "zarbaliev": [700, 875],
@@ -739,29 +788,22 @@ function Team() {
     loading: "lazy",
     decoding: "async"
   })), /*#__PURE__*/React.createElement("div", {
+    className: "team-name",
     style: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: 600,
       color: 'var(--color-ink)',
       margin: '16px 0 4px'
     }
-  }, m[1]), /*#__PURE__*/React.createElement("div", {
+  }, m[1], ", ", /*#__PURE__*/React.createElement("span", {
+    className: "team-exp"
+  }, "\u0441\u0442\u0430\u0436 ", m[3])), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: 'var(--color-graphite)',
-      lineHeight: 1.5,
-      marginBottom: 16
+      lineHeight: 1.5
     }
-  }, m[2]), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 'auto',
-      fontSize: 13,
-      color: 'var(--color-graphite)',
-      background: 'var(--color-cloud)',
-      borderRadius: 8,
-      padding: '10px 14px'
-    }
-  }, "\u0421\u0442\u0430\u0436 ", m[3]))))));
+  }, m[2]))))));
 }
 window.Team = Team;
 
@@ -799,7 +841,7 @@ function Works() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "dock__card"
   }, /*#__PURE__*/React.createElement("img", {
-    src: 'img/raboty-gbo/' + n + '.webp?v=37',
+    src: 'img/raboty-gbo/' + n + '.webp?v=51',
     alt: cap,
     width: w,
     height: h,
@@ -1009,7 +1051,7 @@ function Fleets() {
     className: "fleets-section",
     style: {
       background: 'var(--color-primary-mist)',
-      padding: '44px 32px',
+      padding: '36px 32px',
       fontFamily: 'var(--font-family)'
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -1023,7 +1065,7 @@ function Fleets() {
     style: {
       fontWeight: 600,
       color: 'var(--color-ink)',
-      margin: '0 0 18px'
+      margin: '0 0 14px'
     }
   }, "\u041D\u0430\u043C \u0434\u043E\u0432\u0435\u0440\u044F\u044E\u0442 ", /*#__PURE__*/React.createElement("span", {
     style: {
@@ -1037,7 +1079,7 @@ function Fleets() {
     style: {
       fontSize: 17,
       color: 'var(--color-ink)',
-      marginTop: 18,
+      marginTop: 14,
       fontWeight: 600,
       lineHeight: 1.5
     }
@@ -1046,7 +1088,7 @@ function Fleets() {
 window.Fleets = Fleets;
 function FAQ() {
   const items = [{
-    title: 'Сколько стоит установка ГБО в Ростове?',
+    title: 'Сколько стоит установка ГБО в Ростове-на-Дону и от чего зависит цена?',
     content: 'Пропан: 4 цилиндра — 80 000 ₽, 6 цилиндров — 100 000 ₽, 8 цилиндров — 140 000 ₽. Прямой впрыск — 175 000 ₽. Напишите марку и год машины — назовём точную цену и срок установки за 10–15 минут. Две недели после установки корректировка бесплатно.'
   }, {
     title: 'Правда, что газ убивает мотор?',
@@ -1055,7 +1097,7 @@ function FAQ() {
     title: 'Машина потеряет мощность?',
     content: 'На пропане просадки нет — машина едет один в один как на бензине: октановое число выше обычного бензина, топливо сгорает лучше. Для турбомоторов это отдельный плюс, уходит детонация. Если после установки машина «не едет» — это признак того, что комплект подобрали не под этот мотор или карту не откалибровали.'
   }, {
-    title: 'ГБО 4 поколения: это какое?',
+    title: 'Установка ГБО 4 поколения: это какое оборудование?',
     content: 'Распределённый впрыск газа: своя форсунка на каждый цилиндр и свой блок управления. Проверено временем, запчасти есть в любом городе. Для прямого впрыска ставим комплекты под него.'
   }, {
     title: 'Займёт весь багажник?',
@@ -1079,7 +1121,7 @@ function FAQ() {
     title: 'Страшно ездить с баллоном. Он может взорваться?',
     content: 'Баллон испытывается давлением, многократно превышающим рабочее, и по безопасности не уступает бензобаку. Мы ставим мультиклапаны класса А итальянского производства с тремя системами защиты и крепим баллон по нормам — с полным комплектом креплений и страховочных лент.'
   }, {
-    title: 'Как часто нужно обслуживать ГБО и что входит в ТО?',
+    title: 'Обслуживание газового оборудования: как часто и что входит в ТО?',
     content: 'Каждые 10 000 км, 1 400–2 000 ₽. Меняем комплект фильтров жидкой и паровой фазы, проверяем герметичность системы, при необходимости делаем компьютерную диагностику. Соблюдение регламента — условие сохранения гарантии.'
   }, {
     title: 'Что делать после установки ГБО?',
@@ -1091,7 +1133,7 @@ function FAQ() {
     title: 'У меня прямой впрыск или китайская машина. Поставите?',
     content: 'Ставим и прямой, и распределённый впрыск, работаем практически со всеми марками. По китайским — только распределённый впрыск: Haval Jolion, Haval M6, Geely Atlas, Москвич 3. Напишите модель и год — скажем точно, возможно ли.'
   }, {
-    title: 'У меня уже стоит газ, но работает плохо. Возьмётесь?',
+    title: 'Газовое оборудование стоит, но работает плохо. Возьмётесь?',
     content: 'Возьмёмся. Работаем с оборудованием любой марки: находим причину, подбираем и заказываем запчасти, ремонтируем в короткие сроки.'
   }];
   return /*#__PURE__*/React.createElement("section", {
@@ -1245,7 +1287,7 @@ function Location() {
     }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
     className: "loc-shot",
-    src: "img/foto/fasad.webp",
+    src: "img/foto/fasad.webp?v=51",
     alt: "\u0424\u0430\u0441\u0430\u0434 \u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437\u0430 \u0441\xA0\u0431\u0430\u043D\u043D\u0435\u0440\u043E\u043C",
     loading: "lazy"
   }), /*#__PURE__*/React.createElement("div", {
@@ -1404,6 +1446,27 @@ function DriveVideo({
   const box = React.useRef(null);
   const [started, setStarted] = React.useState(false);
   const [playing, setPlaying] = React.useState(false);
+  /* Постер - картинка на 60-90 КБ, и браузер качает её сразу, хотя блок «Как добраться»
+     лежит далеко внизу: на первую загрузку это было 150 КБ из 667. Ставим постер, когда
+     блок подъезжает к экрану (Eugene, 13.10). */
+  const [postavit, setPostavit] = React.useState(false);
+  React.useEffect(() => {
+    const el = box.current;
+    if (!el || !window.IntersectionObserver) {
+      setPostavit(true);
+      return;
+    }
+    const n = new IntersectionObserver(e => {
+      if (e[0].isIntersecting) {
+        setPostavit(true);
+        n.disconnect();
+      }
+    }, {
+      rootMargin: '400px'
+    });
+    n.observe(el);
+    return () => n.disconnect();
+  }, []);
   React.useEffect(() => {
     const v = ref.current,
       el = box.current;
@@ -1468,7 +1531,7 @@ function DriveVideo({
   }, /*#__PURE__*/React.createElement("video", {
     ref: ref,
     className: "loc-video__media",
-    poster: poster,
+    poster: postavit ? poster : undefined,
     muted: true,
     loop: true,
     playsInline: true,
@@ -1538,7 +1601,11 @@ function BookingForm({
   const [car, setCar] = React.useState('');
   const [sent, setSent] = React.useState(false);
   const [trap, setTrap] = React.useState('');
-  const ready = window.phoneComplete(phone);
+  /* Галочка согласия обязательная: по 152-ФЗ согласие - явное действие, а не
+     строка под кнопкой. Вторая галочка, про рассылку, - по желанию (Eugene, 13.10). */
+  const [pd, setPd] = React.useState(false);
+  const [reklama, setReklama] = React.useState(false);
+  const ready = window.phoneComplete(phone) && pd;
   const msg = encodeURIComponent(C.MESSENGER_TEXTS['форма записи']);
   return /*#__PURE__*/React.createElement("section", {
     className: "booking-section",
@@ -1563,6 +1630,7 @@ function BookingForm({
       position: 'relative'
     }
   }, /*#__PURE__*/React.createElement("div", {
+    className: "booking-card",
     style: {
       position: 'relative',
       background: '#fff',
@@ -1585,7 +1653,7 @@ function BookingForm({
     }
   }, "\u043D\u0430\xA0\u0432\u0430\u0448\u0443 \u043C\u0430\u0448\u0438\u043D\u0443")), /*#__PURE__*/React.createElement("p", {
     className: "booking-sub"
-  }, "\u041F\u0435\u0440\u0435\u0437\u0432\u043E\u043D\u0438\u043C \u0432\xA0\u0440\u0430\u0431\u043E\u0447\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0437\u0430\xA010\u201315\xA0\u043C\u0438\u043D\u0443\u0442 \u0438\xA0\u043D\u0430\u0437\u043E\u0432\u0451\u043C \u0446\u0435\u043D\u0443 \u0438\xA0\u0441\u0440\u043E\u043A."), /*#__PURE__*/React.createElement("div", {
+  }, "\u041F\u0435\u0440\u0435\u0437\u0432\u043E\u043D\u0438\u043C \u0447\u0435\u0440\u0435\u0437\xA015\xA0\u043C\u0438\u043D\u0443\u0442 \u0432\xA0\u0440\u0430\u0431\u043E\u0447\u0435\u0435 \u0432\u0440\u0435\u043C\u044F"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -1597,14 +1665,16 @@ function BookingForm({
     placeholder: "\u041A\u0430\u043A \u0432\u0430\u0441 \u0437\u043E\u0432\u0443\u0442",
     value: name,
     onChange: e => setName(e.target.value)
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "pole-telefon"
+  }, /*#__PURE__*/React.createElement(Input, {
     label: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D",
     placeholder: "+7 (___) ___-__-__",
     value: phone,
     onChange: e => setPhone(window.formatPhone(e.target.value))
-  }), /*#__PURE__*/React.createElement(Input, {
+  })), /*#__PURE__*/React.createElement(Input, {
     label: "\u041C\u0430\u0440\u043A\u0430 \u0438\xA0\u0433\u043E\u0434 \u0430\u0432\u0442\u043E (\u043D\u0435\u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E)",
-    placeholder: "\u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, Toyota Camry, 2015",
+    placeholder: "Toyota Camry, 2015",
     value: car,
     onChange: e => setCar(e.target.value)
   })), /*#__PURE__*/React.createElement("input", {
@@ -1616,7 +1686,30 @@ function BookingForm({
     "aria-hidden": "true",
     value: trap,
     onChange: e => setTrap(e.target.value)
-  }), /*#__PURE__*/React.createElement(SubmitMorph, {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "lead-check"
+  }, /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    "data-nado": "",
+    checked: pd,
+    onChange: e => setPd(e.target.checked)
+  }), /*#__PURE__*/React.createElement("span", null, "\u0414\u0430\u044E ", /*#__PURE__*/React.createElement("a", {
+    href: "consent-pd.html",
+    target: "_blank",
+    rel: "noopener"
+  }, "\u0441\u043E\u0433\u043B\u0430\u0441\u0438\u0435 \u043D\u0430 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0443 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445"), " \u0438 \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u044E ", /*#__PURE__*/React.createElement("a", {
+    href: "policy.html",
+    target: "_blank",
+    rel: "noopener"
+  }, "\u043F\u043E\u043B\u0438\u0442\u0438\u043A\u0443"))), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: reklama,
+    onChange: e => setReklama(e.target.checked)
+  }), /*#__PURE__*/React.createElement("span", null, "\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C ", /*#__PURE__*/React.createElement("a", {
+    href: "consent-ads.html",
+    target: "_blank",
+    rel: "noopener"
+  }, "\u043D\u043E\u0432\u043E\u0441\u0442\u0438 \u0438 \u0430\u043A\u0446\u0438\u0438 \u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437\u0430")))), /*#__PURE__*/React.createElement(SubmitMorph, {
     ready: ready,
     sent: sent,
     size: "lg",
@@ -1627,25 +1720,12 @@ function BookingForm({
         name,
         phone,
         note: car,
-        source: 'форма записи',
-        company: trap
+        source: 'форма записи' + (reklama ? ' · согласен на рассылку' : ''),
+        company: trap,
+        pdConsent: pd
       });
     }
   }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 12
-    }
-  }, /*#__PURE__*/React.createElement(Button, {
-    variant: "ghost",
-    fullWidth: true,
-    onClick: () => onCta && onCta('ближайшее свободное время')
-  }, "\u0417\u0430\u043F\u0438\u0441\u0430\u0442\u044C\u0441\u044F \u043D\u0430\xA0\u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F"), /*#__PURE__*/React.createElement("p", {
-    className: "lead-consent"
-  }, "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0443, \u0432\u044B \u0441\u043E\u0433\u043B\u0430\u0448\u0430\u0435\u0442\u0435\u0441\u044C \u0441 ", /*#__PURE__*/React.createElement("a", {
-    href: "policy.html",
-    target: "_blank",
-    rel: "noopener"
-  }, "\u043F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445"))), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'center',
       margin: '28px 0 8px'
@@ -1661,7 +1741,8 @@ function BookingForm({
     style: {
       fontSize: 14,
       color: 'var(--color-graphite)',
-      lineHeight: 1.5
+      lineHeight: 1.5,
+      textWrap: 'balance'
     }
   }, "\u041F\u0440\u043E\u0441\u0442\u043E \u043D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \u043C\u0430\u0440\u043A\u0443 \u0438\xA0\u0433\u043E\u0434. \u0421\u043A\u0430\u0436\u0435\u043C, \u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0431\u0443\u0434\u0435\u0442 \u0441\u0442\u043E\u0438\u0442\u044C \u0438\xA0\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0437\u0430\u0439\u043C\u0451\u0442 \u0432\u0440\u0435\u043C\u0435\u043D\u0438. \u0411\u0435\u0437 \u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u0441\u0442\u0432.")), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1687,6 +1768,18 @@ function Footer() {
     MessengerButton
   } = window.DesignSystem_a63f4f;
   const C = window.GBO_CONFIG;
+  /* Адрес и график не рвём посреди: «Минеральная улица, 16» и каждый промежуток
+     времени держатся одной строкой, перенос идёт только между ними (Eugene, 13.10). */
+  const chasti = window.HOURS_LINE.split(' · ');
+  const chasy = chasti.map((t, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: i
+  }, i ? /*#__PURE__*/React.createElement("br", null) : null, /*#__PURE__*/React.createElement("span", {
+    className: "nowrap"
+  }, t)));
+  const [gorod, ...ulica] = C.ADDRESS.split(', ');
+  const adres = /*#__PURE__*/React.createElement(React.Fragment, null, gorod, ", ", /*#__PURE__*/React.createElement("span", {
+    className: "nowrap"
+  }, ulica.join(', ')));
   return /*#__PURE__*/React.createElement("footer", {
     style: {
       background: 'var(--color-ink)',
@@ -1721,7 +1814,7 @@ function Footer() {
       color: 'var(--color-steel)',
       lineHeight: 1.5
     }
-  }, "\u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437. \u0413\u0430\u0437\u043E\u0431\u0430\u043B\u043B\u043E\u043D\u043D\u043E\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435, \u043A\u043B\u0438\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0441\u0438\u0441\u0442\u0435\u043C\u044B, \u0430\u0432\u0442\u043E\u043D\u043E\u043C\u043D\u044B\u0435 \u043E\u0442\u043E\u043F\u0438\u0442\u0435\u043B\u0438. \u0421\xA01996\xA0\u0433\u043E\u0434\u0430")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, "\u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437. \u0413\u0430\u0437\u043E\u0431\u0430\u043B\u043B\u043E\u043D\u043D\u043E\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435, \u043A\u043B\u0438\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0441\u0438\u0441\u0442\u0435\u043C\u044B, \u0430\u0432\u0442\u043E\u043D\u043E\u043C\u043D\u044B\u0435 \u043E\u0442\u043E\u043F\u0438\u0442\u0435\u043B\u0438. \u0421 1996 \u0433\u043E\u0434\u0430")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: 'var(--color-steel)',
@@ -1736,20 +1829,32 @@ function Footer() {
   }, "\u0413\u0411\u041E \u2014 ", C.PHONE_GBO), /*#__PURE__*/React.createElement("div", {
     className: "nowrap",
     style: {
-      fontSize: 16
+      fontSize: 16,
+      marginBottom: 14
     }
-  }, "\u041A\u043E\u043D\u0434\u0438\u0446\u0438\u043E\u043D\u0435\u0440\u044B \u2014 ", C.PHONE_CLIMATE)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, "\u041A\u043E\u043D\u0434\u0438\u0446\u0438\u043E\u043D\u0435\u0440\u044B \u2014 ", C.PHONE_CLIMATE), /*#__PURE__*/React.createElement("div", {
+    className: "footer-contacts"
+  }, /*#__PURE__*/React.createElement(Messenger, {
+    type: "telegram",
+    href: "https://t.me/share/url?url=&text="
+  }), /*#__PURE__*/React.createElement(Messenger, {
+    type: "whatsapp",
+    href: C.WHATSAPP
+  }), /*#__PURE__*/React.createElement(Messenger, {
+    type: "max",
+    href: C.MAX_LINK
+  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: 'var(--color-steel)',
       marginBottom: 10
     }
-  }, "\u0410\u0434\u0440\u0435\u0441 \u0438\xA0\u0433\u0440\u0430\u0444\u0438\u043A"), /*#__PURE__*/React.createElement("div", {
+  }, "\u0410\u0434\u0440\u0435\u0441 \u0438 \u0433\u0440\u0430\u0444\u0438\u043A"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       lineHeight: 1.6
     }
-  }, C.ADDRESS, /*#__PURE__*/React.createElement("br", null), window.HOURS_LINE)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, adres, /*#__PURE__*/React.createElement("br", null), chasy)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: 'var(--color-steel)',
@@ -1775,22 +1880,11 @@ function Footer() {
     style: {
       color: 'var(--color-steel)'
     }
-  }, "\u041E\u0442\u043E\u043F\u0438\u0442\u0435\u043B\u0438 \u0438\xA0\u043A\u043E\u043D\u0434\u0438\u0446\u0438\u043E\u043D\u0435\u0440\u044B")), /*#__PURE__*/React.createElement("div", {
-    className: "footer-contacts"
-  }, /*#__PURE__*/React.createElement(Messenger, {
-    type: "telegram",
-    href: "https://t.me/share/url?url=&text="
-  }), /*#__PURE__*/React.createElement(Messenger, {
-    type: "whatsapp",
-    href: C.WHATSAPP
-  }), /*#__PURE__*/React.createElement(Messenger, {
-    type: "max",
-    href: C.MAX_LINK
-  })), /*#__PURE__*/React.createElement("div", {
+  }, "\u041E\u0442\u043E\u043F\u0438\u0442\u0435\u043B\u0438 \u0438 \u043A\u043E\u043D\u0434\u0438\u0446\u0438\u043E\u043D\u0435\u0440\u044B")), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: 'var(--color-steel)',
-      margin: '16px 0 8px',
+      margin: '0 0 8px',
       lineHeight: 1.4
     }
   }, "\u041C\u0430\u0433\u0430\u0437\u0438\u043D \u0433\u0430\u0437\u043E\u0432\u043E\u0433\u043E \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F: \u0437\u0430\u043F\u0447\u0430\u0441\u0442\u0438 \u043D\u0430 Ozon \u0438 Wildberries"), /*#__PURE__*/React.createElement("div", {
@@ -1821,12 +1915,23 @@ function Footer() {
       gap: 16,
       flexWrap: 'wrap'
     }
-  }, /*#__PURE__*/React.createElement("span", null, "\u0418\u041F \u041A\u043E\u0440\u0441\u0443\u043D\u043E\u0432 \u0410\u043D\u0442\u043E\u043D \u0418\u0433\u043E\u0440\u0435\u0432\u0438\u0447 \xB7 \u0418\u041D\u041D 890414959136 \xB7 \u041E\u0413\u0420\u041D\u0418\u041F 324619600106274"), /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("span", null, "\u0418\u041F \u041A\u043E\u0440\u0441\u0443\u043D\u043E\u0432 \u0410\u043D\u0442\u043E\u043D \u0418\u0433\u043E\u0440\u0435\u0432\u0438\u0447 \xB7 \u0418\u041D\u041D 890414959136 \xB7 \u041E\u0413\u0420\u041D\u0418\u041F 324619600106274"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      gap: 16,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("a", {
     href: "policy.html",
     style: {
       color: 'var(--color-steel)'
     }
-  }, "\u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445"), /*#__PURE__*/React.createElement("span", null, "\xA9 1996\u20132026 \u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437")));
+  }, "\u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445"), /*#__PURE__*/React.createElement("a", {
+    href: "cookie.html",
+    style: {
+      color: 'var(--color-steel)'
+    }
+  }, "\u041A\u0430\u043A\u0438\u0435 cookie")), /*#__PURE__*/React.createElement("span", null, "\xA9 1996\u20132026 \u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437 \xB7 0+")));
 }
 window.Footer = Footer;
 function Popup({
@@ -1841,7 +1946,9 @@ function Popup({
   const [phone, setPhone] = React.useState('+7');
   const [sent, setSent] = React.useState(false);
   const [trap, setTrap] = React.useState('');
-  const ready = window.phoneComplete(phone);
+  const [pd, setPd] = React.useState(false);
+  const [reklama, setReklama] = React.useState(false);
+  const ready = window.phoneComplete(phone) && pd;
   const [shown, setShown] = React.useState(false);
   React.useEffect(() => {
     const r = requestAnimationFrame(() => setShown(true));
@@ -1864,6 +1971,7 @@ function Popup({
     },
     onClick: onClose
   }, /*#__PURE__*/React.createElement("div", {
+    className: "popup-card",
     style: {
       width: 420,
       maxWidth: '100%',
@@ -1891,7 +1999,7 @@ function Popup({
       margin: '0 0 20px',
       lineHeight: 1.45
     }
-  }, "\u041F\u0435\u0440\u0435\u0437\u0432\u043E\u043D\u0438\u043C \u0432\xA0\u0440\u0430\u0431\u043E\u0447\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0437\u0430\xA010\u201315\xA0\u043C\u0438\u043D\u0443\u0442 \u0438\xA0\u043D\u0430\u0437\u043E\u0432\u0451\u043C \u0446\u0435\u043D\u0443 \u0438\xA0\u0441\u0440\u043E\u043A."), /*#__PURE__*/React.createElement("div", {
+  }, "\u041F\u0435\u0440\u0435\u0437\u0432\u043E\u043D\u0438\u043C \u0447\u0435\u0440\u0435\u0437\xA015\xA0\u043C\u0438\u043D\u0443\u0442 \u0432\xA0\u0440\u0430\u0431\u043E\u0447\u0435\u0435 \u0432\u0440\u0435\u043C\u044F"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -1903,12 +2011,14 @@ function Popup({
     placeholder: "\u041A\u0430\u043A \u0432\u0430\u0441 \u0437\u043E\u0432\u0443\u0442",
     value: name,
     onChange: e => setName(e.target.value)
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "pole-telefon"
+  }, /*#__PURE__*/React.createElement(Input, {
     label: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D",
     placeholder: "+7 (___) ___-__-__",
     value: phone,
     onChange: e => setPhone(window.formatPhone(e.target.value))
-  })), /*#__PURE__*/React.createElement("input", {
+  }))), /*#__PURE__*/React.createElement("input", {
     className: "lead-trap",
     type: "text",
     name: "company",
@@ -1917,7 +2027,30 @@ function Popup({
     "aria-hidden": "true",
     value: trap,
     onChange: e => setTrap(e.target.value)
-  }), /*#__PURE__*/React.createElement(SubmitMorph, {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "lead-check"
+  }, /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    "data-nado": "",
+    checked: pd,
+    onChange: e => setPd(e.target.checked)
+  }), /*#__PURE__*/React.createElement("span", null, "\u0414\u0430\u044E ", /*#__PURE__*/React.createElement("a", {
+    href: "consent-pd.html",
+    target: "_blank",
+    rel: "noopener"
+  }, "\u0441\u043E\u0433\u043B\u0430\u0441\u0438\u0435 \u043D\u0430 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0443 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445"), " \u0438 \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u044E ", /*#__PURE__*/React.createElement("a", {
+    href: "policy.html",
+    target: "_blank",
+    rel: "noopener"
+  }, "\u043F\u043E\u043B\u0438\u0442\u0438\u043A\u0443"))), /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: reklama,
+    onChange: e => setReklama(e.target.checked)
+  }), /*#__PURE__*/React.createElement("span", null, "\u0425\u043E\u0447\u0443 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C ", /*#__PURE__*/React.createElement("a", {
+    href: "consent-ads.html",
+    target: "_blank",
+    rel: "noopener"
+  }, "\u043D\u043E\u0432\u043E\u0441\u0442\u0438 \u0438 \u0430\u043A\u0446\u0438\u0438 \u041C\u0430\u0441\u0442\u0435\u0440\u0413\u0430\u0437\u0430")))), /*#__PURE__*/React.createElement(SubmitMorph, {
     ready: ready,
     sent: sent,
     label: "\u041E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0437\u0430\u044F\u0432\u043A\u0443",
@@ -1926,17 +2059,12 @@ function Popup({
       window.sendLead({
         name,
         phone,
-        source,
-        company: trap
+        source: source + (reklama ? ' · согласен на рассылку' : ''),
+        company: trap,
+        pdConsent: pd
       });
     }
-  }), /*#__PURE__*/React.createElement("p", {
-    className: "lead-consent"
-  }, "\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0443, \u0432\u044B \u0441\u043E\u0433\u043B\u0430\u0448\u0430\u0435\u0442\u0435\u0441\u044C \u0441 ", /*#__PURE__*/React.createElement("a", {
-    href: "policy.html",
-    target: "_blank",
-    rel: "noopener"
-  }, "\u043F\u043E\u043B\u0438\u0442\u0438\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u043A\u0438 \u043F\u0435\u0440\u0441\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445")), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'center',
       fontSize: 16,
@@ -1981,6 +2109,17 @@ function App() {
      поэтому файл подключаем после отрисовки. Не ожил за 3 секунды - показываем всё без движения. */
   React.useEffect(() => {
     const pokazatVsyo = () => document.documentElement.classList.remove('dv');
+    /* Снимок первого экрана (sborka/snimok-pervogo-ekrana.py) снимается без движения:
+       иначе в снимок попадёт разметка, которую dvizhenie.js дорисовывает сам (слова
+       заголовка в отдельных span), и при перерисовке строка поедет. */
+    if (/[?&]prerender\b/.test(location.search)) {
+      pokazatVsyo();
+      return;
+    }
+    /* Первый экран человек уже видит - его рисует снимок из index.html. При перерисовке
+       он не должен мигнуть и ждать dvizhenie.js, поэтому помечаем его показанным сразу.
+       Остальная страница появляется по прокрутке, как раньше. */
+    document.querySelectorAll('.hero [data-reveal],.hero [data-stagger]').forEach(e => e.classList.add('is-in'));
     const storozh = setTimeout(pokazatVsyo, 3000);
     const s = document.createElement('script');
     s.src = 'dvizhenie.js?v=38';

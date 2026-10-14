@@ -62,7 +62,7 @@
       company:String(lead.company||''),
       page:location.href,
       time:new Date().toISOString(),
-      pdConsent:true   // под кнопкой строка о согласии: нажал - согласился
+      pdConsent:lead.pdConsent===true   // галочка согласия в форме (Eugene, 13.10)
     };
     if(!url){
       console.warn('[заявки] Не задан адрес приёма (config.js → LEADS_ENDPOINT) - заявка не отправлена.',full);
